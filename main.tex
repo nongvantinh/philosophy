@@ -1,55 +1,182 @@
-% Bài luận triết học: Chủ nghĩa duy vật thời kì cổ đại
+% Bài luận triết học: Chủ nghĩa duy vật cổ đại
 % Biên dịch: XeLaTeX hoặc LuaLaTeX (hỗ trợ tiếng Việt Unicode)
 
-\documentclass[12pt,a4paper]{article}
+\documentclass[14pt,a4paper]{extarticle}
 
 % Gói tiếng Việt (Unicode)
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setmainlanguage{vietnamese}
-% Font: 12pt, dãn dòng 1.5 (onehalfspacing) theo chuẩn tiểu luận học phần thạc sĩ.
-% Đổi thành Times New Roman: \setmainfont{Times New Roman} nếu cơ sở đào tạo yêu cầu.
 \setmainfont{Times New Roman}
 
 % Layout và hình thức
 \usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[normalem]{ulem}
 \usepackage{indentfirst}
 \usepackage{setspace}
 \onehalfspacing
 \setlength{\parindent}{1.25cm}
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{5.2em}
+\setlength{\cftsubsecnumwidth}{2.8em}
+\setlength{\cftsubsubsecnumwidth}{4em}
+\renewcommand{\thesection}{Chương \arabic{section}\quad}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
 
-% Trích dẫn và tài liệu tham khảo (dùng vietnamese.lbx trong thư mục project)
+% Trích dẫn và tài liệu tham khảo
 \usepackage{csquotes}
 \DeclareQuoteStyle{vietnamese}
   {\guillemotleft}{\guillemotright}
   {\textquotedblleft}{\textquotedblright}
 \usepackage[backend=biber,style=ieee,sorting=none,bibencoding=utf8,giveninits=false]{biblatex}
 \addbibresource{references.bib}
-% Dấu chấm sau số thứ tự [1]. [2]. trong Tài liệu tham khảo
 \DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}\addperiod}
-% Ghi đầy đủ tên tác giả (không viết tắt); ghi đè tùy chọn giveninits của style IEEE
 \ExecuteBibliographyOptions{giveninits=false}
 \setlength{\emergencystretch}{5em}
 \AtBeginBibliography{\sloppy}
 
-% Liên kết trong PDF (mục lục nhấp được + outline trong sidebar trình đọc PDF)
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \printnames{author}%
+  \setunit{\addcomma\space}%
+  \printfield{year}%
+  \setunit{\addcomma\space}%
+  \printfield{title}%
+  \setunit{\addcomma\space}%
+  \printlist{publisher}%
+  \iflistundef{location}{}{\setunit{\addcomma\space}\printlist{location}}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \printnames{author}%
+  \setunit{\addcomma\space}%
+  \printfield{year}%
+  \setunit{\addcomma\space}%
+  \printfield{title}%
+  \setunit{\addcomma\space}%
+  \printfield{booktitle}%
+  \setunit{\addcomma\space}%
+  \printlist{publisher}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{periodical}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \printfield{title}%
+  \setunit{\addcomma\space}%
+  \printlist{publisher}%
+  \iflistundef{location}{}{\setunit{\addcomma\space}\printlist{location}}%
+  \usebibmacro{finentry}%
+}
+
 \usepackage[unicode,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,
   bookmarks=true,bookmarksopen=true,bookmarksnumbered=true,bookmarksdepth=3,
   pdfencoding=unicode]{hyperref}
 \usepackage[open,numbered,depth=3]{bookmark}
 
-% Siêu dữ liệu
-\title{\textbf{Chủ nghĩa duy vật thời kì cổ đại:\\Nội dung, giá trị và hạn chế}}
-\author{Bài luận triết học}
-\date{}
+% Thông tin bìa (có thể sửa trực tiếp tại đây)
+\newcommand{\hocphan}{Triết học}
+\newcommand{\tenduan}{Chủ nghĩa duy vật cổ đại: giá trị triết học và giới hạn lịch sử}
+\newcommand{\giangvien}{Phạm Quốc Hương}
+\newcommand{\hocvien}{Nông Văn Tình}
+\newcommand{\mahocvien}{8480101250028}
+\newcommand{\lop}{Khoa học máy tính}
+\newcommand{\malop}{25MCS2}
+\newcommand{\nganh}{Khoa học máy tính}
+\newcommand{\manganh}{8480101}
+\newcommand{\thangnam}{.... / .....}
+\newcommand{\noidungnghiencuu}{\tenduan}
 
 \begin{document}
 
-\maketitle
+%==============================================================================
+% BÌA 1 (trang 1 - theo mẫu BIA DO AN CUOI MON MCS.docx)
+%==============================================================================
 \thispagestyle{empty}
+\begin{center}
+\vspace*{0.3cm}
+{\fontsize{14}{18}\selectfont\bfseries BỘ GIÁO DỤC VÀ ĐÀO TẠO}\\[0.5cm]
+{\fontsize{14}{18}\selectfont\bfseries TRƯỜNG ĐẠI HỌC TƯ THỤC QUỐC TẾ SÀI GÒN}\\[0.5cm]
+\includegraphics[height=1.8cm]{image/logo.png}\\[0.3cm]
+
+\vspace{0.8cm}
+{\fontsize{18}{22}\selectfont\bfseries BÀI ĐỒ ÁN CUỐI KỲ}\\[1.2cm]
+
+{\fontsize{14}{18}\selectfont\bfseries HỌC PHẦN:\quad \hocphan}\\[1cm]
+
+{\fontsize{14}{18}\selectfont\bfseries TÊN ĐỒ ÁN:}\\[0.3cm]
+{\fontsize{14}{18}\selectfont\bfseries \tenduan}\\[1.5cm]
+
+\begin{minipage}[t]{0.85\textwidth}
+\fontsize{13}{17}\selectfont
+\bfseries Giảng viên giảng dạy:\quad \giangvien\\[0.4cm]
+\bfseries Học viên thực hiện:\quad \hocvien\\[0.4cm]
+\bfseries Mã học viên:\quad \mahocvien\\[0.4cm]
+\bfseries Lớp:\quad \lop \hspace{2cm} \bfseries Mã số lớp:\quad \malop\\[1.2cm]
+\end{minipage}
+
+\vfill
+{\fontsize{13}{17}\selectfont\itshape TP. Hồ Chí Minh, tháng \thangnam}\\[0.6cm]
+\end{center}
+
+%==============================================================================
+% BÌA 2 (trang 2 - theo mẫu BIA DO AN CUOI MON MCS.docx)
+%==============================================================================
+\newpage
+\thispagestyle{empty}
+{\setlength{\fboxrule}{4.5pt}\setlength{\fboxsep}{12pt}%
+\noindent\fbox{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
+\begin{center}
+\vspace*{0.3cm}
+{\fontsize{14}{18}\selectfont\bfseries BỘ GIÁO DỤC VÀ ĐÀO TẠO}\\[0.5cm]
+{\fontsize{14}{18}\selectfont\bfseries TRƯỜNG ĐẠI HỌC TƯ THỤC QUỐC TẾ SÀI GÒN}\\[0.8cm]
+{\fontsize{14}{18}\selectfont\bfseries *********}\\[1cm]
+
+\includegraphics[width=11cm]{image/full-name-and-logo.png}\\[0.7cm]
+
+{\fontsize{18}{22}\selectfont\bfseries BÀI CUỐI KỲ}\\[1.2cm]
+
+\begin{tabular}{l l}
+{\fontsize{14}{18}\selectfont\bfseries Ngành:} & \nganh \\[0.3cm]
+{\fontsize{14}{18}\selectfont\bfseries Mã ngành:} & \manganh \\[0.3cm]
+{\fontsize{14}{18}\selectfont\bfseries Mã lớp:} & \malop \\[0.3cm]
+\end{tabular}
+
+\end{center}
+\begin{flushleft}
+{\fontsize{14}{18}\selectfont\bfseries \uline{Nội dung nghiên cứu:}}\\[0.3cm]
+\hspace{1cm}\noidungnghiencuu
+\end{flushleft}
+\vspace{1.2cm}
 
 \begin{center}
-\rule{0.6\textwidth}{0.4pt}
+\vfill
+{\fontsize{13}{17}\selectfont\itshape TP. Hồ Chí Minh, tháng \thangnam}\\[0.8cm]
+\end{center}
+
+\end{minipage}}}
+
+\begin{center}
+  % Bảng chấm điểm
+\begin{tabular}{|p{2.5cm}|p{3cm}|p{5cm}|p{3.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Điểm}} 
+& \multicolumn{1}{c|}{\textbf{Nhận xét}} 
+& \multicolumn{1}{c|}{\textbf{Giảng viên ký}} \\
+\cline{1-2}
+\textbf{Bằng số} & \textbf{Bằng chữ} & & \\
+\hline
+&  &  &  \\[2.5cm]
+\hline
+\end{tabular}
 \end{center}
 
 \newpage
@@ -58,816 +185,251 @@
 \setcounter{page}{1}
 
 %==============================================================================
-\section{Mở đầu}
+\section*{Mở đầu}
+\addcontentsline{toc}{section}{\numberline{}Mở đầu}
 %==============================================================================
 
-\subsection{Vấn đề nghiên cứu và ý nghĩa triết học}
+Trong lịch sử tư tưởng nhân loại, sự ra đời của triết học đánh dấu một bước chuyển quan trọng trong cách con người nhận thức và giải thích thế giới. Nếu trong giai đoạn đầu của lịch sử, các hiện tượng tự nhiên và xã hội chủ yếu được giải thích thông qua thần thoại, tôn giáo và các niềm tin siêu nhiên, thì từ khoảng thiên niên kỷ I trước Công nguyên, ở nhiều nền văn minh lớn đã xuất hiện một xu hướng tư duy mới: giải thích thế giới bằng những nguyên lý mang tính lý tính và tự nhiên. Trong bối cảnh đó, chủ nghĩa duy vật cổ đại hình thành như một trong những khuynh hướng triết học sớm nhất nhằm khẳng định rằng bản chất của thế giới là vật chất và các hiện tượng tự nhiên có thể được lý giải bằng chính những quy luật nội tại của tự nhiên, thay vì dựa vào các lực lượng siêu nhiên.
 
-Trong lịch sử tư tưởng nhân loại, có những thời điểm mà cách con người hiểu về thế giới thay đổi một cách căn bản. Sự xuất hiện của chủ nghĩa duy vật cổ đại là một trong những bước ngoặt như vậy. Khi thế giới không còn được giải thích bằng ý chí thần linh mà bằng những nguyên lý vật chất nội tại, cấu trúc ý thức của con người đã dịch chuyển từ thần thoại sang lý giải.\cite{runes}\cite{onhaiminh}
+Chủ nghĩa duy vật cổ đại xuất hiện ở nhiều trung tâm văn minh khác nhau, tiêu biểu nhất là trong triết học Hy Lạp cổ đại và triết học Trung Hoa cổ đại. Ở Hy Lạp, các nhà triết học tiền Socrates đã đặt ra câu hỏi về \emph{bản nguyên} (\emph{archê}) của thế giới và tìm kiếm những yếu tố vật chất cơ bản cấu thành nên mọi sự vật. Những quan niệm như nước của Thales, \emph{apeiron} của Anaximander, không khí của Anaximenes, hay đặc biệt là thuyết nguyên tử của Democritus đã thể hiện nỗ lực giải thích cấu trúc của vũ trụ trên cơ sở vật chất. Trong khi đó, ở Trung Hoa cổ đại, nhiều tư tưởng triết học cũng thể hiện những yếu tố duy vật rõ rệt, đặc biệt là quan niệm về \emph{khí} như một bản nguyên vật chất của vạn vật, cùng với học thuyết âm dương và ngũ hành nhằm giải thích sự vận động và biến đổi của tự nhiên.
 
-Nghiên cứu chủ nghĩa duy vật cổ đại vì thế không chỉ là khảo sát một học thuyết triết học đã qua, mà là truy tìm nguồn gốc của một phương thức tư duy: tư duy coi thế giới là thực tại tự thân, vận hành theo quy luật khách quan, có thể được nhận thức bằng lý tính. Tuy nhiên, việc tiếp cận chủ nghĩa duy vật cổ đại thường rơi vào hai khuynh hướng: hoặc giản lược nó thành những ``mầm mống'' của duy vật hiện đại, hoặc trình bày nó như những tri thức sơ khai mang tính tiền khoa học. Cả hai cách tiếp cận này đều bỏ qua chiều sâu cấu trúc của nó. Chủ nghĩa duy vật cổ đại vượt lên trên vai trò bước đệm: nó là một hình thức tự ý thức của nhân loại trong điều kiện lịch sử cụ thể.
+Mặc dù được hình thành trong những bối cảnh văn hóa và lịch sử khác nhau, các quan niệm duy vật cổ đại đều có chung một đặc điểm quan trọng: chúng đánh dấu sự chuyển biến từ cách lý giải thế giới dựa trên thần thoại sang cách tiếp cận dựa trên tư duy lý tính. Nhờ đó, chủ nghĩa duy vật cổ đại đã góp phần đặt nền móng cho sự phát triển của tư duy khoa học và triết học sau này. Những nỗ lực tìm kiếm bản chất vật chất của thế giới, dù còn mang tính trực quan và sơ khai, đã mở ra một hướng tiếp cận mới đối với việc nghiên cứu tự nhiên, trong đó các hiện tượng được giải thích bằng những nguyên nhân nội tại thay vì các lực lượng siêu nhiên.
 
-Đề tài này vì vậy đặt ra một vấn đề triết học: làm thế nào để hiểu chủ nghĩa duy vật cổ đại không như một tập hợp quan điểm rời rạc, mà như một cấu trúc tư duy, với bản thể luận, nhận thức luận và những hệ quả nhân sinh riêng biệt trong sự đa dạng của nó, đặc biệt là giữa truyền thống Hy Lạp và Trung Hoa đâu là những khả thể khác nhau của tư duy duy vật? Việc đặt lại câu hỏi theo cách này cho phép vượt qua lối trình bày liệt kê và chuyển sang phân tích chiều sâu triết học của vấn đề.
+Tuy nhiên, bên cạnh những đóng góp quan trọng, chủ nghĩa duy vật cổ đại cũng mang những giới hạn lịch sử nhất định. Do điều kiện khoa học còn sơ khai và phương pháp nhận thức còn hạn chế, nhiều quan niệm về vật chất và cấu trúc của thế giới vẫn mang tính trực quan, cảm tính hoặc cơ học. Các nhà triết học cổ đại thường dựa chủ yếu vào quan sát và suy luận triết học, trong khi thiếu cơ sở thực nghiệm khoa học để kiểm chứng các giả thuyết của mình. Vì vậy, mặc dù chứa đựng những yếu tố hợp lý và tiến bộ, chủ nghĩa duy vật cổ đại vẫn chưa thể phát triển thành một hệ thống triết học hoàn chỉnh về mặt khoa học.
 
-\subsection{Mục tiêu và phương pháp tiếp cận}
+Từ góc độ lịch sử triết học, việc nghiên cứu chủ nghĩa duy vật cổ đại có ý nghĩa quan trọng không chỉ trong việc hiểu rõ nguồn gốc của tư duy duy vật, mà còn giúp làm sáng tỏ quá trình phát triển của tư tưởng triết học nói chung. Thông qua việc phân tích những quan niệm về bản nguyên vật chất, cấu trúc của thế giới và sự vận động của tự nhiên trong các hệ thống triết học cổ đại, có thể thấy được những bước tiến quan trọng trong quá trình hình thành thế giới quan khoa học của nhân loại. Đồng thời, việc nhận diện những hạn chế lịch sử của các quan niệm này cũng giúp hiểu rõ hơn những điều kiện cần thiết cho sự phát triển của triết học và khoa học trong các giai đoạn sau.
 
-Mục tiêu đặt ra ở đây vượt ra ngoài việc mô tả các học thuyết duy vật cổ đại: phân tích cấu trúc bản thể luận của chúng và làm rõ tiền đề nhận thức luận hàm ẩn, so sánh hai truyền thống Đông -- Tây ở cấp độ mô hình tư duy và đánh giá giá trị và giới hạn của chúng từ góc nhìn lịch sử triết học. Phương pháp tiếp cận được sử dụng không đơn thuần là lịch sử và mô tả, mà là phân tích cấu trúc và đối chiếu triết học. Các học thuyết được đặt trong quan hệ với điều kiện văn minh và trong tiến trình phát triển của tư duy nhân loại, nhằm làm rõ ý nghĩa nội tại của chúng.
+Trên cơ sở đó, bài luận này hướng tới việc phân tích sự hình thành và đặc điểm tư duy của chủ nghĩa duy vật cổ đại, đồng thời làm rõ giá trị triết học cũng như những giới hạn lịch sử của nó trong tiến trình phát triển của tư tưởng nhân loại. Cụ thể, bài viết tập trung trả lời ba câu hỏi nghiên cứu chính: (1) chủ nghĩa duy vật cổ đại hình thành trong bối cảnh lịch sử và tri thức như thế nào; (2) những quan niệm triết học cơ bản của nó về bản nguyên vật chất và cấu trúc của thế giới là gì; và (3) những đóng góp cũng như hạn chế của chủ nghĩa duy vật cổ đại đối với lịch sử triết học là gì.
 
-\subsection{Ý nghĩa khoa học và ý nghĩa triết học}
+Để giải quyết các vấn đề trên, bài luận sử dụng phương pháp phân tích triết học kết hợp với phương pháp lịch sử và so sánh. Thông qua việc xem xét các tư tưởng duy vật tiêu biểu trong triết học Hy Lạp và Trung Hoa cổ đại, bài viết không chỉ làm rõ nội dung của các quan niệm này mà còn chỉ ra những điểm tương đồng và khác biệt trong cách tiếp cận vấn đề bản nguyên của thế giới.
 
-Ở cấp độ khoa học, nghiên cứu này góp phần hệ thống hóa và phân tích sâu hơn chủ nghĩa duy vật cổ đại như một chỉnh thể. Ở cấp độ triết học, công trình khẳng định rằng sự xuất hiện của tư duy duy vật là một bước chuyển trong cấu trúc ý thức: từ thế giới bị nhân cách hóa sang thế giới được hiểu như một hệ thống quy luật. Việc làm rõ bước chuyển này có ý nghĩa trong việc nhận diện tiến trình tự ý thức của con người về vị trí của mình trong vũ trụ.
-
-\subsection{Nguồn tài liệu và luận điểm chính}
-
-Tiểu luận này dựa trên các tư liệu lịch sử triết học đã được trích xuất và hiệu đính từ các nguồn sách tham khảo,\cite{runes}\cite{onhaiminh} cùng các nguồn học thuật chuyên ngành (Stanford Encyclopedia of Philosophy về triết học tiền Socrates,\cite{sep-presocratic} Tạp chí Triết học của Viện Hàn lâm Khoa học xã hội Việt Nam\cite{tapchitriethoc}). Luận điểm chính (\emph{thesis statement}): Có thể khẳng định rằng CNDV cổ đại, dù trong hai bối cảnh văn minh khác nhau (Hy Lạp và Trung Quốc), đều thể hiện một bước đột phá chung đó là xác lập vật chất như nền tảng tối hậu của tồn tại và tìm kiếm quy luật nội tại của thế giới. Tuy nhiên, sự khác biệt về phương pháp và cấu trúc tư duy đã dẫn tới hai mô hình bản thể luận khác nhau (rời rạc và liên tục), tạo nên hai hướng phát triển triết học và khoa học về sau. Việc đặt song song hai truyền thống trong khung nội dung--giá trị--hạn chế--kế thừa, kết hợp với phân tích mối quan hệ CNDV--khoa học và phê phán tính tự phát cùng tính siêu hình của CNDV cơ học, góp phần lấp khoảng trống nghiên cứu mà phần Tổng quan dưới đây sẽ chỉ ra.
+Về cấu trúc, bài luận được chia thành hai chương chính. Chương thứ nhất tập trung phân tích bối cảnh hình thành và cấu trúc tư duy của chủ nghĩa duy vật cổ đại, bao gồm các hình thức biểu hiện tiêu biểu trong triết học Hy Lạp và Trung Hoa. Chương thứ hai sẽ đánh giá giá trị triết học cũng như những giới hạn lịch sử của các quan niệm duy vật cổ đại, đồng thời xem xét ảnh hưởng của chúng đối với sự phát triển của triết học và thế giới quan khoa học trong các giai đoạn sau. Thông qua đó, bài luận hướng tới việc làm rõ vị trí và ý nghĩa của chủ nghĩa duy vật cổ đại trong lịch sử tư tưởng nhân loại.
 
 %==============================================================================
-\section{Tổng quan tình hình nghiên cứu}
+\section{Sự hình thành và cấu trúc tư duy của chủ nghĩa duy vật cổ đại}
 %==============================================================================
 
-\subsection{Hướng nghiên cứu của các nhà Mácxít truyền thống}
+\subsection{Bối cảnh lịch sử -- tri thức của sự ra đời chủ nghĩa duy vật cổ đại}
 
-Trong truyền thống nghiên cứu Mác--Lênin, chủ nghĩa duy vật cổ đại thường được tiếp cận như một mắt xích lịch sử trong tiến trình phát triển của thế giới quan duy vật. Từ những nhận định của F.\,Engels trong \emph{Biện chứng của tự nhiên}\cite{engels} đến các giáo trình triết học Mác--Lênin ở Liên Xô và Việt Nam, cũng như nhiều bài viết đăng trên \emph{Tạp chí Triết học} của Viện Hàn lâm Khoa học xã hội Việt Nam\cite{tapchitriethoc}, chủ nghĩa duy vật cổ đại được trình bày như bước chuyển đầu tiên của tư duy nhân loại từ thần thoại sang lý tính.
+Sự ra đời của chủ nghĩa duy vật cổ đại không phải là một hiện tượng ngẫu nhiên trong lịch sử tư tưởng, mà là kết quả của những biến đổi sâu sắc trong đời sống kinh tế, xã hội và nhận thức của con người ở các nền văn minh cổ đại. Từ khoảng thiên niên kỷ I trước Công nguyên, nhiều trung tâm văn minh lớn như Hy Lạp và Trung Hoa đã bước vào một giai đoạn phát triển mới, trong đó các hình thức tổ chức xã hội, hoạt động kinh tế và giao lưu văn hóa ngày càng trở nên phức tạp. Chính những điều kiện này đã tạo ra nhu cầu giải thích thế giới một cách hợp lý hơn, góp phần thúc đẩy sự hình thành của tư duy triết học nói chung và các quan niệm duy vật nói riêng.
 
-Trong cách tiếp cận này, nội dung duy vật của các học thuyết từ việc truy tìm bản nguyên vật chất ở các nhà Tiền Socrates, thuyết nguyên tử của Democritus, đến hệ thống âm dương--ngũ hành ở phương Đông được phân tích như những hình thái sơ khai của một thế giới quan tiền khoa học. Đồng thời, truyền thống Mácxít nhấn mạnh giá trị của cái gọi là ``biện chứng tự phát'': dù chưa đạt tới mức độ khái quát lý luận của phép biện chứng khoa học, các nhà tư tưởng cổ đại đã nhận thấy tính vận động, biến đổi và liên hệ của thế giới. Ở chiều ngược lại, các hạn chế cũng được chỉ ra một cách nhất quán: sự đồng nhất vật chất với những dạng tồn tại cụ thể, tính trực quan cảm tính của khái niệm, sự thiếu vắng cơ sở thực nghiệm, và khuynh hướng siêu hình trong các hệ thống duy vật cơ học. Những giới hạn mà triết học hiện đại, đặc biệt qua định nghĩa vật chất của Lenin, được xem là đã khắc phục ở cấp độ khái niệm.
+Trước khi triết học xuất hiện, cách con người lý giải thế giới chủ yếu dựa vào thần thoại và tôn giáo. Trong các hệ thống thần thoại cổ đại, tự nhiên thường được nhân cách hóa thành các vị thần có ý chí và quyền năng siêu nhiên, chi phối sự vận động của vũ trụ cũng như đời sống con người. Những hiện tượng như sấm sét, mưa gió, mùa màng hay thiên tai được xem là biểu hiện của quyền lực thần linh. Mặc dù thần thoại có vai trò quan trọng trong việc hình thành thế giới quan ban đầu của con người, song cách giải thích này mang tính biểu tượng và thiếu tính hệ thống lý luận.
 
-Tuy nhiên, trong bối cảnh nghiên cứu đương đại, cách tiếp cận này cũng trở thành đối tượng của sự phản tư phê phán. Khi duy vật lịch sử bị giản lược thành một hình thức quyết định luận kinh tế (economic determinism), sự phong phú của đời sống tinh thần và vai trò chủ thể của con người trong các xã hội cổ đại có nguy cơ bị làm mờ. Sự hình thành của các hệ thống tư tưởng không thể chỉ quy về điều kiện vật chất theo nghĩa hẹp, mà còn phải được hiểu như kết quả của tương tác phức tạp giữa cấu trúc kinh tế, thiết chế chính trị, truyền thống văn hóa và năng lực sáng tạo của cá nhân.
+Sự phát triển của đời sống xã hội đã dần làm xuất hiện những nhu cầu nhận thức mới. Khi hoạt động sản xuất, thương mại và hàng hải ngày càng mở rộng, con người cần hiểu rõ hơn các quy luật của tự nhiên để phục vụ cho đời sống thực tiễn. Những kinh nghiệm tích lũy trong các lĩnh vực như thiên văn học, toán học, nông nghiệp hay y học đã góp phần làm phong phú tri thức của con người về thế giới tự nhiên. Từ đó, một xu hướng tư duy mới dần hình thành: thay vì giải thích các hiện tượng bằng ý chí của thần linh, con người bắt đầu tìm kiếm những nguyên nhân tự nhiên và khách quan nằm trong chính bản thân thế giới vật chất.
 
-Trên nền tảng đó, nghiên cứu này tiếp nhận những đóng góp phương pháp luận của truyền thống Mácxít, đặc biệt là việc đặt tư tưởng vào bối cảnh lịch sử--xã hội và sử dụng các phạm trù biện chứng để đánh giá giá trị và giới hạn nội tại của học thuyết. Nhưng đồng thời tránh xu hướng giản lược mọi động lực phát triển về một nhân tố duy nhất. Việc dành dung lượng phân tích thích đáng cho các chiều kích đạo đức và nhân sinh trong tư tưởng của Epicurus hay Tuân Tử không chỉ nhằm bổ sung tư liệu, mà còn nhằm khẳng định vai trò chủ động của con người trong việc kiến tạo thế giới quan duy vật.
+Trong bối cảnh đó, triết học cổ đại ra đời như một hình thức tư duy lý luận nhằm khái quát và hệ thống hóa những tri thức về thế giới. Một trong những vấn đề trung tâm mà các nhà triết học cổ đại quan tâm là câu hỏi về bản nguyên của vũ trụ: thế giới được cấu thành từ cái gì và vì sao nó tồn tại trong trạng thái vận động và biến đổi không ngừng. Việc đặt ra câu hỏi này cho thấy một bước tiến quan trọng trong nhận thức, bởi nó hướng tới việc tìm kiếm những nguyên lý chung của tự nhiên thay vì chỉ mô tả các hiện tượng riêng lẻ.
 
-Một giới hạn đáng chú ý của hướng nghiên cứu Mácxít truyền thống là xu hướng tập trung chủ yếu vào không gian Hy Lạp--La Mã như trung tâm của tiến trình phát triển duy vật luận, trong khi sự so sánh có hệ thống với các truyền thống Đông phương thường chưa được triển khai ở cấp độ cấu trúc tư duy. Bên cạnh đó, mối quan hệ giữa chủ nghĩa duy vật cổ đại và các hình thức tri thức thực hành (khoa học tự nhiên, kỹ thuật, y học) đôi khi được nêu ra như bối cảnh, nhưng chưa được phân tích như một yếu tố nội tại cấu thành phương pháp luận của tư duy duy vật.
+Ở Hy Lạp cổ đại, sự phát triển của các thành bang, đặc biệt là các trung tâm thương mại ven biển, đã tạo điều kiện thuận lợi cho sự giao lưu văn hóa và tri thức giữa nhiều nền văn minh khác nhau. Những tiếp xúc với tri thức của Ai Cập và Lưỡng Hà đã góp phần thúc đẩy sự phát triển của khoa học và triết học Hy Lạp. Trong môi trường trí tuệ tương đối cởi mở này, các nhà triết học tiền Socrates bắt đầu đặt ra những câu hỏi mang tính nền tảng về cấu trúc của thế giới tự nhiên. Thay vì viện dẫn các câu chuyện thần thoại, họ tìm cách giải thích sự hình thành và vận động của vũ trụ bằng những yếu tố vật chất cơ bản. Đây chính là bước khởi đầu của tư duy duy vật trong triết học phương Tây.
 
-Việc nhận diện những giới hạn ấy không nhằm phủ nhận giá trị của truyền thống Mácxít, mà nhằm tái đặt nó trong một không gian đối thoại rộng hơn, nơi chủ nghĩa duy vật cổ đại được nhìn nhận không chỉ như tiền đề lịch sử của duy vật biện chứng, mà như một hình thái tư duy mang tính tự ý thức của nhân loại, với những khả thể và giới hạn riêng của nó.
+Ở Trung Hoa cổ đại, những biến động xã hội sâu sắc trong thời kỳ Xuân Thu -- Chiến Quốc cũng đã thúc đẩy sự phát triển mạnh mẽ của tư tưởng triết học. Trong bối cảnh trật tự xã hội truyền thống bị lung lay, nhiều học phái triết học đã xuất hiện nhằm tìm kiếm những nguyên lý giải thích tự nhiên và xã hội. Bên cạnh các hệ thống tư tưởng mang tính đạo đức -- chính trị như Nho gia hay Pháp gia, nhiều quan niệm về tự nhiên cũng được hình thành, đặc biệt là học thuyết về khí, âm dương và ngũ hành. Những quan niệm này, dù chưa phát triển thành một hệ thống duy vật hoàn chỉnh theo nghĩa chặt chẽ, nhưng đã thể hiện rõ xu hướng giải thích thế giới bằng các yếu tố vật chất và các quy luật vận động nội tại của tự nhiên.
 
-\subsection{Hướng nghiên cứu của triết học phương Tây đương đại}
+Nhìn chung, sự ra đời của chủ nghĩa duy vật cổ đại gắn liền với quá trình chuyển biến từ tư duy thần thoại sang tư duy lý tính trong lịch sử nhận thức của nhân loại. Các nhà triết học cổ đại đã cố gắng tìm kiếm những nguyên lý vật chất cơ bản nhằm giải thích sự tồn tại và vận động của vũ trụ. Mặc dù những quan niệm này còn mang tính sơ khai và chịu nhiều hạn chế do điều kiện khoa học thời bấy giờ, nhưng chúng đã mở ra một hướng tiếp cận mới đối với việc nghiên cứu thế giới tự nhiên. Chính từ nền tảng đó, các hình thức tư duy duy vật khác nhau đã dần được hình thành và phát triển trong các hệ thống triết học cổ đại.
 
-Các công trình nghiên cứu phương Tây từ những bộ lịch sử và từ điển triết học như của Runes\cite{runes} đến các chuyên khảo học thuật trong \emph{Stanford Encyclopedia of Philosophy} về triết học tiền Socrates và Democritus\cite{sep-presocratic} nhìn chung đều tiếp cận chủ nghĩa duy vật cổ đại trước hết như một hiện tượng văn bản và một cấu trúc lập luận nội tại. Trọng tâm của họ thường đặt vào việc tái dựng bối cảnh tư liệu, phân tích tính nhất quán logic của thuyết nguyên tử, và đặt nó trong không gian văn hóa--chính trị của thế giới Hy Lạp cổ đại. Cách tiếp cận này có ưu điểm ở tính chặt chẽ về văn bản học và độ chính xác trong việc xác lập hệ hình khái niệm.
+\subsection{Các hình thức chủ nghĩa duy vật trong triết học Hy Lạp cổ đại}
 
-Tuy nhiên, chính sự tập trung mạnh vào bình diện nội tại ấy lại tạo ra một giới hạn phương pháp luận: chủ nghĩa duy vật cổ đại được khảo sát như một chỉnh thể khép kín trong truyền thống Hy Lạp, hơn là như một hình thái tư duy có thể được đặt trong tương quan so sánh với các truyền thống triết học khác, đặc biệt là Đông phương. Bên cạnh đó, việc thiếu vắng một khung phân tích biện chứng duy vật với những phạm trù như vật chất, nguồn gốc vận động, và mâu thuẫn nội tại khiến cho đánh giá về giá trị và giới hạn của chủ nghĩa duy vật cổ đại thường dừng lại ở mô tả lịch sử hoặc phân tích logic, mà chưa đạt tới bình diện phê phán cấu trúc.
+Triết học Hy Lạp cổ đại được xem là một trong những cái nôi quan trọng của tư duy triết học phương Tây. Trong quá trình hình thành và phát triển của nó, nhiều nhà tư tưởng đã cố gắng tìm kiếm bản nguyên của thế giới thông qua các yếu tố vật chất cụ thể. Những nỗ lực này đã đặt nền móng cho sự xuất hiện của chủ nghĩa duy vật trong triết học phương Tây. Mặc dù các quan niệm duy vật trong giai đoạn này còn mang tính trực quan và chưa hình thành một hệ thống lý luận hoàn chỉnh, song chúng đã thể hiện rõ xu hướng giải thích thế giới bằng những nguyên nhân tự nhiên thay vì dựa vào các lực lượng siêu nhiên.
 
-Hệ quả là, tính siêu hình của chủ nghĩa duy vật cơ học chưa được đặt thành một vấn đề triết học theo nghĩa đầy đủ, và sự khác biệt giữa biện chứng tự phát trong tư duy cổ đại với phép biện chứng khoa học ở các giai đoạn sau cũng chưa được lý giải như một bước chuyển về chất trong lịch sử tư duy. Vì vậy, dù giàu tư liệu và tinh tế trong phân tích, cách tiếp cận này vẫn còn thiếu một chiều kích phản tư mang tính hệ hình.
+\subsubsection{Trường phái Miletus và sự tìm kiếm bản nguyên vật chất}
 
-\subsection{Hướng nghiên cứu so sánh Đông--Tây}
+Những biểu hiện sớm nhất của tư duy duy vật trong triết học Hy Lạp cổ đại xuất hiện trong các triết gia thuộc trường phái Miletus vào khoảng thế kỷ VI trước Công nguyên. Các nhà tư tưởng của trường phái này tập trung vào việc tìm kiếm \emph{archê} -- bản nguyên cơ bản của vũ trụ, tức yếu tố đầu tiên từ đó mọi sự vật được hình thành và phát triển.
 
-Một số công trình nghiên cứu bao gồm các giáo trình và tài liệu về tư tưởng triết học Trung Quốc\cite{onhaiminh} cũng như những nghiên cứu so sánh giữa truyền thống Hy Lạp và Trung Hoa đã bước đầu đặt hai hệ hình tư duy này trong thế đối chiếu. Cách tiếp cận phổ biến là đặt các khái niệm tương ứng cạnh nhau, chẳng hạn bản nguyên với ngũ hành--khí, hay nguyên tử với khí, qua đó chỉ ra những điểm tương đồng ở cấp độ thuật ngữ và nội dung biểu đạt. Cách làm này có ý nghĩa nhất định trong việc mở ra hướng so sánh liên văn hóa và cho thấy rằng tư duy duy vật không phải là hiện tượng biệt lập của riêng một nền văn minh.
+Thales, người thường được xem là nhà triết học đầu tiên của Hy Lạp cổ đại, cho rằng bản nguyên của mọi sự vật là nước. Theo ông, nước tồn tại trong nhiều trạng thái khác nhau và đóng vai trò thiết yếu đối với sự sống cũng như sự hình thành của thế giới tự nhiên. Mặc dù quan niệm này mang tính đơn giản và trực quan, song nó có ý nghĩa quan trọng ở chỗ đã tìm cách giải thích sự tồn tại của thế giới bằng một yếu tố vật chất cụ thể, thay vì viện dẫn các yếu tố thần thoại.
 
-Tuy nhiên, phần lớn các công trình trên vẫn dừng lại ở bình diện đối chiếu khái niệm, mà chưa nâng việc so sánh lên cấp độ cấu trúc tư duy. Một mặt, tính phổ quát của tư duy duy vật tức việc cả Đông và Tây đều tìm cách quy thế giới về những nguyên lý vật chất nội tại và thoát khỏi cách giải thích thần thoại chưa được khái quát hóa như một đặc điểm mang tính hình thái của ý thức triết học cổ đại. Mặt khác, sự khác biệt mang tính phương pháp luận giữa hai truyền thống cũng chưa được phân tích một cách hệ thống: từ khuynh hướng phân tích, chia cắt và cơ học trong duy vật Hy Lạp, gắn với nền tảng thiên văn và toán học, đến khuynh hướng tư duy liên tục, chỉnh thể trong duy vật Trung Hoa, gắn với thực hành thiên văn--nông học--y học và kinh nghiệm điều hòa đời sống.
+Tiếp nối tư tưởng của Thales, Anaximander cho rằng bản nguyên của thế giới không phải là một yếu tố vật chất cụ thể như nước, mà là một thực thể vô định và vô hạn mà ông gọi là \emph{apeiron}. Theo quan niệm của ông, từ \emph{apeiron} đã phát sinh ra các yếu tố đối lập như nóng -- lạnh, khô -- ẩm, và chính sự tương tác giữa các yếu tố này tạo nên sự đa dạng của thế giới tự nhiên. Tư tưởng của Anaximander thể hiện một bước tiến trong tư duy triết học, bởi ông đã cố gắng tìm kiếm một nguyên lý chung mang tính trừu tượng hơn để giải thích nguồn gốc của vũ trụ.
 
-Do chưa làm rõ được đồng thời cả tính phổ quát lẫn tính dị biệt ở cấp độ phương pháp luận, các nghiên cứu so sánh này thường thiếu một trục khái niệm đủ mạnh để liên kết tổng quan học thuật với vấn đề nghiên cứu cụ thể. Chính khoảng trống đó khiến cho sự so sánh dễ rơi vào mô tả song song hơn là phân tích cấu trúc, và chưa chỉ ra được vì sao sự khác biệt Đông--Tây trong tư duy duy vật không chỉ là khác biệt về nội dung học thuyết, mà là khác biệt về cách con người tổ chức và vận hành tư duy triết học trước thế giới tự nhiên.
+Anaximenes, một triết gia khác của trường phái Miletus, lại cho rằng không khí là bản nguyên của thế giới. Theo ông, mọi sự vật đều được hình thành từ không khí thông qua các quá trình cô đặc và loãng ra. Chẳng hạn, khi không khí bị cô đặc sẽ trở thành gió, mây, nước, đất và đá; ngược lại, khi loãng ra sẽ trở thành lửa. Quan niệm này cho thấy nỗ lực giải thích sự đa dạng của các sự vật trong tự nhiên thông qua sự biến đổi của một yếu tố vật chất cơ bản.
 
-\subsection{Khoảng trống nghiên cứu và đóng góp của nghiên cứu}
+Mặc dù mỗi nhà triết học của trường phái Miletus đưa ra một bản nguyên khác nhau, điểm chung trong tư tưởng của họ là đều cố gắng tìm kiếm một nguyên lý vật chất có khả năng giải thích nguồn gốc và cấu trúc của thế giới. Chính sự tìm kiếm này đã đánh dấu bước chuyển quan trọng từ tư duy thần thoại sang tư duy triết học mang tính lý tính.
 
-Những công trình hiện có về chủ nghĩa duy vật cổ đại, dù phong phú về tư liệu và đa dạng về cách tiếp cận, phần lớn vẫn vận động trong hai quỹ đạo quen thuộc: hoặc dừng lại ở bình diện khảo cứu lịch sử, tái dựng hệ thống học thuyết theo trình tự niên đại; hoặc tiếp cận vấn đề từ một hệ hình lý luận đã định sẵn, trong đó chủ nghĩa duy vật cổ đại được xem như tiền đề tất yếu của những hình thái duy vật về sau. Ở cả hai hướng này, điều còn thiếu không phải là thông tin hay sự phân tích chi tiết, mà là một sự tái cấu trúc vấn đề ở cấp độ phương pháp luận.
+\subsubsection{Thuyết nguyên tử và quan niệm về cấu trúc của thế giới}
 
-Khoảng trống thực sự nằm ở chỗ chủ nghĩa duy vật cổ đại chưa được nhìn nhận một cách nhất quán như một hình thức tự ý thức của nhân loại trong những điều kiện lịch sử--văn hóa xác định, nơi bản thể luận, nhận thức luận và các hệ quả nhân sinh không tồn tại tách rời, mà cấu thành một chỉnh thể tư duy. Việc thiếu vắng cách nhìn này khiến cho các phạm trù như ``giá trị'', ``hạn chế'' và ``kế thừa'' thường được triển khai rời rạc, thay vì được đặt trong cùng một hệ thống khái niệm có khả năng áp dụng đồng thời cho cả hai truyền thống Đông và Tây. Do đó, so sánh liên văn hóa, nếu có, vẫn mang tính minh họa hơn là phân tích cấu trúc.
+Một trong những hình thức phát triển quan trọng nhất của chủ nghĩa duy vật trong triết học Hy Lạp cổ đại là thuyết nguyên tử, gắn liền với tên tuổi của Leucippus và Democritus vào thế kỷ V trước Công nguyên. Theo học thuyết này, thế giới được cấu thành từ vô số các hạt vật chất cực nhỏ gọi là nguyên tử (\emph{atomos}), tồn tại trong khoảng không gian trống rỗng gọi là chân không.
 
-Bên cạnh đó, mối quan hệ giữa chủ nghĩa duy vật cổ đại và khoa học tự nhiên đặc biệt trong sự hình thành quan niệm về vật chất và vận động chưa được làm rõ một cách có hệ thống như một bước chuyển của lý tính từ trực giác sang khái niệm. Đồng thời, tính tự phát của phép biện chứng cổ đại và tính siêu hình của chủ nghĩa duy vật cơ học vẫn chưa được đặt thành vấn đề như những giới hạn nội tại của chính cấu trúc tư duy ấy. Ở chiều ngược lại, phần phân tích truyền thống phương Đông, nhất là trường hợp Tuân Tử và chiều kích đạo đức của duy vật luận, thường chưa được triển khai đủ sâu để tạo thế cân bằng với truyền thống Hy Lạp.
+Các nguyên tử được cho là không thể chia nhỏ hơn, có tính vĩnh cửu và bất biến. Sự khác nhau giữa các sự vật trong thế giới không phải do bản chất khác nhau của các nguyên tử, mà do sự khác nhau về hình dạng, kích thước, vị trí và cách sắp xếp của chúng. Khi các nguyên tử kết hợp với nhau theo những cấu trúc khác nhau, chúng tạo nên các vật thể khác nhau trong tự nhiên. Ngược lại, khi các cấu trúc này bị phá vỡ, các sự vật cũng tan rã.
 
-Trên nền tảng nhận diện những giới hạn đó, nghiên cứu này không chỉ bổ sung thêm tư liệu, mà chủ yếu hướng tới một sự điều chỉnh ở cấp độ phương pháp: đặt song song hai truyền thống trong cùng một hệ quy chiếu khái niệm; nhấn mạnh tính phổ quát của bước chuyển từ thần thoại sang giải thích vật chất; đồng thời làm rõ sự khác biệt về phương pháp luận giữa tư duy phân tích--cơ học và tư duy chỉnh thể--liên tục. Thông qua việc đào sâu mối liên hệ giữa chủ nghĩa duy vật và khoa học tự nhiên, cũng như phê phán những giới hạn nội tại của biện chứng tự phát và duy vật cơ học, nghiên cứu này tìm cách tái định vị chủ nghĩa duy vật cổ đại như một hình thái tư duy có tính lịch sử, vừa mở ra khả thể nhận thức mới, vừa mang trong nó những giới hạn tất yếu của thời đại.
+Thuyết nguyên tử của Democritus thể hiện một bước tiến quan trọng trong tư duy duy vật cổ đại, bởi nó đã đưa ra một mô hình giải thích tương đối nhất quán về cấu trúc của thế giới vật chất. Theo quan niệm này, mọi hiện tượng tự nhiên đều có thể được giải thích thông qua sự vận động và tương tác của các nguyên tử trong chân không, mà không cần đến sự can thiệp của các lực lượng siêu nhiên.
 
-\subsection{Phương pháp luận nghiên cứu}
+\subsubsection{Sự phát triển của chủ nghĩa duy vật trong triết học Epicurus}
 
-Việc khảo sát chủ nghĩa duy vật cổ đại trong nghiên cứu này không được triển khai như một thao tác mô tả thuần túy, mà như một nỗ lực tái cấu trúc một hình thái tư duy trong điều kiện lịch sử xác định. Do đó, các phương pháp được vận dụng không tồn tại tách rời, mà đan xen như những bình diện khác nhau của cùng một tiến trình nhận thức.
+Đến thế kỷ IV--III trước Công nguyên, Epicurus đã tiếp thu và phát triển thuyết nguyên tử của Democritus, đồng thời đưa vào đó một số điều chỉnh quan trọng. Theo Epicurus, các nguyên tử vẫn là những hạt vật chất cơ bản cấu thành thế giới, nhưng trong quá trình vận động của chúng tồn tại một yếu tố lệch hướng nhỏ, thường được gọi là sự ``lệch'' (\emph{clinamen}). Nhờ sự lệch này, các nguyên tử có thể va chạm và kết hợp với nhau để hình thành nên các sự vật trong thế giới.
 
-Trước hết, bình diện lịch sử cho phép đặt sự xuất hiện của các quan niệm duy vật vào trong những điều kiện kinh tế--xã hội cụ thể đã sản sinh ra chúng. Ở Hy Lạp cổ đại, sự phát triển của thương nghiệp, hàng hải và đời sống đô thị tạo nên một không gian tư duy thuận lợi cho khuynh hướng phân tích và khái quát hóa trừu tượng. Trong khi đó, tại Trung Quốc kinh nghiệm thiên văn, nông học và y học định hình một lối tư duy chỉnh thể, gắn với nhịp điệu vận động của tự nhiên và xã hội. Việc đặt các học thuyết vào bối cảnh như vậy nhằm làm sáng tỏ không chỉ ``cái gì'' được tư duy, mà cả ``vì sao'' nó được tư duy theo cách ấy, tức là điều kiện khả thể của sự chuyển dịch từ thần thoại sang triết học duy vật.
+Việc đưa yếu tố ngẫu nhiên vào trong thuyết nguyên tử có ý nghĩa quan trọng đối với triết học của Epicurus. Nó cho phép ông giải thích sự hình thành của thế giới mà không cần đến sự chi phối của các lực lượng tất định tuyệt đối, đồng thời mở ra khả năng lý giải về tự do của con người. Theo Epicurus, nếu mọi sự vật đều vận động theo những quy luật tất định hoàn toàn, thì con người sẽ không có khả năng tự do lựa chọn hành động của mình. Vì vậy, sự tồn tại của yếu tố ngẫu nhiên trong tự nhiên giúp tạo ra không gian cho tự do của ý chí.
 
-Tuy nhiên, bình diện lịch sử tự nó chưa đủ để nắm bắt cấu trúc nội tại của tư duy. Do đó, phân tích logic được triển khai như một bước thứ hai, nhằm tái dựng hệ thống khái niệm và quan hệ giữa các phạm trù trung tâm. Thuyết nguyên tử với cặp phạm trù nguyên tử--chân không--va chạm được xem xét như một cấu trúc giải thích vận động dựa trên tính phân tách và cơ học; trong khi đó, thuyết âm dương--ngũ hành được khảo sát như một mô hình vận động dựa trên tương tác và chuyển hóa liên tục. Đồng thời, tiến trình phát triển của phạm trù vật chất được theo dõi từ những hình dung trực quan (nước, lửa, nguyên tử có hình dạng) đến những xác định khái niệm mang tính trừu tượng cao hơn trong triết học hiện đại. Ở đây, vấn đề không chỉ là sự thay đổi nội dung, mà là sự chuyển hóa cấp độ khái niệm.
+Nhìn chung, các hình thức duy vật trong triết học Hy Lạp cổ đại đã thể hiện nỗ lực mạnh mẽ của các nhà tư tưởng trong việc tìm kiếm những nguyên lý vật chất cơ bản của thế giới. Từ việc xác định các yếu tố tự nhiên như nước hay không khí là bản nguyên của vũ trụ, đến việc xây dựng học thuyết nguyên tử nhằm giải thích cấu trúc của vật chất, các nhà triết học Hy Lạp cổ đại đã đặt những nền móng quan trọng cho sự phát triển của tư duy duy vật trong lịch sử triết học phương Tây. Mặc dù những quan niệm này còn mang tính sơ khai và chịu nhiều hạn chế do điều kiện khoa học của thời đại, nhưng chúng đã mở ra một cách tiếp cận mới đối với việc nghiên cứu thế giới tự nhiên, dựa trên các nguyên nhân vật chất và quy luật nội tại của tự nhiên.
 
-Trên nền tảng đó, so sánh được triển khai không phải như một phép đối chiếu giản đơn, mà như một phương thức làm lộ rõ cấu trúc tư duy. Qua so sánh, tính phổ quát của bước chuyển duy vật tức sự tìm kiếm bản nguyên vật chất và sự thoát ly khỏi mô hình giải thích thần thoại được nhận diện như một hiện tượng chung của ý thức nhân loại. Đồng thời, sự khác biệt phương pháp luận giữa tư duy phân tích--cơ học và tư duy chỉnh thể--tương tác được làm nổi bật như hai khả thể khác nhau của cùng một nỗ lực lý giải thế giới.
+\subsection{Các yếu tố duy vật trong triết học Trung Hoa cổ đại}
 
-Cuối cùng, khung lý luận biện chứng duy vật được sử dụng như một bình diện phản tư, nhằm đánh giá giá trị và giới hạn nội tại của chủ nghĩa duy vật cổ đại. Thông qua các phạm trù như vật chất, nguồn gốc vận động, mâu thuẫn nội tại hay cặp tất yếu--ngẫu nhiên, nghiên cứu không chỉ xác định những đóng góp mang tính khai mở của duy vật cổ đại, mà còn chỉ ra những giới hạn tất yếu của nó, đặc biệt là tính tự phát của biện chứng cổ đại và khuynh hướng siêu hình trong duy vật cơ học. Nhờ đó, vấn đề kế thừa không được hiểu như sự lặp lại, mà như một sự vượt bỏ (Aufhebung) trong tiến trình phát triển của tư duy triết học.
+Bên cạnh triết học Hy Lạp cổ đại, trong lịch sử tư tưởng phương Đông cũng xuất hiện nhiều quan niệm mang tính duy vật nhằm giải thích cấu trúc và sự vận động của thế giới tự nhiên. Trong triết học Trung Hoa cổ đại, mặc dù các học thuyết thường gắn liền với những vấn đề đạo đức, chính trị và trật tự xã hội, song nhiều hệ thống tư tưởng vẫn chứa đựng những yếu tố duy vật đáng chú ý. Đặc biệt, các quan niệm về \emph{khí}, học thuyết \emph{âm dương} và \emph{ngũ hành}, cũng như tư tưởng của một số nhà triết học như Tuân Tử đã thể hiện xu hướng giải thích thế giới dựa trên các yếu tố vật chất và những quy luật vận động nội tại của tự nhiên.
 
-Trên cơ sở phương pháp luận ấy, phần tiếp theo sẽ triển khai nội dung của chủ nghĩa duy vật cổ đại trong hai truyền thống, như những hình thái cụ thể của cùng một vận động lịch sử của lý tính.
+\subsubsection{Quan niệm về khí như bản nguyên của thế giới}
+
+Một trong những khái niệm trung tâm trong nhiều hệ thống tư tưởng Trung Hoa cổ đại là khái niệm \emph{khí}. Theo quan niệm này, khí được xem là yếu tố vật chất cơ bản cấu thành nên mọi sự vật và hiện tượng trong vũ trụ. Khí không phải là một thực thể tĩnh tại, mà luôn tồn tại trong trạng thái vận động và biến đổi, từ đó tạo nên sự đa dạng của thế giới tự nhiên.
+
+Trong nhiều văn bản triết học cổ đại, khí được mô tả như một dạng vật chất tinh vi và phổ biến khắp vũ trụ. Tất cả các sự vật, từ những hiện tượng tự nhiên như trời, đất, núi, sông cho đến con người và các sinh vật sống, đều được cho là hình thành từ sự kết hợp và biến đổi của khí. Khi khí tụ lại thì hình thành các vật thể cụ thể; khi khí tán ra thì các sự vật tan rã và trở về trạng thái ban đầu.
+
+Quan niệm về khí thể hiện một cách nhìn mang tính duy vật ở chỗ nó coi thế giới là một chỉnh thể vật chất thống nhất. Mọi hiện tượng đều được giải thích thông qua sự vận động và biến đổi của khí, chứ không phải thông qua sự can thiệp của các lực lượng siêu nhiên. Nhờ đó, khái niệm này đã góp phần hình thành một cách tiếp cận tự nhiên đối với việc lý giải vũ trụ.
+
+\subsubsection{Học thuyết âm dương và ngũ hành}
+
+Bên cạnh quan niệm về khí, học thuyết âm dương và ngũ hành cũng đóng vai trò quan trọng trong việc giải thích cấu trúc và sự vận động của thế giới trong triết học Trung Hoa cổ đại. Theo học thuyết âm dương, mọi sự vật và hiện tượng trong vũ trụ đều chứa đựng hai mặt đối lập nhưng bổ sung cho nhau là âm và dương. Hai yếu tố này không tồn tại tách biệt mà luôn vận động, chuyển hóa và tương tác với nhau, tạo nên sự biến đổi không ngừng của thế giới tự nhiên.
+
+Âm thường được gắn với những đặc tính như tĩnh, tối, lạnh và mềm; trong khi dương gắn với những đặc tính như động, sáng, nóng và cứng. Tuy nhiên, âm và dương không phải là những thực thể độc lập, mà chỉ là hai mặt của cùng một quá trình vận động của tự nhiên. Sự cân bằng và chuyển hóa giữa âm và dương được xem là nguyên lý cơ bản chi phối sự tồn tại và phát triển của vạn vật.
+
+Bổ sung cho học thuyết âm dương là học thuyết ngũ hành, trong đó thế giới được cho là cấu thành từ năm yếu tố cơ bản: kim, mộc, thủy, hỏa và thổ. Các yếu tố này không chỉ tồn tại riêng lẻ mà còn có mối quan hệ tương sinh và tương khắc với nhau. Chính sự tương tác giữa các yếu tố này được xem là nguyên nhân của những biến đổi và chu trình vận động trong tự nhiên.
+
+Mặc dù học thuyết âm dương và ngũ hành mang nhiều yếu tố biểu tượng và chưa có cơ sở khoa học theo nghĩa hiện đại, nhưng chúng đã thể hiện một nỗ lực quan trọng nhằm giải thích các hiện tượng tự nhiên bằng những quy luật nội tại của thế giới vật chất. Thay vì dựa vào ý chí của thần linh, các học thuyết này tìm cách mô tả những nguyên lý phổ quát chi phối sự vận động của vũ trụ.
+
+\subsubsection{Tư tưởng duy vật trong triết học Tuân Tử}
+
+Trong số các nhà tư tưởng Trung Hoa cổ đại, Tuân Tử được xem là một trong những người thể hiện rõ nhất xu hướng duy vật trong cách nhìn về tự nhiên. Khác với nhiều quan niệm truyền thống cho rằng thiên nhiên có ý chí hay mục đích riêng, Tuân Tử cho rằng trời và đất vận hành theo những quy luật khách quan, không phụ thuộc vào mong muốn của con người.
+
+Theo Tuân Tử, các hiện tượng tự nhiên như sự thay đổi của mùa, sự vận động của mặt trời và mặt trăng hay sự sinh trưởng của vạn vật đều diễn ra theo những quy luật nhất định của tự nhiên. Những quy luật này không chịu sự chi phối của các lực lượng siêu nhiên hay ý chí thần linh. Vì vậy, con người không nên tìm cách cầu xin hoặc dựa vào các yếu tố thần bí để thay đổi tự nhiên, mà cần hiểu rõ các quy luật của nó để có thể thích ứng và sử dụng chúng một cách hợp lý.
+
+Quan điểm này thể hiện rõ tinh thần duy vật trong triết học của Tuân Tử. Ông nhấn mạnh rằng thiên nhiên tồn tại độc lập với con người và vận hành theo những quy luật khách quan. Nhiệm vụ của con người không phải là thay đổi các quy luật đó, mà là nhận thức và vận dụng chúng trong đời sống thực tiễn.
+
+Nhìn chung, các quan niệm về khí, âm dương -- ngũ hành và tư tưởng của Tuân Tử đã góp phần hình thành những yếu tố duy vật quan trọng trong triết học Trung Hoa cổ đại. Mặc dù các hệ thống tư tưởng này chưa phát triển thành một chủ nghĩa duy vật hoàn chỉnh theo nghĩa lý luận chặt chẽ, nhưng chúng đã thể hiện rõ xu hướng giải thích thế giới bằng các yếu tố vật chất và các quy luật vận động nội tại của tự nhiên. Điều này cho thấy rằng tư duy duy vật không chỉ xuất hiện trong triết học phương Tây mà còn có những biểu hiện đáng kể trong truyền thống triết học phương Đông.
+
+\subsection{Hai mô hình bản thể luận của chủ nghĩa duy vật cổ đại}
+
+Từ việc khảo sát các tư tưởng duy vật trong triết học Hy Lạp và Trung Hoa cổ đại, có thể nhận thấy rằng mặc dù cùng hướng tới việc giải thích thế giới trên cơ sở vật chất, các hệ thống triết học này đã hình thành những cách tiếp cận khác nhau đối với bản chất và cấu trúc của thực tại. Những cách tiếp cận đó có thể được khái quát thành hai mô hình bản thể luận cơ bản: mô hình vật chất rời rạc và mô hình vật chất liên tục. Hai mô hình này phản ánh những cách hiểu khác nhau về bản nguyên của thế giới cũng như về cách thức mà các sự vật hình thành và biến đổi trong tự nhiên.
+
+\subsubsection{Mô hình vật chất rời rạc}
+
+Mô hình vật chất rời rạc được thể hiện rõ nét nhất trong thuyết nguyên tử của các nhà triết học Hy Lạp cổ đại, đặc biệt là trong tư tưởng của Leucippus và Democritus. Theo quan niệm này, thế giới được cấu thành từ vô số những hạt vật chất cực nhỏ gọi là nguyên tử. Các nguyên tử được cho là không thể phân chia, tồn tại vĩnh viễn và không thay đổi về bản chất. Chúng khác nhau về hình dạng, kích thước và vị trí trong không gian, và chính sự khác nhau này tạo nên sự đa dạng của các sự vật trong thế giới.
+
+Trong mô hình này, thế giới được hiểu như một tập hợp các đơn vị vật chất độc lập vận động trong khoảng không gian trống rỗng. Các hiện tượng tự nhiên được giải thích thông qua sự chuyển động, va chạm và kết hợp của các nguyên tử. Khi các nguyên tử kết hợp theo những cấu trúc khác nhau, chúng tạo thành các vật thể cụ thể; khi các cấu trúc này bị phá vỡ, các vật thể cũng tan rã và trở về trạng thái ban đầu của các nguyên tử.
+
+Mô hình vật chất rời rạc có ý nghĩa quan trọng trong lịch sử tư tưởng bởi nó đã đưa ra một cách giải thích tương đối nhất quán về cấu trúc của thế giới vật chất. Thay vì xem các sự vật là những thực thể độc lập được tạo ra bởi các lực lượng siêu nhiên, thuyết nguyên tử cho rằng tất cả các hiện tượng đều có thể được giải thích bằng sự vận động của các yếu tố vật chất cơ bản. Nhờ đó, mô hình này đã đặt nền tảng cho nhiều quan niệm khoa học về cấu trúc của vật chất trong các giai đoạn sau.
+
+\subsubsection{Mô hình vật chất liên tục}
+
+Khác với mô hình vật chất rời rạc của thuyết nguyên tử, trong nhiều hệ thống triết học phương Đông -- đặc biệt là trong triết học Trung Hoa cổ đại -- thế giới thường được hiểu theo mô hình vật chất liên tục. Theo cách nhìn này, bản nguyên của vũ trụ không phải là những đơn vị vật chất tách rời nhau, mà là một dạng vật chất thống nhất và liên tục, thường được biểu hiện thông qua khái niệm khí.
+
+Trong quan niệm này, khí tồn tại khắp nơi trong vũ trụ và luôn vận động, biến đổi không ngừng. Các sự vật cụ thể được hình thành khi khí tụ lại trong những hình thức nhất định; khi khí tán ra, các sự vật lại trở về trạng thái ban đầu. Do đó, sự khác biệt giữa các sự vật không phải là kết quả của những yếu tố vật chất hoàn toàn khác nhau, mà chủ yếu là do sự khác nhau về trạng thái, mức độ tập trung hoặc sự vận động của cùng một bản nguyên vật chất.
+
+Mô hình vật chất liên tục thường gắn liền với quan niệm về sự vận động và biến đổi không ngừng của tự nhiên. Thông qua các học thuyết như âm dương và ngũ hành, triết học Trung Hoa cổ đại đã nhấn mạnh rằng các yếu tố trong tự nhiên luôn tương tác và chuyển hóa lẫn nhau. Sự vận động này tạo nên quá trình biến đổi liên tục của vạn vật trong vũ trụ.
+
+\subsubsection{So sánh hai mô hình bản thể luận}
+
+Mặc dù có những điểm khác biệt đáng kể, hai mô hình bản thể luận trên đều thể hiện một điểm chung quan trọng: chúng đều khẳng định tính vật chất của thế giới và cố gắng giải thích các hiện tượng tự nhiên bằng những nguyên lý nội tại của tự nhiên. Cả hai cách tiếp cận đều tìm cách loại bỏ vai trò của các lực lượng siêu nhiên trong việc giải thích sự tồn tại và vận động của vũ trụ.
+
+Tuy nhiên, giữa hai mô hình vẫn tồn tại những khác biệt cơ bản. Mô hình vật chất rời rạc nhấn mạnh đến cấu trúc của vật chất như một tập hợp các đơn vị riêng biệt, từ đó giải thích các hiện tượng tự nhiên thông qua sự vận động và tương tác cơ học giữa các đơn vị này. Trong khi đó, mô hình vật chất liên tục lại xem thế giới như một chỉnh thể thống nhất, trong đó các sự vật chỉ là những trạng thái khác nhau của cùng một bản nguyên vật chất.
+
+Sự khác biệt này phản ánh những định hướng triết học khác nhau trong cách tiếp cận vấn đề bản nguyên của thế giới. Triết học Hy Lạp cổ đại thường có xu hướng phân tích và tìm kiếm các yếu tố cấu thành cơ bản của thực tại, trong khi triết học Trung Hoa cổ đại lại nhấn mạnh tính tổng thể và sự vận động liên tục của vũ trụ. Tuy vậy, cả hai cách tiếp cận đều đóng góp quan trọng vào sự hình thành của tư duy duy vật trong lịch sử triết học.
+
+Nhìn chung, hai mô hình bản thể luận này cho thấy sự phong phú và đa dạng của các quan niệm duy vật trong thời cổ đại. Chúng không chỉ phản ánh những nỗ lực ban đầu của con người trong việc hiểu bản chất của thế giới, mà còn đặt nền móng cho nhiều cuộc tranh luận triết học về cấu trúc và bản chất của vật chất trong các giai đoạn sau của lịch sử tư tưởng.
 
 %==============================================================================
-\section{Nội dung của chủ nghĩa duy vật cổ đại}
+\section{Giá trị triết học và giới hạn lịch sử của chủ nghĩa duy vật cổ đại}
 %==============================================================================
 
-\subsection{Sự xuất hiện của tư duy duy vật như bước chuyển cấu trúc ý thức}
+\subsection{Giá trị triết học của chủ nghĩa duy vật cổ đại}
 
-Chủ nghĩa duy vật cổ đại không thể được hiểu giản lược như một tập hợp các luận điểm về vật chất hay bản nguyên của thế giới. Nó trước hết là một biến cố trong lịch sử ý thức: một sự tái cấu trúc cách con người định vị mình trước thực tại. Khi thế giới không còn được kể lại bằng huyền thoại mà được đặt thành vấn đề, khi tự nhiên không còn được nhân cách hóa như ý chí của các lực lượng siêu nhiên mà được suy tư như một tồn tại tự thân, thì một hình thái ý thức mới bắt đầu hình thành. Trong ý nghĩa ấy, sự xuất hiện của tư duy duy vật đánh dấu một sự chuyển trục căn bản của lý tính.
+Chủ nghĩa duy vật cổ đại giữ một vị trí quan trọng trong lịch sử phát triển của tư tưởng triết học. Mặc dù được hình thành trong những điều kiện khoa học và nhận thức còn hạn chế, các quan niệm duy vật cổ đại đã góp phần đặt nền móng cho cách tiếp cận lý tính trong việc giải thích thế giới. Thông qua việc khẳng định bản chất vật chất của vũ trụ và tìm kiếm các nguyên nhân tự nhiên của các hiện tượng, chủ nghĩa duy vật cổ đại đã mở ra một hướng phát triển mới cho tư duy triết học và khoa học.
 
-Điểm quyết định của bước chuyển này không nằm ở việc các nhà tư tưởng lựa chọn nước, lửa, nguyên tử hay khí làm bản nguyên, mà ở chính sự thay đổi phương thức giải thích. Thay vì quy thế giới về một nguyên nhân ngoại tại và siêu nghiệm, tư duy duy vật tìm kiếm nguyên lý nội tại của vận động và tồn tại. Nhân tố thần linh, nếu còn hiện diện, không còn giữ vai trò nguyên nhân tối hậu; nó bị đẩy ra khỏi trung tâm của hệ thống giải thích. Thế giới từ đây không còn là sản phẩm của ý chí, mà là một trật tự có cấu trúc và quy luật.
+\subsubsection{Bước chuyển từ tư duy thần thoại sang giải thích lý tính về thế giới}
 
-Sự chuyển dịch này không nên được hiểu như một sự phủ định trực tiếp tôn giáo theo nghĩa đối kháng, mà đúng hơn như một sự thay đổi trục quy chiếu của ý thức. Nếu trong huyền thoại, ý nghĩa của thế giới được bảo đảm bởi một nền tảng siêu nhiên, thì trong tư duy duy vật, nền tảng ấy được tìm thấy ngay trong chính cấu trúc vật chất của thực tại. Lý tính thay thế mặc khải; suy luận thay thế truyền thuyết; quy luật khách quan thay thế ý chí thần linh. Điều được thiết lập không chỉ là một học thuyết về tự nhiên, mà là một niềm tin mới vào khả năng nhận thức của con người.
+Một trong những giá trị quan trọng nhất của chủ nghĩa duy vật cổ đại là góp phần thúc đẩy quá trình chuyển biến từ tư duy thần thoại sang tư duy lý tính trong lịch sử nhận thức của nhân loại. Trong giai đoạn trước khi triết học xuất hiện, con người thường giải thích các hiện tượng tự nhiên thông qua các câu chuyện thần thoại hoặc niềm tin vào quyền lực của các vị thần. Những cách giải thích này tuy có ý nghĩa về mặt văn hóa và tinh thần, nhưng thường mang tính biểu tượng và thiếu cơ sở lý luận.
 
-Ở đây, tự nhiên lần đầu tiên xuất hiện như một chỉnh thể có thể được nắm bắt bằng khái niệm. Nó không còn là một trường lực của những quyền năng huyền bí, mà trở thành một hệ thống quan hệ có thể được tư duy. Chính trong khoảnh khắc ấy, con người không chỉ lý giải thế giới theo cách khác, mà còn tự xác lập mình như chủ thể nhận thức: một hữu thể có khả năng tìm thấy nền tảng của tồn tại ngay trong bản thân thế giới, chứ không ở bên ngoài nó. Tư duy duy vật cổ đại, vì vậy, không chỉ mở ra một hướng phát triển của triết học, mà còn đặt nền móng cho ý thức khoa học như một khả thể lịch sử của lý tính.
+Sự xuất hiện của các nhà triết học duy vật cổ đại đã tạo ra một cách tiếp cận khác đối với việc lý giải thế giới. Thay vì viện dẫn các lực lượng siêu nhiên, họ tìm cách xác định những yếu tố vật chất cơ bản và các quy luật tự nhiên chi phối sự vận động của vũ trụ. Việc đặt ra câu hỏi về bản nguyên của thế giới, cũng như nỗ lực tìm kiếm những nguyên lý chung để giải thích các hiện tượng tự nhiên, đã đánh dấu sự ra đời của tư duy triết học theo nghĩa chặt chẽ.
 
-\subsection{Bối cảnh và đặc điểm chung}
+Chính sự chuyển biến này đã góp phần hình thành một thái độ nhận thức mới, trong đó thế giới được xem là một hệ thống có thể được hiểu và giải thích thông qua lý trí của con người. Đây là bước tiến quan trọng trong lịch sử trí tuệ, bởi nó mở đường cho sự phát triển của khoa học và triết học trong các giai đoạn sau.
 
-Trong hai không gian văn minh khác biệt về địa lý, ngôn ngữ và cấu trúc xã hội, tư duy duy vật xuất hiện như một đáp ứng trước một nhu cầu cấu trúc tương tự: nhu cầu vượt qua giới hạn của mô hình giải thích thần thoại. Điều này không có nghĩa rằng thần thoại biến mất ngay lập tức, mà đúng hơn, nó mất đi vị trí độc tôn như nguyên lý tối hậu của thế giới. Khi lời giải thích bằng ý chí thần linh không còn đủ sức thỏa mãn yêu cầu nhất quán của lý tính, một hình thức tư duy mới bắt đầu tự xác lập: thế giới được tìm hiểu từ chính nó, chứ không từ một nền tảng siêu nhiên.
+\subsubsection{Khẳng định tính vật chất của thế giới}
 
-Tại Hy Lạp thế kỷ VI TCN, đặc biệt ở các thành bang ven biển như Miletus, nơi giao thương và tiếp xúc văn hóa diễn ra mạnh mẽ,\cite{runes} triết học hình thành không phải như một hệ thống hoàn chỉnh ngay từ đầu, mà như một thao tác tách rời khỏi huyền thoại. Các nhà tư tưởng tiền Socrates không tìm kiếm nguồn gốc của vạn vật từ các thần linh ở đỉnh Olympus, mà quy thế giới về một hoặc một vài dạng vật chất có thể được quan sát, suy luận hoặc khái quát hóa từ kinh nghiệm. Bản nguyên (archê) ở đây không chỉ là một yếu tố vật chất cụ thể, mà là nỗ lực đầu tiên nhằm tìm kiếm sự thống nhất của tồn tại trong một nguyên lý nội tại.
+Một đóng góp quan trọng khác của chủ nghĩa duy vật cổ đại là việc khẳng định rằng thế giới có bản chất vật chất và tồn tại độc lập với ý thức của con người. Các nhà triết học duy vật cổ đại, dù xuất phát từ những cách tiếp cận khác nhau, đều cố gắng giải thích sự hình thành và vận động của vũ trụ dựa trên các yếu tố vật chất.
 
-Trong khi đó, ở Trung Quốc thời Xuân Thu--Chiến Quốc là giai đoạn thường được gọi là ``Bách gia chư tử'' sự phát triển của thiên văn học, lịch pháp, nông học và y học tạo nên một không gian tri thức nơi thế giới ngày càng được hiểu như một hệ thống vận hành theo quy luật.\cite{onhaiminh} Các học thuyết nhấn mạnh khí, âm dương hay ngũ hành không đơn thuần là những mô hình vũ trụ luận, mà là nỗ lực diễn đạt một trật tự nội tại của tự nhiên và xã hội. Ý chí của trời, nếu còn được nhắc đến, không còn đóng vai trò giải thích trực tiếp cho từng biến cố cụ thể. Như vậy, trong cả hai truyền thống, sự chuyển dịch không chỉ diễn ra ở nội dung học thuyết, mà ở chính cách đặt vấn đề về tồn tại.
+Chẳng hạn, trong triết học Hy Lạp cổ đại, các nhà tư tưởng thuộc trường phái Miletus đã tìm kiếm bản nguyên của thế giới trong các yếu tố tự nhiên như nước hoặc không khí. Sau đó, thuyết nguyên tử đã phát triển quan niệm này theo hướng cho rằng thế giới được cấu thành từ những hạt vật chất cơ bản tồn tại trong chân không. Trong triết học Trung Hoa cổ đại, quan niệm về khí cũng thể hiện cách nhìn coi vật chất là nền tảng của mọi sự vật và hiện tượng trong vũ trụ.
 
-Điểm tương đồng sâu xa giữa hai bối cảnh không nằm ở sự giống nhau của khái niệm, mà ở sự xuất hiện của cùng một nhu cầu nhận thức: tìm một nguyên lý nội tại để thay thế cho mô hình thần thoại. Lịch sử, vì thế, không chỉ đóng vai trò bối cảnh, mà trở thành một thành tố nội tại của lập luận triết học: điều cần được giải thích không phải là sự trùng hợp ngẫu nhiên giữa Đông và Tây, mà là tính phổ quát của một bước chuyển trong cấu trúc ý thức nhân loại.
+Những quan niệm này, mặc dù còn mang tính trực quan và chưa có cơ sở khoa học vững chắc theo tiêu chuẩn hiện đại, nhưng đã đặt nền tảng cho một thế giới quan duy vật. Việc khẳng định rằng các hiện tượng tự nhiên có thể được giải thích thông qua các yếu tố vật chất và các quy luật tự nhiên đã góp phần hình thành cơ sở lý luận cho sự phát triển của khoa học tự nhiên trong lịch sử.
 
-\subsubsection{Bối cảnh kinh tế--xã hội: điều kiện khả thể của tư duy duy vật}
+\subsubsection{Những yếu tố biện chứng tự phát trong tư duy cổ đại}
 
-Nếu bước chuyển từ thần thoại sang triết học duy vật là một biến đổi của ý thức, thì nó không diễn ra trong khoảng không trừu tượng. Những điều kiện kinh tế--xã hội và hình thức thực hành tri thức đóng vai trò như những điều kiện khả thể của sự biến đổi ấy. Tuy nhiên, điều này không nên được hiểu theo nghĩa giản lược rằng kinh tế ``quyết định'' trực tiếp nội dung tư tưởng; đúng hơn, nó tạo ra một không gian trong đó những câu hỏi mới trở nên khả thi.
+Ngoài việc khẳng định tính vật chất của thế giới, nhiều quan niệm duy vật cổ đại còn chứa đựng những yếu tố biện chứng tự phát trong cách nhìn về sự vận động và biến đổi của tự nhiên. Các nhà triết học cổ đại đã nhận thấy rằng thế giới không phải là một thực thể tĩnh tại, mà luôn tồn tại trong trạng thái biến đổi và phát triển.
 
-Tại Miletus trung tâm thương nghiệp và hàng hải giao lưu với Babylon và Ai Cập, cùng nhu cầu định hướng thiên văn phục vụ hàng hải,\cite{runes} đã thúc đẩy một kiểu tư duy dựa trên quan sát, dự đoán và tính toán. Khi thành công của thực hành phụ thuộc vào khả năng hiểu quy luật tự nhiên, con người có xu hướng tìm kiếm những nguyên nhân có thể kiểm chứng thay vì cầu khẩn thần linh. Việc Thales xác định nước như bản nguyên không chỉ phản ánh một suy luận từ kinh nghiệm cảm tính, mà còn cho thấy sự chuyển dịch sang một mô hình giải thích dựa trên tính phổ quát của một yếu tố vật chất.
+Trong triết học Hy Lạp cổ đại, thuyết nguyên tử đã giải thích sự hình thành và tan rã của các sự vật thông qua sự kết hợp và phân tách của các nguyên tử. Điều này cho thấy một cách hiểu sơ khai về quá trình vận động và biến đổi của vật chất. Tương tự, trong triết học Trung Hoa cổ đại, học thuyết âm dương nhấn mạnh sự tồn tại của các mặt đối lập trong tự nhiên và sự chuyển hóa lẫn nhau giữa chúng. Quan niệm này phản ánh một cách nhìn năng động về thế giới, trong đó sự vận động và biến đổi được xem là đặc điểm cơ bản của thực tại.
 
-Ở Trung Quốc thời Xuân Thu--Chiến Quốc, sự tích lũy tri thức về lịch pháp, thiên văn, nông học và y học gắn liền với nhu cầu quản lý sản xuất và tổ chức xã hội.\cite{onhaiminh} Thế giới ngày càng được hiểu như một chỉnh thể vận hành theo quy luật âm dương, ngũ hành và khí. Những mô hình này, dù còn mang tính trực giác và biểu tượng, vẫn biểu hiện một niềm tin ngày càng rõ rệt vào khả năng nhận thức trật tự tự nhiên bằng lý tính. Ở đây, thực hành sản xuất và quản trị xã hội không chỉ cung cấp dữ liệu, mà còn nuôi dưỡng một thái độ nhận thức: tin rằng thế giới có thể được hiểu, và do đó có thể được điều chỉnh.
+Những yếu tố biện chứng tự phát này cho thấy rằng các nhà triết học cổ đại đã bước đầu nhận thức được tính vận động, biến đổi và liên hệ của các sự vật trong thế giới. Mặc dù chưa phát triển thành một phương pháp biện chứng hoàn chỉnh, các quan niệm này đã góp phần chuẩn bị những tiền đề quan trọng cho sự hình thành của các hệ thống triết học biện chứng trong các giai đoạn sau của lịch sử tư tưởng.
 
-Do vậy, bối cảnh kinh tế--xã hội không phải là nguyên nhân cơ giới của tư duy duy vật, mà là môi trường trong đó sự tự tin của lý tính được hình thành. Nơi con người buộc phải dựa vào quan sát và kinh nghiệm để tồn tại và phát triển, ở đó thế giới dần được nhìn nhận như một hệ thống có quy luật nội tại. Chính trong điều kiện ấy, triết học mới có thể tách khỏi huyền thoại và định hình như một nỗ lực giải thích thế giới bằng những nguyên lý vật chất dù còn tự phát và chưa đạt tới mức độ khái niệm hóa hoàn chỉnh.
+Nhìn chung, chủ nghĩa duy vật cổ đại có giá trị to lớn trong việc đặt nền móng cho sự phát triển của tư duy triết học và khoa học. Thông qua việc khẳng định tính vật chất của thế giới, tìm kiếm các quy luật tự nhiên và nhận thức bước đầu về sự vận động của thực tại, các nhà triết học cổ đại đã mở ra một hướng tiếp cận mới đối với việc nghiên cứu vũ trụ và vị trí của con người trong thế giới. Mặc dù những quan niệm này còn mang nhiều hạn chế lịch sử, nhưng giá trị của chúng vẫn được ghi nhận như những bước khởi đầu quan trọng trong quá trình phát triển của tư tưởng triết học nhân loại.
 
-\subsection{Chủ nghĩa duy vật cổ đại trong triết học Hy Lạp}
+\subsection{Những hạn chế lịch sử của chủ nghĩa duy vật cổ đại}
 
-Trong không gian văn minh Hy Lạp, vấn đề trung tâm của triết học không chỉ là câu hỏi ``bản nguyên của vạn vật là gì?'' mà sâu xa hơn là: \emph{cấu trúc của thực tại được hình thành như thế nào để từ cái đơn nhất có thể xuất hiện cái đa dạng?} Vấn đề bản nguyên vì thế đồng thời là vấn đề về \textbf{tính thống nhất của thế giới} và \textbf{cơ chế sinh thành của khác biệt}.
+Mặc dù chủ nghĩa duy vật cổ đại có những đóng góp quan trọng đối với sự phát triển của tư duy triết học và khoa học, các quan niệm duy vật trong giai đoạn này vẫn mang những hạn chế nhất định do điều kiện lịch sử và trình độ nhận thức của thời đại. Những hạn chế này không làm giảm giá trị lịch sử của chủ nghĩa duy vật cổ đại, nhưng cho thấy rằng các quan niệm này mới chỉ là những bước khởi đầu trong quá trình phát triển lâu dài của tư tưởng duy vật.
 
-Từ Thales với nước, Anaximenes với không khí, Heraclitus với lửa, đến Leucippus và Democritus với nguyên tử, ta thấy một tiến trình nội tại: thực tại dần được trừu tượng hóa. Ban đầu, bản nguyên còn là một yếu tố cảm tính cụ thể; về sau, nó trở thành những đơn vị siêu cảm tính (nguyên tử), Không thể cảm nhận bằng giác quan một cách trực tiếp nhưng có tính khái niệm cao. Điểm quyết định không nằm ở việc lựa chọn ``nước'' hay ``lửa'', mà ở mô hình tư duy ẩn sau: \textbf{thế giới có thể được giải thích từ những yếu tố cấu thành nội tại, không cần đến thần linh như nguyên nhân tối hậu}.
+\subsubsection{Tính trực quan và cảm tính trong quan niệm về vật chất}
 
-Đặc biệt, học thuyết nguyên tử đánh dấu bước chuyển từ duy vật trực quan sang duy vật lý luận: vật chất không còn đồng nhất với một chất thể cụ thể trong kinh nghiệm, mà trở thành cấu trúc vi mô mang tính bản thể học. Như vậy, duy vật Hy Lạp mang đặc trưng \textbf{phân tích--cấu trúc}: tìm đơn vị tối giản để từ đó tái cấu trúc toàn bộ thế giới.
+Một trong những hạn chế cơ bản của chủ nghĩa duy vật cổ đại là tính trực quan và cảm tính trong cách hiểu về vật chất. Do khoa học tự nhiên thời cổ đại chưa phát triển, các nhà triết học thường dựa chủ yếu vào quan sát trực tiếp và suy luận triết học để hình thành các quan niệm của mình về cấu trúc của thế giới.
 
-\subsubsection{Các trường phái và đại biểu tiêu biểu}
+Vì vậy, nhiều nhà tư tưởng đã xác định bản nguyên của vũ trụ thông qua những yếu tố vật chất cụ thể và quen thuộc trong đời sống như nước, không khí hoặc lửa. Những quan niệm này phản ánh nỗ lực tìm kiếm một nền tảng vật chất cho thế giới, nhưng đồng thời cũng cho thấy sự hạn chế trong khả năng nhận thức về cấu trúc thực sự của vật chất. Ngay cả thuyết nguyên tử, mặc dù có ý nghĩa quan trọng trong lịch sử tư tưởng, cũng chủ yếu dựa trên suy luận triết học chứ chưa được chứng minh bằng các phương pháp khoa học thực nghiệm.
 
-\subsubsection{Truyền thống duy vật tự nhiên: từ Thales đến trường phái Milete}
+Tương tự, trong triết học Trung Hoa cổ đại, các khái niệm như khí hay các yếu tố trong học thuyết ngũ hành cũng mang tính khái quát trực quan về thế giới tự nhiên. Những quan niệm này thể hiện nỗ lực giải thích sự đa dạng của các hiện tượng tự nhiên, nhưng vẫn thiếu những cơ sở khoa học rõ ràng để kiểm chứng.
 
-\textbf{Thales} (khoảng 624--547 TCN), thường được xem là nhà triết học đầu tiên của Hy Lạp, khẳng định: \emph{nước là bản nguyên của vạn vật}.\cite{runes} Quan điểm này tuy còn mang tính trực quan, nhưng đã thực hiện một bước đột phá cấu trúc: thay vì quy thế giới về thần thoại, ông quy nó về một thực thể vật chất có thể quan sát. Ở đây, sự sống, biến đổi và chu trình tự nhiên được giải thích bằng nội tại tự nhiên.
+\subsubsection{Thiếu cơ sở khoa học thực nghiệm}
 
-\textbf{Anaximander} (610--547 TCN) vượt qua tính cụ thể cảm tính của Thales khi đề xuất \emph{apeiron} (cái vô định, vô hạn) làm bản nguyên.\cite{runes} Đây là bước trừu tượng hóa quan trọng: bản nguyên không còn là một vật thể cụ thể, mà là nền tảng vô hạn từ đó các đối cực (nóng/lạnh, khô/ướt) tách ra và tương tác. Ý tưởng này hàm chứa mầm mống của tư duy về mâu thuẫn nội tại trong tự nhiên.
+Một hạn chế quan trọng khác của chủ nghĩa duy vật cổ đại là sự thiếu vắng các phương pháp khoa học thực nghiệm. Trong thời cổ đại, khoa học tự nhiên chưa phát triển thành các ngành nghiên cứu độc lập với những phương pháp nghiên cứu chặt chẽ. Do đó, các nhà triết học thường kết hợp việc quan sát tự nhiên với suy luận mang tính khái quát để xây dựng các hệ thống triết học của mình.
 
-\textbf{Anaximenes} (khoảng 585--525 TCN) trở lại với một yếu tố cảm tính là \emph{không khí} nhưng bổ sung cơ chế biến đổi: sự \emph{cô đặc} và \emph{làm loãng}.\cite{runes} Ở đây, lần đầu tiên sự đa dạng hiện tượng được giải thích bằng một tiến trình định lượng (mật độ) dẫn tới khác biệt định tính. Đây là mầm mống sơ khai của tư duy về quy luật.
+Điều này dẫn đến việc nhiều quan niệm về cấu trúc và vận động của thế giới mang tính giả thuyết hơn là kết luận khoa học được kiểm chứng. Các nhà triết học cổ đại thường không có những công cụ và phương pháp cần thiết để kiểm tra tính đúng đắn của các giả thuyết về bản nguyên của thế giới. Vì vậy, nhiều quan niệm dù có giá trị về mặt tư duy triết học nhưng vẫn chưa thể trở thành các lý thuyết khoa học theo nghĩa hiện đại.
 
-\textbf{Heraclitus} (khoảng 535--475 TCN) đưa tư duy duy vật sang chiều sâu mới khi coi \emph{lửa} là biểu tượng của sự vận động và biến đổi vĩnh cửu. Câu nói nổi tiếng ``Không ai tắm hai lần trên cùng một dòng sông'' diễn tả một trực giác bản thể học: \textbf{vận động là bản chất của tồn tại}. Nếu các nhà Milete nhấn mạnh yếu tố nền tảng, thì Heraclitus nhấn mạnh \textbf{tính động} của thực tại. Ở ông xuất hiện rõ rệt tính biện chứng tự phát: các mặt đối lập vừa xung đột vừa thống nhất trong một trật tự logos phổ quát.
+Chính vì thiếu cơ sở thực nghiệm, nhiều hệ thống triết học cổ đại vẫn mang tính suy đoán và chưa có khả năng giải thích đầy đủ các hiện tượng phức tạp của tự nhiên. Điều này cho thấy rằng sự phát triển của triết học duy vật trong các giai đoạn sau gắn liền với sự tiến bộ của khoa học tự nhiên và phương pháp nghiên cứu khoa học.
 
-Nhìn tổng thể, truyền thống này đánh dấu sự hình thành của \textbf{duy vật tự nhiên trực quan}: thế giới được quy về một yếu tố vật chất, vận động và biến đổi được thừa nhận, nhưng cơ chế sâu xa của vận động vẫn chưa được lý giải một cách hệ thống.
+\subsubsection{Xu hướng cơ học trong việc giải thích thế giới}
 
-\subsubsection{Thuyết nguyên tử: Democritus và Leucippus}
+Một hạn chế khác có thể thấy trong nhiều quan niệm duy vật cổ đại là xu hướng giải thích thế giới theo cách cơ học. Đặc biệt trong thuyết nguyên tử của các nhà triết học Hy Lạp, sự vận động của thế giới thường được hiểu chủ yếu như kết quả của sự chuyển động và va chạm của các nguyên tử trong không gian.
 
-Với \textbf{Leucippus} và đặc biệt \textbf{Democritus} (khoảng 460--370 TCN), chủ nghĩa duy vật Hy Lạp đạt đến đỉnh cao lý luận.\cite{sep-presocratic} Thay vì một bản nguyên duy nhất, họ khẳng định thực tại gồm hai thành phần không thể thiếu:
+Cách giải thích này có ý nghĩa quan trọng trong việc loại bỏ vai trò của các lực lượng siêu nhiên, nhưng đồng thời cũng dẫn đến cách nhìn khá đơn giản về cấu trúc và sự vận động của thế giới. Nhiều hiện tượng tự nhiên phức tạp được quy về những quá trình cơ học đơn giản, trong khi các yếu tố như sự phát triển, sự biến đổi về chất hoặc các mối quan hệ phức tạp giữa các sự vật chưa được phân tích một cách đầy đủ.
 
-\begin{itemize}
-    \item \textbf{Nguyên tử} (\emph{atomos}): những đơn vị vật chất cực nhỏ, bất khả phân, vĩnh cửu, khác nhau về hình dạng và vị trí.
-    \item \textbf{Chân không} (\emph{kenon}): khoảng trống cho phép nguyên tử vận động.
-\end{itemize}
+Ngoài ra, trong nhiều hệ thống tư tưởng cổ đại, các quan niệm về tự nhiên thường chưa phân biệt rõ giữa các lĩnh vực khác nhau của thực tại như vật lý, sinh học hay xã hội. Do đó, các cách giải thích về thế giới thường mang tính khái quát rộng nhưng thiếu sự phân tích chi tiết về các quy luật cụ thể của từng lĩnh vực.
 
-Đây là bước nhảy bản thể luận quan trọng: thay vì một chất thể liên tục, thế giới được cấu tạo từ các đơn vị rời rạc. Sự đa dạng của hiện tượng không xuất phát từ thay đổi bản thể, mà từ \textbf{sự tổ hợp khác nhau của những đơn vị bất biến}.
+Nhìn chung, những hạn chế của chủ nghĩa duy vật cổ đại phản ánh trình độ phát triển của khoa học và nhận thức trong giai đoạn lịch sử đó. Tuy nhiên, chính trong quá trình vượt qua những hạn chế này mà tư tưởng duy vật đã tiếp tục phát triển và hoàn thiện trong các giai đoạn sau của lịch sử triết học. Các hệ thống duy vật hiện đại, với sự hỗ trợ của khoa học tự nhiên và phương pháp nghiên cứu khoa học, đã có điều kiện để xây dựng những quan niệm sâu sắc và toàn diện hơn về bản chất của thế giới vật chất.
 
-\textbf{Giải pháp cho vấn đề ``một và nhiều''}. Parmenides phủ nhận biến đổi để bảo vệ tính nhất quán của tồn tại; Heraclitus khẳng định biến đổi triệt để. Democritus dung hòa hai cực này: mỗi nguyên tử là bất biến (tính nhất), nhưng có vô số nguyên tử (tính đa); biến đổi chỉ là sự sắp xếp lại của cái bất biến. Nhờ vậy, ông bảo toàn được tính hợp lý của tồn tại mà vẫn giải thích được vận động.
+\subsection{Sự kế thừa và phát triển trong triết học sau này}
 
-\textbf{Chân không như điều kiện khả thể của vận động}. Việc thừa nhận ``cái không'' như một yếu tố cấu thành thực tại là một đột phá siêu hình học. Truyền thống trước đó đồng nhất tồn tại với cái đầy; Democritus đưa \emph{hư vô} vào cấu trúc tồn tại như điều kiện cho chuyển động. Nhờ đó, vận động được giải thích nội tại, không cần đến tác nhân siêu nhiên.
+Mặc dù còn mang nhiều hạn chế do điều kiện lịch sử và trình độ khoa học của thời đại, chủ nghĩa duy vật cổ đại vẫn có ảnh hưởng sâu rộng đối với sự phát triển của triết học và khoa học trong các giai đoạn sau. Những quan niệm ban đầu về bản nguyên vật chất của thế giới và về khả năng giải thích các hiện tượng tự nhiên bằng các quy luật nội tại đã trở thành tiền đề quan trọng cho sự hình thành và phát triển của các hệ thống triết học duy vật trong lịch sử. Từ triết học cận đại đến các hệ thống duy vật hiện đại, nhiều tư tưởng cơ bản của chủ nghĩa duy vật cổ đại đã được kế thừa, phát triển và hoàn thiện trên cơ sở những thành tựu mới của khoa học và nhận thức.
 
-\textbf{Tính hệ thống}. Democritus không chỉ xây dựng bản thể luận mà còn phát triển nhận thức luận và nhân sinh quan trên nền tảng duy vật. Cảm giác được giải thích bằng sự tác động cơ học của ``ảnh tượng'' nguyên tử lên giác quan; tư duy là kết quả của cấu trúc nguyên tử tinh tế trong linh hồn; đạo đức hướng tới trạng thái cân bằng nội tại. Ở đây, lần đầu tiên xuất hiện một hệ thống duy vật toàn diện, trong đó tự nhiên và con người được giải thích bằng cùng một nguyên lý.\cite{runes}
+\subsubsection{Ảnh hưởng đối với triết học cận đại}
 
-\subsubsection{Chủ nghĩa Epicurus: duy vật và tự do}
+Trong thời kỳ cận đại, sự phát triển mạnh mẽ của khoa học tự nhiên đã tạo điều kiện thuận lợi cho việc phục hưng và phát triển các quan niệm duy vật về thế giới. Nhiều nhà triết học trong giai đoạn này đã tiếp thu những ý tưởng cơ bản của chủ nghĩa duy vật cổ đại, đặc biệt là quan niệm cho rằng thế giới có bản chất vật chất và vận hành theo những quy luật khách quan.
 
-\textbf{Epicurus} (341--270 TCN) kế thừa nguyên tử luận nhưng đặt nó vào một bối cảnh nhân sinh rõ rệt: triết học phải giải phóng con người khỏi sợ hãi.\cite{runes} Linh hồn là cấu trúc nguyên tử tinh tế; khi thân thể tan rã, linh hồn cũng tiêu tan. Vì thế, cái chết không đáng sợ.
+Sự phát triển của vật lý học, thiên văn học và cơ học trong thời kỳ này đã cung cấp những bằng chứng khoa học mới giúp củng cố cách nhìn duy vật về vũ trụ. Những nghiên cứu về cấu trúc và vận động của vật chất đã góp phần làm rõ hơn các giả thuyết ban đầu của các nhà triết học cổ đại về bản nguyên của thế giới. Đồng thời, sự tiến bộ của phương pháp khoa học cũng giúp khắc phục phần nào những hạn chế mang tính suy đoán trong các hệ thống triết học trước đó.
 
-Điểm sáng tạo quyết định của Epicurus là khái niệm \emph{clinamen} được hiểu là sự lệch hướng tự phát của nguyên tử.\cite{lucretius} Nếu mọi chuyển động đều tất định, thì thế giới chỉ là một chuỗi cơ học khép kín. Sự lệch hướng mở ra khả năng va chạm, hình thành thế giới và đặc biệt là không gian cho tự do.
+Trong bối cảnh đó, nhiều nhà tư tưởng cận đại đã phát triển những hệ thống triết học duy vật mang tính hệ thống và chặt chẽ hơn. Các quan niệm về thế giới như một hệ thống vật chất vận động theo những quy luật tự nhiên đã trở thành một trong những nền tảng quan trọng của thế giới quan khoa học trong thời kỳ này.
 
-Vấn đề ở đây là mâu thuẫn giữa \textbf{tất yếu} và \textbf{ngẫu nhiên}. Epicurus khẳng định ngẫu nhiên tồn tại khách quan, phá vỡ định mệnh luận cơ học. Tuy nhiên, ông chưa giải thích được nguồn gốc nội tại của sự lệch hướng. Chính vì vậy, ông đặt đúng vấn đề tự do trong một thế giới duy vật nhưng chưa có công cụ biện chứng để giải quyết triệt để.
+\subsubsection{Vai trò đối với sự hình thành chủ nghĩa duy vật hiện đại}
 
-K.\,Marx trong luận án tiến sĩ \emph{Sự khác biệt giữa triết học tự nhiên của Democritus và Epicurus}\cite{marx-epicurus} đã đánh giá cao đóng góp này: sự lệch hướng biểu thị nỗ lực khẳng định tính tự thân của vật chất và mở đường cho tư duy về tự do.
+Những tư tưởng của chủ nghĩa duy vật cổ đại cũng có ảnh hưởng đáng kể đối với sự hình thành và phát triển của các hệ thống duy vật hiện đại. Trong quá trình phát triển của triết học, nhiều nhà tư tưởng đã kế thừa những yếu tố hợp lý của các quan niệm duy vật cổ đại, đồng thời bổ sung và hoàn thiện chúng dựa trên những thành tựu mới của khoa học và nhận thức.
 
-\textbf{Lucretius} (98--55 TCN) trong \emph{De Rerum Natura} đã hệ thống hóa và thi ca hóa thế giới quan Epicurus.\cite{lucretius}\cite{runes} Tác phẩm không chỉ truyền bá nguyên tử luận mà còn thể hiện lý tưởng giải phóng con người khỏi mê tín và nỗi sợ thần linh. Ở đây, chủ nghĩa duy vật không chỉ là một học thuyết tự nhiên, mà là một dự án nhân văn: đem lại bình thản cho tâm trí thông qua hiểu biết về cấu trúc vật chất của thế giới.
+Chủ nghĩa duy vật hiện đại không chỉ tiếp tục khẳng định tính vật chất của thế giới mà còn nhấn mạnh tính vận động, biến đổi và phát triển của thực tại. Nhờ sự phát triển của khoa học tự nhiên, đặc biệt là các ngành như vật lý học, hóa học và sinh học, các quan niệm về cấu trúc và vận động của vật chất đã trở nên sâu sắc và toàn diện hơn nhiều so với thời cổ đại.
 
-\subsubsection{So sánh nội tại giữa Democritus và Epicurus: từ tất định luận cơ học đến vấn đề tự do}
+Trong bối cảnh đó, các hệ thống triết học duy vật hiện đại đã phát triển những cách tiếp cận mới đối với việc nghiên cứu thế giới tự nhiên và xã hội. Những quan niệm này không chỉ kế thừa các ý tưởng cơ bản của chủ nghĩa duy vật cổ đại mà còn mở rộng chúng thông qua việc phân tích các quy luật phát triển của tự nhiên, xã hội và tư duy.
 
-Sự khác biệt giữa Democritus và Epicurus không chỉ là bổ sung khái niệm \emph{clinamen}. Đó là sự khác biệt về định hướng triết học: từ một hệ thống duy vật mang tính nhận thức luận và vũ trụ luận thuần túy sang một hệ thống duy vật có ý thức rõ ràng về vấn đề nhân sinh và tự do.
+\subsubsection{Ý nghĩa đối với thế giới quan khoa học ngày nay}
 
-\textbf{Bản thể luận: tính tất định và cấu trúc vận động}
+Ngày nay, mặc dù khoa học đã đạt được những tiến bộ vượt bậc so với thời cổ đại, nhiều ý tưởng cơ bản của chủ nghĩa duy vật cổ đại vẫn giữ được ý nghĩa nhất định trong việc hình thành thế giới quan khoa học. Quan niệm rằng thế giới có bản chất vật chất và vận hành theo những quy luật khách quan vẫn là một nguyên tắc cơ bản trong nhiều lĩnh vực nghiên cứu khoa học.
 
-Ở Democritus, nguyên tử vận động theo tính tất yếu cơ học. Mọi sự hình thành và tiêu vong chỉ là kết quả của va chạm và tổ hợp trong chân không. Không có chỗ cho ngẫu nhiên theo nghĩa bản thể học; cái được gọi là ``ngẫu nhiên'' chỉ là biểu hiện của sự thiếu hiểu biết về chuỗi nguyên nhân. Thế giới vì thế là một chỉnh thể hoàn toàn tất định.
+Bên cạnh đó, tinh thần tìm kiếm các nguyên nhân tự nhiên để giải thích các hiện tượng của thế giới, vốn là đặc điểm nổi bật của các nhà triết học duy vật cổ đại, vẫn tiếp tục đóng vai trò quan trọng trong phương pháp nghiên cứu khoa học hiện đại. Chính thái độ nhận thức này đã thúc đẩy sự phát triển của khoa học bằng cách khuyến khích con người đặt câu hỏi, quan sát và tìm kiếm những quy luật chi phối sự vận động của tự nhiên.
 
-Epicurus kế thừa cấu trúc nguyên tử--chân không nhưng đưa vào yếu tố \emph{clinamen} (sự lệch hướng tự phát). Sự lệch này không có nguyên nhân xác định trước; nó phá vỡ chuỗi tất yếu thuần cơ học. Nếu ở Democritus vận động là hệ quả của va chạm tất yếu, thì ở Epicurus, vận động có một khởi điểm không hoàn toàn bị quy định bởi quá khứ.
-
-Điểm khác biệt cốt lõi nằm ở đây: Democritus xây dựng một bản thể luận duy vật nhất nguyên và tất định; Epicurus mở cấu trúc đó ra bằng cách thừa nhận yếu tố ngẫu nhiên khách quan. Sự chuyển dịch này cho thấy Epicurus không chỉ sửa đổi vật lý học nguyên tử mà đang tái cấu trúc toàn bộ nền tảng siêu hình học của nó.
-
-\textbf{Vấn đề tất yếu và ngẫu nhiên}
-
-Trong hệ thống Democritus, tất yếu là nguyên lý chi phối toàn bộ thực tại. Ngẫu nhiên, nếu có, chỉ là tên gọi của cái chưa được nhận thức. Do đó, tính hợp lý của thế giới được bảo toàn tuyệt đối; nhưng hệ quả là một dạng định mệnh luận cơ học.
-
-Epicurus ý thức được hệ quả đạo đức của định mệnh luận ấy. Nếu mọi hành vi chỉ là kết quả tất yếu của chuyển động nguyên tử, thì trách nhiệm và tự do ý chí trở nên khó khả thi. Sự lệch hướng (\emph{clinamen}) vì vậy mang ý nghĩa siêu hình học sâu xa: nó khẳng định sự tồn tại của ngẫu nhiên như một yếu tố cấu thành thực tại.
-
-Tuy nhiên, chính tại đây nảy sinh vấn đề triết học: nếu sự lệch là hoàn toàn vô nguyên nhân, thì nó rơi vào ngẫu nhiên thuần túy, không đủ nền tảng để giải thích tự do như một hành vi có ý thức; nếu nó có nguyên nhân, thì lại quay về tất định. Epicurus đã mở ra vấn đề nhưng chưa thể giải quyết triệt để mâu thuẫn giữa tất yếu và tự do.
-
-\textbf{Nhận thức luận và giá trị của cảm giác}
-
-Democritus phân biệt giữa ``nhận thức mờ tối'' (qua giác quan) và ``nhận thức chân chính'' (qua lý trí). Ông có xu hướng đề cao tư duy lý tính như phương tiện đạt tới chân lý về cấu trúc nguyên tử, vượt lên trên cảm giác vốn chỉ phản ánh bề ngoài.
-
-Epicurus thì ngược lại: ông khẳng định cảm giác luôn chân thực theo cách của nó; sai lầm chỉ xuất hiện trong phán đoán. Sự tin cậy vào cảm giác gắn với mục đích thực tiễn của triết học: giải phóng con người khỏi sợ hãi. Như vậy, nếu Democritus thiên về lý tính khoa học, thì Epicurus nhấn mạnh tính thực hành và giá trị trị liệu của triết học.
-
-\textbf{Nhân sinh quan và mục đích của triết học}
-
-Ở Democritus, hệ thống duy vật có tính phổ quát: giải thích tự nhiên, nhận thức và đạo đức bằng cùng một nguyên lý cơ học. Tuy nhiên, mục tiêu của ông vẫn thiên về tri thức hơn là giải phóng tâm linh.
-
-Epicurus đặt nhân sinh vào trung tâm. Triết học không chỉ để hiểu thế giới mà để đạt tới \emph{ataraxia} (bình thản). Vật lý học nguyên tử trở thành công cụ để xóa bỏ mê tín và nỗi sợ thần linh. Như vậy, trong khi Democritus xây dựng một vũ trụ luận duy vật có tính khoa học sơ khai, thì Epicurus chuyển nó thành một dự án nhân văn.
-
-\textbf{Ý nghĩa triết học của sự khác biệt}
-
-Có thể nói: Democritus đại diện cho đỉnh cao của duy vật cơ học cổ đại; Epicurus đại diện cho nỗ lực vượt qua giới hạn của duy vật cơ học từ bên trong.
-
-Nếu hệ thống Democritus bảo toàn tính hợp lý và tính tất yếu của thế giới, thì hệ thống Epicurus tìm cách dung hòa tính tất yếu ấy với yêu cầu về tự do và trách nhiệm. Sự khác biệt này không chỉ là tranh luận nội bộ của nguyên tử luận, mà là một trong những tiền đề sớm nhất cho vấn đề tự do tất yếu trong lịch sử triết học phương Tây.
-
-Theo phân tích trong \emph{Sự khác biệt giữa triết học tự nhiên của Democritus và Epicurus} của Karl Marx,\cite{marx-epicurus} sự lệch hướng của nguyên tử ở Epicurus biểu thị nỗ lực khẳng định tính tự thân của hình thức tồn tại cá biệt chống lại tính trừu tượng thuần túy của tất yếu cơ học. Dù còn hạn chế về mặt lý luận, Epicurus đã mở ra một chiều kích mới cho chủ nghĩa duy vật: chiều kích của tự do.
-
-%----------------------------------------------------------------------------
-\subsection{Chủ nghĩa duy vật cổ đại trong triết học Trung Quốc}
-%----------------------------------------------------------------------------
-
-Nếu truyền thống Hy Lạp đặt trọng tâm vào câu hỏi về bản nguyên cấu thành của tồn tại, thì tư duy Trung Hoa cổ đại lại hướng đến việc nắm bắt \textbf{nguyên lý vận hành của chỉnh thể}. Ở đây, vấn đề không phải là tìm ``viên gạch'' đầu tiên của thế giới, mà là hiểu cách thế giới biến hóa và tự điều hòa.
-
-Trong học thuyết âm--dương và ngũ hành, thực tại không được phân tích thành những đơn vị rời rạc, mà được hiểu như một \textbf{quá trình liên tục}. ``Khí'' không phải là hạt bất biến, mà là một thực thể động: vừa là chất thể, vừa là năng lực vận động. Tồn tại không tách khỏi quá trình; bản thể đồng nhất với biến hóa.
-
-Khác với mô hình phân tích của Hy Lạp, duy vật Trung Hoa mang tính \textbf{tổng hợp--quan hệ}: không truy tìm đơn vị tối giản, mà truy tìm nguyên lý điều hòa sự vận hành của chỉnh thể. Triết học Trung Quốc cổ đại không dùng khái niệm ``duy vật'' theo nghĩa phương Tây hiện đại, nhưng nhiều tư tưởng thể hiện rõ khuynh hướng duy vật: thế giới có nền tảng vật chất, vận động theo quy luật tự nhiên, và con người có thể nhận thức quy luật ấy.\cite{onhaiminh}
-
-\subsubsection{Các khái niệm nền: Ngũ hành, Âm Dương, Nguyên khí}
-
-Hình thức sơ khai của tư tưởng duy vật Trung Hoa gắn với ba trục khái niệm: \textbf{ngũ hành}, \textbf{âm dương} và \textbf{khí}.
-
-\textbf{Ngũ hành như mô hình hệ thống học sơ khai}
-
-Ngũ hành (kim, mộc, thủy, hỏa, thổ) không chỉ là năm ``chất'' vật lý, mà là một \textbf{mô hình quan hệ}. Quan hệ tương sinh--tương khắc diễn tả cơ chế điều hòa động của chỉnh thể. Không yếu tố nào tồn tại biệt lập; mỗi yếu tố được định nghĩa thông qua tương tác với yếu tố khác.
-
-Ở đây xuất hiện một đặc điểm bản thể luận quan trọng: \textbf{tính hồi quy}. Vận động diễn ra theo chu trình, không có điểm khởi đầu tuyệt đối. Khác với logic truy nguyên tuyến tính (tìm nguyên nhân đầu tiên), mô hình ngũ hành thể hiện cấu trúc tương tác lặp lại, cân bằng động. Điều này cho thấy một hình thức tư duy hệ thống trước khoa học hệ thống hiện đại.
-
-\textbf{Âm dương và logic của mâu thuẫn}
-
-Âm và dương không phải hai thực thể tách biệt, mà là hai mặt đối lập trong cùng một quá trình. Chúng vừa xung đột vừa chuyển hóa lẫn nhau. Mọi sự vật đều chứa mầm mống của mặt đối lập của nó. Đây là một hình thức \textbf{biện chứng tự phát}: tồn tại không tĩnh tại mà mang trong nó sự vận động nội tại.
-
-\textbf{Khí như bản thể liên tục}
-
-Khái niệm ``khí'' biểu thị một chất thể phổ quát, liên tục, có thể cô đặc hoặc phân tán. Không có ``chân không'' tách biệt; mọi tồn tại là trạng thái của khí. Ở đây, ta gặp một \textbf{bản thể luận của tính liên tục}.
-
-Các nhà tư tưởng như \textbf{Vương Sung} (27--khoảng 97) phê phán mạnh mẽ mê tín và thiên mệnh, cho rằng mọi sự vật sinh ra từ khí và không có quỷ thần can thiệp vào tự nhiên.\cite{onhaiminh} \textbf{Trương Tái} (1020--1077) sau này hệ thống hóa quan niệm ấy: ``khí'' là thực tại duy nhất, mọi sự khác biệt chỉ là mức độ tụ--tán khác nhau của khí.\cite{onhaiminh}
-
-Ở đây ta thấy rõ: duy vật Trung Hoa không xây dựng một bản thể luận hạt, mà lại là một bản thể luận trường, liên tục, chỉnh thể.
-
-\subsubsection{Tuân Tử: duy vật và nền tảng đạo đức--chính trị}
-
-Trong số các nhà tư tưởng Chiến Quốc, \textbf{Tuân Tử} (khoảng 310--235 TCN) thể hiện rõ khuynh hướng duy vật và duy lý.\cite{onhaiminh}
-
-Luận điểm nổi tiếng của ông: \emph{``Thiên hành hữu thường''} trời vận hành theo quy luật cố định, không vì thiện ác của con người mà thay đổi. Đây là bước tách biệt tự nhiên khỏi ý chí thần linh.
-
-Từ quan niệm đó, Tuân Tử xây dựng một hệ thống đạo đức--chính trị mang tính nhân bản và thế tục: đạo đức không dựa trên thiên mệnh mà trên giáo dục; lễ nghĩa là công cụ điều chỉnh hành vi xã hội; con người có thể ``chế thiên nhiên nhi dụng chi'' hiểu và sử dụng quy luật tự nhiên.
-
-Ở đây, duy vật về tự nhiên trở thành nền tảng cho đạo đức học và chính trị học. Triết học không nhằm truy tìm bản nguyên siêu hình, mà nhằm tổ chức đời sống xã hội phù hợp với quy luật khách quan.
-
-\subsubsection{So sánh bản thể luận: nguyên tử và khí}
-
-So với thuyết nguyên tử Hy Lạp, thuyết khí của Trung Hoa đại diện cho hai lựa chọn bản thể luận khác nhau:
-
-\begin{itemize}
-\item \textbf{Nguyên tử} $\rightarrow$ bản thể luận của tính rời rạc: thế giới gồm các đơn vị tách biệt trong chân không; biến đổi là sự sắp xếp lại.
-\item \textbf{Khí} $\rightarrow$ bản thể luận của tính liên tục: thế giới là một chất thể phổ quát; biến đổi là sự cô đặc--phân tán.
-\end{itemize}
-
-Nếu nguyên tử luận nhấn mạnh cấu trúc thành phần, thì khí luận nhấn mạnh quá trình và quan hệ. Sự khác biệt này không chỉ là chi tiết học thuyết, mà là khác biệt trong cách ``đặt vấn đề'' về thực tại: một bên phân tích, một bên tổng hợp.
-
-\subsubsection{Tính biện chứng tự phát}
-
-F.\,Engels trong \emph{Biện chứng của tự nhiên} đã nhận xét rằng phép biện chứng của các nhà triết học cổ đại là ``ngây thơ nhưng đúng đắn về thực chất''.\cite{engels}
-
-Ở Hy Lạp, điều này thể hiện rõ trong tư tưởng của Heraclitus về sự vận động và biến đổi vĩnh cửu. Ở Trung Quốc, nó biểu hiện trong tương sinh--tương khắc của ngũ hành và chuyển hóa âm--dương.
-
-Cả hai truyền thống đều nhìn thế giới như một chỉnh thể vận động, tránh được khuynh hướng cô lập và cơ giới hóa cực đoan. Tuy chưa có cơ sở khoa học thực nghiệm, tư duy này chứa đựng những trực giác phương pháp luận sâu sắc về tính liên hệ và phát triển.
-
-\subsubsection{Giới hạn nội tại của duy vật Trung Hoa cổ đại: vì sao không phát triển thành khoa học tự nhiên cơ học như phương Tây?}
-
-Duy vật Trung Hoa cổ đại đạt tới trình độ cao về tư duy chỉnh thể và trực giác biện chứng, nhưng đã không phát triển thành một khoa học tự nhiên cơ học theo con đường tương tự phương Tây cận đại. Hiện tượng này không thể giải thích bằng sự ``thiếu hụt trí tuệ'', mà phải được phân tích từ cấu trúc bản thể luận, phương pháp luận và điều kiện xã hội đặc thù của nó.
-
-\textbf{Giới hạn bản thể luận: tính liên tục thay vì tính rời rạc}
-
-Thuyết khí xây dựng một \textbf{bản thể luận liên tục}. Thực tại là một chất thể phổ quát, biến hóa qua tụ--tán, âm--dương, tương sinh--tương khắc. Cấu trúc này thuận lợi cho tư duy tổng hợp và điều hòa, nhưng không khuyến khích việc \textbf{phân tích thực tại thành các đơn vị rời rạc có thể đo lường chính xác}.
-
-Ngược lại, thuyết nguyên tử Hy Lạp (sau này được phục hồi trong khoa học cận đại) đặt nền tảng trên tính rời rạc và cấu trúc hạt. Chính tiền đề bản thể luận ấy cho phép sự phát triển của hình học hóa tự nhiên, cơ học hóa vận động và cuối cùng là vật lý học định lượng.
-
-Khi không có khái niệm về ``đơn vị cơ bản bất biến'' tách khỏi chỉnh thể, thì khả năng xây dựng mô hình toán học chính xác về chuyển động cũng bị hạn chế. Bản thể luận liên tục của khí thiên về mô tả chất lượng và quan hệ hơn là đo lường số lượng.
-
-\textbf{Giới hạn phương pháp luận: ưu tiên điều hòa hơn phân tích thực nghiệm}
-
-Tư duy âm--dương và ngũ hành nhấn mạnh cân bằng và chu trình. Đây là mô hình giải thích mang tính tương quan hơn là nhân quả tuyến tính.
-
-Trong khi khoa học cơ học phương Tây (đặc biệt từ thế kỷ XVII) phát triển dựa trên: phân tích sự vật thành thành phần đơn giản, cô lập hiện tượng trong điều kiện thí nghiệm, lượng hóa và mô tả bằng phương trình toán học; thì tư duy Trung Hoa cổ đại thiên về \textbf{quan sát tổng thể}, điều chỉnh theo hoàn cảnh cụ thể, và ứng dụng thực tiễn (y học, nông nghiệp, thiên văn lịch pháp).
-
-Sự thiếu vắng một truyền thống hình học hóa tự nhiên như ở Hy Lạp (Euclid, Archimedes) đã hạn chế khả năng chuyển từ trực giác triết học sang mô hình toán học chính xác.
-
-\textbf{Định hướng thực tiễn--đạo đức thay vì nhận thức thuần túy}
-
-Triết học Trung Hoa cổ đại gắn chặt với vấn đề trị quốc và tu thân. Từ Tuân Tử đến các nhà tư tưởng đời Hán, mục tiêu trung tâm là ổn định xã hội và điều hòa con người.
-
-Tri thức về tự nhiên chủ yếu nhằm phục vụ: nông nghiệp (chu kỳ mùa vụ), y học (cân bằng âm dương), chính trị (hòa hợp thiên--nhân).
-
-Vì thế, động lực phát triển khoa học tự nhiên như một hệ thống độc lập không trở thành ưu tiên. Triết học không tách khỏi đạo đức và chính trị; khoa học không tách khỏi quản trị xã hội.
-
-\textbf{Cấu trúc xã hội--thể chế và vai trò của tầng lớp trí thức}
-
-Ở Trung Quốc, mô hình nhà nước quan liêu tập quyền hình thành sớm và ổn định lâu dài. Hệ thống khoa cử và học thuật chính thống ưu tiên kinh điển Nho gia. Điều này tạo nên một môi trường trong đó tư duy chuẩn mực được khuyến khích, còn sự đột phá tri thức thuần túy ít có không gian thể chế.
-
-Trong khi đó, ở Hy Lạp cổ đại và sau này châu Âu, cấu trúc đô thị tự trị và sự cạnh tranh tri thức giữa các trường phái tạo ra môi trường tranh luận tương đối tự do, thúc đẩy đổi mới lý luận.
-
-\textbf{Tính biện chứng tự phát nhưng thiếu cơ chế lượng hóa}
-
-Duy vật Trung Hoa cổ đại có trực giác biện chứng sâu sắc: mọi sự vật đều vận động, chuyển hóa, đối lập thống nhất. Tuy nhiên, sự vận động này được mô tả bằng phạm trù chất lượng (âm/dương, sinh/khắc) hơn là bằng đại lượng đo được.
-
-Khoa học cơ học hiện đại đòi hỏi sự lượng hóa vận động (vận tốc, gia tốc, khối lượng). Khi vận động chưa được chuyển thành đại lượng toán học, thì khoa học cơ học không thể hình thành.
-
-\textbf{Kết luận: khác biệt cấu trúc, không phải thiếu hụt}
-
-Việc duy vật Trung Hoa cổ đại không phát triển thành khoa học cơ học không phải là thất bại, mà là hệ quả của: lựa chọn bản thể luận (liên tục thay vì rời rạc), định hướng phương pháp luận (tổng hợp thay vì phân tích), mục tiêu xã hội (điều hòa đạo đức--chính trị thay vì nhận thức thuần túy), cấu trúc thể chế và truyền thống học thuật.
-
-Nếu truyền thống Hy Lạp mở đường cho vật lý học hạt và cơ học, thì truyền thống Trung Hoa mở đường cho tư duy hệ thống, y học chỉnh thể và triết lý hòa hợp tự nhiên. Hai con đường ấy đều là biểu hiện của chủ nghĩa duy vật cổ đại, nhưng mỗi con đường phát triển theo một logic nội tại khác nhau, phản ánh cấu trúc văn minh đặc thù của mình.
-
-\subsection{Tóm tắt nội dung cốt lõi}
-
-Từ các truyền thống Hy Lạp và Trung Hoa, có thể khái quát nội dung chủ nghĩa duy vật cổ đại thành một cấu trúc lý luận gồm bốn trục cơ bản: bản thể luận, quan niệm về vận động, nhận thức luận và định hướng thực tiễn.
-
-\begin{enumerate}
-    \item \textbf{Bản thể luận}: Thế giới có nền tảng vật chất tự thân. Tồn tại không xuất phát từ ý chí thần linh hay ý niệm siêu hình thuần túy, mà từ các yếu tố vật chất nội tại. Ở Hy Lạp, đó là nước, không khí, \emph{apeiron}, hay hệ thống nguyên tử--chân không; ở Trung Quốc, đó là ngũ hành, âm dương và khí. Dù khác nhau về cấu trúc (rời rạc hay liên tục), cả hai đều khẳng định tính tự lập của tự nhiên.
-
-    \item \textbf{Vận động và quy luật}: Vật chất không tĩnh tại mà luôn vận động. Sự đa dạng của thế giới được giải thích bằng cơ chế nội tại của vật chất: ở Hy Lạp là tổ hợp và va chạm (Democritus), hay lệch hướng (\emph{clinamen}) của nguyên tử (Epicurus); ở Trung Quốc là tương sinh--tương khắc, âm--dương chuyển hóa và quan niệm ``thiên hành hữu thường''. Quy luật tự nhiên được thừa nhận như nguyên lý khách quan, không phụ thuộc vào ý chí thần linh.
-
-    \item \textbf{Nhận thức}: Nhận thức được đặt trên nền tảng tự nhiên. Ở Hy Lạp, đặc biệt trong hệ thống của Democritus và Epicurus, cảm giác và tư duy được giải thích như kết quả của tương tác vật chất. Ở Trung Quốc, các nhà tư tưởng như Tuân Tử hay Vương Sung nhấn mạnh kinh nghiệm, học tập và khả năng hiểu quy luật khách quan. Con người có thể biết thế giới vì con người là một bộ phận của thế giới ấy.
-
-    \item \textbf{Phương pháp và thực tiễn}: Chủ nghĩa duy vật cổ đại đánh dấu bước chuyển từ huyền thoại sang lý giải tự nhiên. Quan sát, suy luận và kinh nghiệm dần thay thế mặc khải. Đồng thời, bản thể luận không tách khỏi đời sống: ở Epicurus, triết học nhằm đạt tới \emph{ataraxia}; ở Trung Quốc, tư duy về tự nhiên gắn liền với đạo đức, chính trị và quản trị xã hội. Tri thức không chỉ để biết, mà để sống và tổ chức đời sống phù hợp với quy luật.
-\end{enumerate}
-
-\textbf{Tính lịch sử và giới hạn nội tại}
-
-Dù mang tính cách mạng trong bối cảnh của mình, chủ nghĩa duy vật cổ đại vẫn chịu những giới hạn cấu trúc.
-
-Trước hết, tính trực quan còn chi phối mạnh. Ngay cả nguyên tử luận cũng vẫn dựa trên hình dung cảm tính về ``hạt'' và ``va chạm''. Ở Trung Quốc, khí và ngũ hành vẫn là những phạm trù chất lượng hơn là đại lượng có thể đo lường chính xác.
-
-Thứ hai, vận động chưa được khái niệm hóa như một quá trình phát triển có cấu trúc mâu thuẫn nội tại. Ở Hy Lạp, vận động thường được hiểu theo mô hình cơ giới; ở Trung Quốc, nó được nhìn như tuần hoàn điều hòa. Cả hai đều chứa trực giác biện chứng, nhưng chưa đạt đến logic phát triển phổ quát.
-
-Thứ ba, nhận thức luận chưa được phân tích độc lập và hệ thống. Quan hệ giữa chủ thể và khách thể chưa trở thành vấn đề triết học tự thân, mà còn hòa lẫn trong bản thể luận.
-
-Những giới hạn này không làm giảm giá trị của duy vật cổ đại; ngược lại, chúng cho thấy tính lịch sử của nó. Nó là sản phẩm của một trình độ khoa học, kỹ thuật và tổ chức xã hội nhất định. Phần Hạn chế và Sự kế thừa sẽ phân tích sâu hơn.
-
-\textbf{Ý nghĩa lịch sử--triết học}
-
-Sự hình thành của chủ nghĩa duy vật cổ đại đánh dấu lần đầu tiên thế giới được tư duy như một thực tại có tính tự thân. Tự nhiên không còn là không gian của thần thoại, mà trở thành đối tượng của lý tính. Con người không còn chỉ cầu khẩn trước thế giới, mà bắt đầu tìm hiểu cấu trúc và quy luật của nó.
-
-Chính từ bước chuyển này, khả thể của khoa học được mở ra: khi thế giới được coi là có quy luật nội tại, nó trở thành đối tượng nghiên cứu chứ không còn chỉ là đối tượng sùng bái. Nếu nhìn toàn bộ tiến trình triết học như sự tự ý thức dần dần của nhân loại về tồn tại, thì chủ nghĩa duy vật cổ đại là khoảnh khắc giải thiêng đầu tiên chưa hoàn chỉnh, nhưng có ý nghĩa khai mở.
-
-Nó đặt nền tảng cho mọi phát triển triết học và khoa học sau này, đồng thời cho thấy rằng sự tiến bộ của tư duy không phải là sự phủ định đơn giản quá khứ, mà là sự kế thừa và vượt qua những trực giác nền tảng đã được hình thành từ buổi đầu của lịch sử triết học.
+Nhìn chung, mặc dù được hình thành trong những điều kiện lịch sử khác xa với thời đại ngày nay, chủ nghĩa duy vật cổ đại vẫn có ý nghĩa quan trọng trong tiến trình phát triển của tư tưởng nhân loại. Những nỗ lực ban đầu của các nhà triết học cổ đại trong việc giải thích thế giới trên cơ sở vật chất đã góp phần đặt nền móng cho sự hình thành của thế giới quan khoa học, đồng thời mở đường cho sự phát triển của triết học và khoa học trong các giai đoạn sau của lịch sử.
 
 %==============================================================================
-\section{Bản thể luận, nhận thức luận và so sánh Đông--Tây}
+\section*{Kết luận}
+\addcontentsline{toc}{section}{\numberline{}Kết luận}
 %==============================================================================
 
-Phân tích chủ nghĩa duy vật cổ đại ở cấp độ sâu đòi hỏi phải đặt nó vào bình diện bản thể luận và nhận thức luận, tức là xem xét cách các nhà tư tưởng cổ đại hiểu về cấu trúc tối hậu của thực tại và khả năng nhận thức thực tại ấy. Ở đây, vấn đề không chỉ là liệt kê các học thuyết về nước, lửa, nguyên tử hay khí, mà là làm rõ logic nội tại chi phối sự hình thành và biến đổi của khái niệm “vật chất” trong các truyền thống tư tưởng khác nhau.
+Chủ nghĩa duy vật cổ đại là một trong những khuynh hướng tư tưởng quan trọng trong lịch sử triết học nhân loại. Sự ra đời của nó gắn liền với quá trình chuyển biến từ tư duy thần thoại sang tư duy lý tính trong nhận thức của con người về thế giới. Thông qua việc tìm kiếm bản nguyên vật chất của vũ trụ và nỗ lực giải thích các hiện tượng tự nhiên bằng những nguyên nhân nội tại, các nhà triết học cổ đại đã đặt những nền móng đầu tiên cho sự phát triển của tư duy triết học và khoa học.
 
-Chủ nghĩa duy vật cổ đại, dù ở Hy Lạp hay Trung Quốc, đều khởi nguyên từ nỗ lực thoát khỏi cách giải thích thần thoại và siêu nhiên, khẳng định rằng thế giới có thể được hiểu từ chính nó. Tuy nhiên, khi truy tìm bản nguyên của vạn vật, các nhà tư tưởng đã hình thành những mô hình bản thể khác nhau: một bên thiên về cấu trúc rời rạc và đơn vị cấu thành, một bên thiên về tính liên tục và quá trình chuyển hóa. Chính sự khác biệt trong cách hình dung cấu trúc thực tại ấy đã dẫn đến những hệ quả sâu sắc về phương pháp nhận thức và quỹ đạo phát triển của khoa học sau này.
+Qua việc khảo sát các quan niệm duy vật trong triết học Hy Lạp và Trung Hoa cổ đại, có thể thấy rằng mặc dù xuất phát từ những bối cảnh lịch sử và văn hóa khác nhau, các hệ thống tư tưởng này đều thể hiện xu hướng chung là khẳng định tính vật chất của thế giới. Các nhà triết học Hy Lạp cổ đại đã cố gắng tìm kiếm những yếu tố vật chất cơ bản cấu thành vũ trụ, từ các quan niệm về bản nguyên tự nhiên cho đến học thuyết nguyên tử nhằm giải thích cấu trúc của thế giới. Trong khi đó, nhiều hệ thống tư tưởng trong triết học Trung Hoa cổ đại đã phát triển những cách tiếp cận khác đối với vấn đề bản nguyên của vũ trụ, tiêu biểu là quan niệm về khí cũng như các học thuyết âm dương và ngũ hành nhằm giải thích sự vận động và biến đổi của tự nhiên.
 
-\subsection{Vấn đề bản thể: từ trực quan cảm tính đến mô hình cấu trúc}
+Những quan niệm này, mặc dù còn mang tính trực quan và chưa có cơ sở khoa học theo nghĩa hiện đại, đã thể hiện nỗ lực quan trọng của con người trong việc hiểu và giải thích thế giới thông qua những nguyên lý tự nhiên. Thông qua đó, chủ nghĩa duy vật cổ đại đã góp phần thúc đẩy sự hình thành của một thế giới quan mới, trong đó các hiện tượng của tự nhiên được xem là kết quả của những quy luật khách quan thay vì sự chi phối của các lực lượng siêu nhiên. Đây chính là bước tiến quan trọng trong lịch sử trí tuệ của nhân loại, bởi nó mở ra khả năng nghiên cứu thế giới bằng phương pháp lý luận và khoa học.
 
-Trong triết học cổ đại, vấn đề bản thể không phải là câu hỏi về một hiện tượng cụ thể, mà là câu hỏi về nền tảng tối hậu của tồn tại: điều gì giữ cho thế giới có tính thống nhất trong khi vẫn luôn biến đổi? Nói cách khác, làm thế nào để giải thích sự đa dạng của hiện tượng mà không viện đến thần linh hay siêu nhiên?
+Bên cạnh những đóng góp quan trọng, chủ nghĩa duy vật cổ đại cũng mang những giới hạn lịch sử nhất định. Do trình độ khoa học và phương pháp nhận thức còn hạn chế, nhiều quan niệm về vật chất và cấu trúc của thế giới vẫn mang tính trực quan, cảm tính hoặc suy đoán triết học. Các hệ thống triết học trong giai đoạn này thường thiếu cơ sở thực nghiệm để kiểm chứng các giả thuyết của mình, và trong nhiều trường hợp, việc giải thích các hiện tượng tự nhiên vẫn còn mang tính giản lược. Tuy nhiên, những hạn chế này phản ánh điều kiện lịch sử cụ thể của thời đại và không làm giảm ý nghĩa của các tư tưởng duy vật cổ đại trong tiến trình phát triển của triết học.
 
-Ở giai đoạn sơ khai của chủ nghĩa duy vật Hy Lạp, bản thể được đồng nhất với một chất thể cảm tính (nước, không khí, lửa). Điều này cho thấy tư duy triết học khi ấy vẫn còn gắn chặt với trực quan tự nhiên: cái phổ biến chưa được tách khỏi cái riêng lẻ, bản nguyên vẫn mang hình thức của một sự vật cụ thể. Tuy nhiên, ngay trong bước đi này đã hàm chứa một chuyển biến quan trọng: thế giới được quy về một nguyên lý nội tại, không còn là sản phẩm của ý chí thần linh.
+Từ góc độ lịch sử tư tưởng, chủ nghĩa duy vật cổ đại có ý nghĩa đặc biệt quan trọng như một giai đoạn khởi đầu trong quá trình hình thành và phát triển của thế giới quan duy vật. Những quan niệm ban đầu về bản chất vật chất của thế giới và về các quy luật tự nhiên đã trở thành tiền đề cho sự phát triển của nhiều hệ thống triết học duy vật trong các giai đoạn sau. Cùng với sự tiến bộ của khoa học tự nhiên và phương pháp nghiên cứu khoa học, các tư tưởng này đã được kế thừa, bổ sung và phát triển thành những hệ thống triết học hoàn chỉnh hơn trong thời kỳ cận đại và hiện đại.
 
-Sự trừu tượng hóa tiếp tục phát triển khi bản thể không còn được hiểu như một chất cụ thể, mà như một nguyên lý vô định. Ở đây, tư duy đã tách khỏi trực quan cảm tính, bắt đầu hình thành ý niệm về cái phổ biến như một phạm trù. Bản thể không còn là ``vật này hay vật kia'', mà là điều kiện khả hữu của mọi vật.
-
-Đến nguyên tử luận, quá trình trừu tượng hóa đạt tới một bước ngoặt mới: bản thể được hiểu như cấu trúc rời rạc gồm những đơn vị tối thiểu. Nguyên tử không phải là đối tượng kinh nghiệm trực tiếp, mà là giả thuyết lý tính nhằm giải thích sự hình thành và tan rã của sự vật. Ở đây xuất hiện một bước nhảy phương pháp luận: thực tại được hình dung như tổ hợp của những phần tử bất biến trong không gian trống rỗng. Tính thống nhất của thế giới được giải thích bằng quy luật cơ học, không cần đến mục đích luận hay ý chí siêu nhiên.
-
-Trong khi đó, ở Trung Quốc cổ đại, vấn đề bản thể không phát triển theo hướng truy tìm đơn vị tối hậu, mà theo hướng tìm nguyên lý bảo đảm tính liên tục của quá trình. Khí và ngũ hành không phải là những ``phần tử'' cấu thành, mà là những phương thức vận động và chuyển hóa. Ở đây, cái phổ biến không nằm ở đơn vị cấu trúc, mà ở quy luật tương tác và cân bằng động. Thế giới không được hình dung như tổng hợp cơ học của các phần tử, mà như một chỉnh thể đang tự điều hòa.
-
-Do đó, khác biệt căn bản không chỉ là khác biệt nội dung, mà là khác biệt trong cách tư duy về nền tảng thực tại: một bên tiếp cận bản thể theo mô hình cấu trúc rời rạc, bên kia theo mô hình quá trình liên tục. Sự phân hóa này về sau sẽ ảnh hưởng sâu sắc đến phương pháp nhận thức và quỹ đạo phát triển của khoa học ở hai truyền thống.
-
-\subsection{Rời rạc và liên tục: hai mô hình cấu trúc thực tại}
-
-Sự khác biệt giữa nguyên tử luận và thuyết khí không chỉ nằm ở nội dung học thuyết, mà ở cách hình dung cấu trúc tối hậu của thực tại. Ở đây xuất hiện hai mô hình bản thể học đối lập: mô hình rời rạc và mô hình liên tục.
-
-\textbf{Mô hình rời rạc} hiểu thực tại như tập hợp những đơn vị tối thiểu, bất biến về bản tính, tồn tại trong một không gian trống rỗng. Sự vật cụ thể chỉ là tổ hợp tạm thời của các phần tử ấy. Biến đổi không làm thay đổi bản chất của đơn vị cấu thành, mà chỉ là thay đổi về vị trí và trật tự sắp xếp. Tính thống nhất của thế giới được giải thích bằng tính đồng nhất của các phần tử, còn tính đa dạng được giải thích bằng sự khác nhau về tổ hợp. Trong khuôn khổ này, quan hệ mang tính ngoại tại: các phần tử liên kết với nhau nhưng không chuyển hóa bản tính của nhau. Vận động vì thế có xu hướng được hiểu theo nghĩa cơ học, như hệ quả của va chạm và tất yếu vật lý.
-
-Ngược lại, \textbf{mô hình liên tục} không truy tìm một đơn vị tối thiểu bất biến, mà nhấn mạnh tính chuyển hóa không ngừng của thực tại. Cái phổ biến không nằm ở phần tử, mà ở quy luật vận động của toàn thể. Mỗi sự vật là một trạng thái tạm thời của một dòng biến dịch. Quan hệ ở đây không phải là sự gắn kết ngoại tại giữa các phần tử độc lập, mà là sự quy định lẫn nhau trong một mạng lưới tương tác. Do đó, biến đổi không chỉ là thay đổi vị trí, mà là thay đổi trạng thái và cường độ trong một quá trình liên tục.
-
-Hai mô hình này hàm chứa những hệ quả phương pháp luận sâu sắc. Mô hình rời rạc tạo điều kiện cho tư duy phân tích: tách thực tại thành đơn vị, xác định tính chất, đo lường và tính toán. Thực tại trở thành đối tượng có thể chia nhỏ và tái cấu trúc trong tư duy. Mô hình liên tục, trái lại, khuyến khích tư duy chỉnh thể: chú ý đến cân bằng, tương quan và quá trình. Thực tại được tiếp cận như một hệ thống phụ thuộc lẫn nhau, không thể hiểu trọn vẹn nếu tách rời các yếu tố khỏi bối cảnh của chúng.
-
-Tuy nhiên, mỗi mô hình cũng mang trong mình giới hạn nội tại. Mô hình rời rạc có xu hướng giản lược thực tại thành tổng số các phần tử, khó giải thích sự xuất hiện của chất mới và tính tự tổ chức. Mô hình liên tục, ngược lại, nếu thiếu cơ chế phân tích, có thể rơi vào tính biểu tượng và thiếu khả năng định lượng chính xác.
-
-Sự phát triển của khoa học cận đại phương Tây cho thấy mô hình rời rạc đặc biệt thuận lợi cho việc hình thành cơ học toán học và phương pháp thực nghiệm định lượng. Trong khi đó, mô hình liên tục phát triển mạnh trong các lĩnh vực đòi hỏi cái nhìn hệ thống và cân bằng động, như y học cổ truyền và tư duy sinh thái. Sự khác biệt này không phải là sự hơn kém tuyệt đối, mà phản ánh những khả năng và giới hạn khác nhau của hai cách hình dung cấu trúc thực tại.
-
-\subsection{Vận động và nguồn gốc vận động}
-
-Việc thừa nhận vận động là thuộc tính của vật chất là bước tiến lớn của chủ nghĩa duy vật cổ đại so với tư duy thần thoại. Tuy nhiên, vấn đề quyết định không chỉ là có thừa nhận vận động hay không, mà là xác định \textbf{nguồn gốc và bản chất của vận động}. Vận động là hệ quả của tác động bên ngoài, hay xuất phát từ cấu trúc nội tại của bản thân sự vật?
-
-Trong nguyên tử luận, vận động được hiểu chủ yếu như sự thay đổi vị trí của các phần tử trong không gian. Nguyên tử tự thân bất biến về bản tính; chúng không chứa xung lực phát triển nội tại. Biến đổi của sự vật chỉ là kết quả của sự va chạm, kết hợp và phân tán giữa các nguyên tử. Do đó, quan hệ giữa các yếu tố mang tính ngoại tại: mỗi phần tử giữ nguyên bản chất của mình, chỉ thay đổi cấu hình trong tổng thể. Trong khuôn khổ này, vận động mang tính cơ học và tất yếu được giải thích bằng chuỗi nhân quả tuyến tính. Thực tại được hình dung như một hệ thống đóng, trong đó không xuất hiện sự tự phủ định hay tự vượt qua.
-
-Ngược lại, trong tư tưởng khí và ngũ hành, vận động không đơn thuần là thay đổi vị trí, mà là quá trình chuyển hóa trạng thái. Các yếu tố không tồn tại như thực thể cô lập, mà chỉ có ý nghĩa trong quan hệ tương sinh và tương khắc. Ở đây, sự vận động được hiểu như kết quả của sự quy định lẫn nhau giữa các mặt khác biệt. Dù chưa có khái niệm mâu thuẫn theo nghĩa biện chứng hiện đại, tư duy này đã hàm chứa ý niệm rằng mỗi yếu tố chỉ tồn tại thông qua sự tương tác với cái khác, và chính trong tương tác ấy mà biến đổi xảy ra. Vận động vì thế mang tính nội tại hơn: không cần một lực siêu nhiên hay một cú hích bên ngoài để giải thích sự biến hóa của thế giới.
-
-Tuy nhiên, cả hai cách hiểu đều mang giới hạn. Nguyên tử luận, do nhấn mạnh tính bất biến của phần tử, khó giải thích sự xuất hiện của chất mới và tính phát triển lịch sử. Ngược lại, mô hình liên tục, do thiếu cơ chế phân tích chi tiết, không xây dựng được khái niệm nhân quả định lượng chính xác. Một bên thiên về cơ học hóa vận động, bên kia thiên về trực giác hóa vận động.
-
-So sánh này cho thấy sự khác biệt không chỉ về nội dung học thuyết, mà về quan niệm bản chất của biến đổi. Nếu mô hình rời rạc làm nổi bật tính ổn định của cấu trúc, thì mô hình liên tục làm nổi bật tính động của quá trình. Cả hai đều chưa đạt tới quan niệm biện chứng về vận động như sự thống nhất giữa ổn định và biến đổi, giữa cấu trúc và quá trình. Tuy vậy, chính trong sự đối lập này đã chứa những tiền đề để tư duy duy vật phát triển lên trình độ cao hơn trong lịch sử triết học.
-
-\subsection{Nhận thức luận: phân tích và tổng hợp}
-
-Nếu bản thể luận đặt câu hỏi về cấu trúc của thực tại, thì nhận thức luận đặt câu hỏi về khả năng và phương thức để con người tiếp cận thực tại ấy. Trong chủ nghĩa duy vật cổ đại, vấn đề trung tâm không chỉ là thế giới có thể nhận thức được hay không, mà là nhận thức phản ánh thế giới theo cách nào.
-
-Trong nguyên tử luận, nhận thức được giải thích trên nền tảng bản thể học rời rạc. Democritus phân biệt giữa nhận thức cảm tính và nhận thức lý trí: cảm giác chỉ đem lại hình ảnh bề ngoài, còn lý trí mới tiếp cận được cấu trúc nguyên tử ẩn sau hiện tượng. Sự phân biệt này mở ra khoảng cách giữa hiện tượng và bản chất, tức là thừa nhận rằng thực tại không đồng nhất với cái đang hiện ra trước ý thức của ta, thông qua nhìn, nghe, chạm, ngửi, nếm. Đây là bước tiến quan trọng, vì nó đặt nền móng cho quan niệm khoa học về thực tại như cái vượt lên trên cảm giác tức thời.
-
-Tuy nhiên, cách giải thích nhận thức vẫn mang tính cơ học. Cảm giác được hiểu như sự tác động của các ``ảnh tượng'' nguyên tử lên giác quan. Quá trình từ kích thích vật lý đến ý thức lý tính chưa được phân tích như một cấu trúc phức tạp, mà bị giản lược thành chuỗi tác động vật lý. Do đó, nhận thức luận nguyên tử luận tuy duy vật, nhưng còn mang tính siêu hình và chưa vượt khỏi mô hình nhân quả tuyến tính.
-
-Ở Trung Quốc cổ đại, nhận thức không phát triển theo hướng phân tích cấu trúc ẩn giấu của sự vật, mà theo hướng nắm bắt quy luật vận động của chỉnh thể. Tri thức gắn với kinh nghiệm thực tiễn, với việc quan sát sự tuần hoàn và tương tác trong tự nhiên. Thay vì tách biệt hiện tượng và bản chất theo nghĩa siêu hình, tư duy này nhấn mạnh sự tương hợp giữa nhân sinh và trật tự tự nhiên. Nhận thức mang tính tổng hợp: nó không phân tích thực tại thành phần tử tối thiểu, mà tìm cách nắm bắt quan hệ và thế cân bằng.
-
-Hai khuynh hướng ấy dẫn tới hai truyền thống phương pháp khác nhau. Khuynh hướng phân tích của phương Tây hướng đến việc tách đối tượng khỏi bối cảnh, xác định cấu trúc nội tại và xây dựng hệ thống chứng minh logic. Khuynh hướng tổng hợp của phương Đông hướng đến việc đặt sự vật trong mạng lưới quan hệ, xem xét sự phụ thuộc lẫn nhau và tìm kiếm quy luật vận động chung.
-
-Tuy nhiên, sự đối lập này không phải là sự loại trừ tuyệt đối. Phân tích mà không tổng hợp sẽ rơi vào chia cắt cơ giới; tổng hợp mà thiếu phân tích sẽ thiếu độ chính xác khái niệm. Cả hai truyền thống đều phản ánh những khả năng khác nhau của tư duy duy vật cổ đại trong việc giải quyết vấn đề quan hệ giữa ý thức và thế giới khách quan.
-
-\subsection{Vì sao quỹ đạo khoa học khác nhau?}
-
-Vấn đề cần đặt ra không phải là đánh giá truyền thống nào ``đúng'' hơn, mà là giải thích vì sao từ những tiền đề duy vật sơ khai, lịch sử tri thức lại rẽ theo những hướng khác nhau. Tại sao ở châu Âu cận đại xuất hiện cơ học toán học và khoa học thực nghiệm, trong khi ở Trung Quốc không hình thành một hệ thống cơ học lý thuyết tương tự, dù đã có nhiều thành tựu kỹ thuật và kinh nghiệm thực tiễn?
-
-Trước hết, cần nhấn mạnh rằng sự khác biệt này không thể quy giản vào một nguyên nhân thuần túy triết học. Nó là kết quả của sự tương tác giữa mô hình bản thể, cấu trúc nhận thức và điều kiện xã hội--lịch sử.
-
-(1) Về phương diện bản thể học, mô hình rời rạc của nguyên tử luận thuận lợi cho việc toán học hóa thực tại. Khi thế giới được hình dung như tổ hợp của các phần tử có thể tách biệt và đo lường, việc xây dựng mô hình định lượng trở nên khả thi hơn. Ngược lại, mô hình liên tục và chuyển hóa, vốn nhấn mạnh quan hệ và cân bằng, khó chuyển trực tiếp thành công thức toán học chính xác. Điều này không làm giảm giá trị của nó, nhưng giới hạn khả năng phát triển thành cơ học định lượng.
-
-(2) Về phương diện logic, truyền thống lập luận hình thức được hệ thống hóa đã cung cấp công cụ phân tích khái niệm và chứng minh chặt chẽ. Việc tách biệt rõ ràng giữa tiền đề và kết luận, giữa định nghĩa và suy luận, tạo nền tảng cho phương pháp khoa học. Trong khi đó, tư duy tổng hợp ở Trung Quốc thiên về trực giác quy luật và tương quan, ít phát triển thành hệ thống chứng minh hình thức độc lập.
-
-(3) Về phương diện xã hội, cấu trúc chính trị phân tán và đời sống tranh luận công khai ở các thành bang Hy Lạp tạo môi trường cho tự do lý luận. Triết học có không gian tương đối độc lập để phát triển thành tư duy trừu tượng. Ở Trung Quốc, triết học gắn chặt với quản trị nhà nước và đạo đức xã hội, do đó ưu tiên tính ứng dụng thực tiễn hơn là xây dựng khoa học tự nhiên lý thuyết thuần túy.
-
-(4) Cuối cùng, sự hình thành khoa học hiện đại ở châu Âu là kết quả của nhiều yếu tố lịch sử khác: sự phát triển của kỹ thuật, thương mại, sự hình thành đại học trung cổ, và đặc biệt là cuộc cách mạng khoa học thế kỉ XVII. Không thể xem nguyên tử luận cổ đại như nguyên nhân trực tiếp, mà chỉ là một tiền đề trí tuệ trong chuỗi phát triển dài hạn.
-
-Từ đó có thể kết luận rằng giới hạn của chủ nghĩa duy vật Trung Hoa cổ đại không nằm ở việc thiếu tư duy duy vật, mà ở chỗ mô hình liên tục và tổng hợp không kết hợp với một quá trình thể chế hóa thành phương pháp thực nghiệm và định lượng. Sự khác biệt về quỹ đạo khoa học phản ánh sự khác biệt trong cấu trúc tri thức và điều kiện lịch sử, chứ không phải sự hơn kém bản chất của hai nền văn minh.
-
-\subsection{Vấn đề ảnh hưởng lịch sử: Plato và Democritus}
-
-Trong lịch sử tư tưởng Hy Lạp, ảnh hưởng của Plato vượt xa Democritus, mặc dù về phương diện bản thể học, nguyên tử luận lại gần với khoa học tự nhiên hiện đại hơn. Hiện tượng này cho thấy sự phát triển của triết học không vận động thuần túy theo tiêu chuẩn ``đúng--sai'' lý luận, mà gắn chặt với nhu cầu tinh thần và cấu trúc quyền lực của xã hội.
-
-Trước hết, hệ thống của Plato mang tính toàn diện: nó không chỉ giải thích cấu trúc thực tại, mà còn cung cấp nền tảng cho đạo đức, chính trị và giáo dục. Học thuyết về thế giới ý niệm và linh hồn bất tử đáp ứng nhu cầu tìm kiếm ý nghĩa và trật tự ổn định trong bối cảnh xã hội Hy Lạp nhiều biến động. Triết học vì thế trở thành công cụ định hướng đời sống tinh thần, không chỉ là lý thuyết về tự nhiên.
-
-Ngược lại, nguyên tử luận tập trung vào giải thích tự nhiên và giải phóng con người khỏi mê tín sợ hãi. Tuy mang tính khai sáng, nhưng nó không cung cấp một siêu hình học về mục đích luận hay một mô hình tổ chức xã hội tương ứng. Do đó, ảnh hưởng của nó chủ yếu giới hạn trong phạm vi triết học tự nhiên.
-
-Yếu tố quyết định hơn nữa là sự tiếp nhận lịch sử. Tư tưởng Plato (và sau này Aristotle) được tích hợp vào thần học Kitô giáo, trở thành nền tảng triết học cho giáo dục và giáo hội trung cổ. Trong khi đó, nguyên tử luận, đặc biệt dưới hình thức Epicurus, bị nghi ngờ vì phủ nhận linh hồn bất tử và mục đích siêu nghiệm. Kết quả là trong nhiều thế kỉ, duy tâm chiếm ưu thế trong đời sống trí thức châu Âu.
-
-Chỉ khi khoa học thực nghiệm phát triển từ thế kỉ XVII, một mô hình giải thích tự nhiên dựa trên cơ học và định luật toán học mới phục hồi và biến đổi tinh thần nguyên tử luận thành nền tảng của khoa học hiện đại. Sự ``trở lại'' này không phải là sự lặp lại đơn giản, mà là sự tái cấu trúc trong điều kiện lịch sử mới.
-
-Hiện tượng Plato thắng thế còn Democritus bị lu mờ cho thấy một quy luật quan trọng: sức sống của một học thuyết phụ thuộc không chỉ vào tính hợp lý nội tại, mà còn vào khả năng đáp ứng nhu cầu ý thức hệ, khả năng thể chế hóa trong giáo dục và tôn giáo, và điều kiện vật chất của xã hội tiếp nhận nó.
-
-\subsection{Kết luận tổng hợp}
-
-Qua phân tích bản thể luận, vận động và nhận thức luận, có thể thấy chủ nghĩa duy vật cổ đại không phải là một hệ thống thống nhất, mà là tập hợp những mô hình tư duy khác nhau về cấu trúc thực tại.
-
-Ở Hy Lạp, xu hướng rời rạc và phân tích đặt nền móng cho tư duy cấu trúc và khả năng toán học hóa tự nhiên. Ở Trung Quốc, xu hướng liên tục và tổng hợp nhấn mạnh quá trình, quan hệ và cân bằng động. Hai khuynh hướng này không loại trừ nhau, mà phản ánh những cách tiếp cận khác nhau đối với cùng một vấn đề bản thể.
-
-Giới hạn của chủ nghĩa duy vật cổ đại không phải là sự sai lầm về nguyên tắc, mà là sự chưa phát triển đầy đủ của phương pháp. Thiếu thực nghiệm có hệ thống, thiếu công cụ toán học và thiếu phân tích biện chứng về mâu thuẫn nội tại, các mô hình ấy dừng lại ở trình độ trực giác và suy luận khái quát.
-
-Tuy nhiên, chính trong sự đa dạng và giới hạn ấy đã hình thành những tiền đề cho sự phát triển tiếp theo của tư duy duy vật. Sự chuyển từ duy vật chất phác và cơ học sang duy vật biện chứng hiện đại không phải là sự phủ định đơn giản, mà là sự kế thừa và nâng cao những yếu tố hợp lý đã manh nha từ thời cổ đại.
-
-%==============================================================================
-\section{Giá trị của chủ nghĩa duy vật cổ đại}
-%==============================================================================
-
-Chủ nghĩa duy vật cổ đại không chỉ là một chương trong lịch sử tư tưởng, mà là một hình thái tự ý thức ban đầu của nhân loại về thế giới vật chất. Giá trị của nó vì thế không nằm ở những mệnh đề cụ thể, mà ở bước chuyển cấu trúc mà nó thực hiện trong kinh nghiệm về tồn tại. Ở đây, nhân loại lần đầu tiên thử nghĩ thế giới như một thực tại tự thân, có nguyên lý nội tại, không quy chiếu vào ý chí siêu nhiên. Tuy nhiên, chính trong bước khẳng định ấy đã hàm chứa những giới hạn nội tại, những mâu thuẫn mà nó chưa đủ khả năng tự giải quyết, và từ đó mở đường cho sự vượt bỏ của các hình thái tư duy cao hơn.
-
-\subsection{Từ Mythos đến Logos: sự tự thức tỉnh của lý tính}
-
-Sự chuyển dịch từ \emph{mythos} sang \emph{logos} không chỉ là thay đổi cách kể về thế giới; đó là sự biến đổi trong chính cấu trúc của kinh nghiệm. Nếu thần thoại tổ chức thực tại như một trật tự linh thiêng, nơi con người sống trong thế giới như sống trong một câu chuyện đã được định đoạt, thì tư duy duy vật cổ đại bắt đầu phá vỡ cấu trúc ấy bằng cách đặt câu hỏi về nguyên nhân nội tại của sự vật. Thế giới không còn được tiếp nhận như huyền nhiệm, mà như một chỉnh thể có thể được truy vấn bằng lý tính.
-
-Khoảnh khắc này có thể được hiểu như một bước ``tự thức tỉnh'' của lý tính: ý thức nhận ra rằng trật tự của thế giới không nằm ngoài thế giới, mà nằm ngay trong bản thân nó. Việc truy tìm \emph{arkhê} ở Hy Lạp hay khẳng định tính thường hằng của thiên đạo ở Trung Quốc đều biểu thị một xác tín chung: tồn tại có cấu trúc, và cấu trúc ấy có thể được nhận biết. Ở đây hình thành một giả định nền tảng cho toàn bộ truyền thống triết học phương Tây và phương Đông sau này: có một sự tương ứng giữa tư duy và thực tại, giữa cấu trúc của lý tính và cấu trúc của tự nhiên.
-
-Tuy nhiên, chính trong sự khẳng định đầy sức mạnh ấy đã nảy sinh giới hạn nội tại của chủ nghĩa duy vật cổ đại. Khi xác định bản nguyên như một thực thể vật chất cụ thể (nước, lửa, nguyên tử\ldots), tư duy vẫn còn vận động trong hình thức trực quan và chất phác. Nó khẳng định tính khách quan của thế giới, nhưng chưa ý thức đầy đủ về vai trò của chủ thể nhận thức; nó đặt nền cho quy luật, nhưng chưa có khái niệm về tính lịch sử của chính các phạm trù mình sử dụng. Nói cách khác, nó giải phóng thế giới khỏi thần linh, nhưng chưa giải phóng tư duy khỏi tính trực quan của chính nó.
-
-Ở bình diện biện chứng, đây là mâu thuẫn cơ bản: tư duy muốn nắm bắt tính phổ quát của tồn tại, nhưng lại biểu đạt nó bằng những hình thái cảm tính cụ thể. Chính mâu thuẫn này buộc tư duy phải vận động tiếp, từ duy vật tự phát sang duy tâm siêu hình, từ khẳng định vật chất như thực thể sang việc suy tư về bản chất của khái niệm và chủ thể. Như vậy, giới hạn của chủ nghĩa duy vật cổ đại không phải là thất bại của nó, mà là điều kiện để nó được vượt bỏ (Aufhebung): bị phủ định, nhưng đồng thời được bảo tồn trong những hình thức cao hơn của triết học.
-
-Vì thế, giá trị đích thực của chủ nghĩa duy vật cổ đại không chỉ nằm ở vai trò ``tiền khoa học'', mà ở chỗ nó đánh dấu khoảnh khắc đầu tiên khi nhân loại thử nghĩ tồn tại như một trật tự tự thân và tin rằng lý tính có khả năng hòa nhập với trật tự ấy. Nó mở ra một chân trời trong đó thế giới có thể được hiểu bằng chính các nguyên lý nội tại của mình. Và dù còn chất phác, chính sự chất phác ấy là hình thức ban sơ của một tiến trình tự vận động của tư duy, một tiến trình trong đó lý tính dần ý thức được về chính mình.
-
-\subsection{Mối quan hệ biện chứng giữa CNDV và khoa học tự nhiên}
-
-Mối quan hệ giữa chủ nghĩa duy vật cổ đại và khoa học tự nhiên không phải là quan hệ tuyến tính một chiều, mà là một quan hệ đồng sinh trong cùng một chân trời lịch sử. Cả hai cùng xuất hiện khi con người bắt đầu tin rằng tự nhiên có trật tự nội tại và trật tự ấy có thể được nhận biết bằng lý tính.
-
-Một mặt, những thành tựu sơ khai của thiên văn học, toán học và y học đã làm lung lay cấu trúc thần thoại của thế giới. Khi chuyển động của các thiên thể có thể được dự đoán, khi hình học cho thấy những quan hệ tất yếu của hình dạng, khi lịch pháp dựa trên chu kỳ tự nhiên thay vì ý chí thần linh, thì niềm tin vào tính quy luật của tự nhiên trở nên có cơ sở thực tiễn. Ở Hy Lạp, việc truy tìm \emph{arkhê} gắn liền với những quan sát thiên văn và suy luận hình học của các nhà tiền Socrates; ở Trung Quốc, lịch pháp, nông học và y học truyền thống đều dựa trên giả định rằng tự nhiên vận hành theo những mô thức ổn định.\cite{runes}\cite{onhaiminh} Chính kinh nghiệm thực tiễn ấy đã nuôi dưỡng thế giới quan duy vật: con người bắt đầu tin rằng có thể tìm nguyên nhân trong bản thân tự nhiên, thay vì bên ngoài nó.
-
-Mặt khác, chủ nghĩa duy vật cổ đại không chỉ là kết quả của tri thức khoa học sơ khai, mà còn là điều kiện tinh thần để khoa học phát triển. Khi thế giới được quan niệm là có nền tảng vật chất và vận động theo quy luật khách quan, việc tìm kiếm quy luật ấy trở thành một nhiệm vụ chính đáng và khả thi. Triết học duy vật, vì thế, không cung cấp phương pháp thực nghiệm hoàn chỉnh, nhưng nó thiết lập một tiền đề siêu hình học: tự nhiên là đối tượng có thể nhận thức. Không có tiền đề ấy, khoa học tự nhiên khó có thể hình thành như một hoạt động độc lập.
-
-Quan hệ này mang tính biện chứng ở chỗ: tri thức thực nghiệm sơ khai thúc đẩy sự hình thành thế giới quan duy vật; và chính thế giới quan duy vật lại củng cố niềm tin vào tính quy luật, qua đó định hướng và hợp pháp hóa hoạt động nhận thức khoa học. CNDV cổ đại vì thế không chỉ là ``tiền khoa học'' theo nghĩa dự báo, mà là một yếu tố nội tại của quá trình tích lũy và hệ thống hóa tri thức về tự nhiên.
-
-\subsection{Tính biện chứng tự phát: giá trị và giới hạn}
-
-Một trong những giá trị đặc sắc của chủ nghĩa duy vật cổ đại là tính biện chứng tự phát của nó. Trong \emph{Biện chứng của tự nhiên}, \textbf{F.~Engels} gọi phép biện chứng của các nhà Hy Lạp cổ đại là ``ngây thơ nhưng đúng đắn về thực chất'': họ nhìn thế giới như một chỉnh thể vận động, trong đó mọi sự vật đều liên hệ và biến đổi.\cite{engels} Tư tưởng của \textbf{Heraclitus} về dòng chảy liên tục của tồn tại hay quan niệm tương sinh--tương khắc của Ngũ hành ở Trung Quốc đều thể hiện trực giác sâu sắc về tính động của thực tại.
-
-Giá trị của trực giác ấy nằm ở chỗ nó chống lại xu hướng cô lập và cố định hóa sự vật. Thế giới không phải là tập hợp của những thực thể bất biến, mà là một quá trình. Cái nhìn này giúp triết học cổ đại tránh được kiểu siêu hình cứng nhắc từng chi phối nhiều hệ thống tư tưởng cận đại.
-
-Tuy nhiên, tính biện chứng ấy vẫn mang tính trực giác hơn là khái niệm. Heraclitus nhận ra sự vận động phổ quát, nhưng chưa triển khai được cấu trúc mâu thuẫn nội tại như nguồn gốc của sự vận động; sự biến đổi được cảm nhận như một thực tế hiển nhiên, chứ chưa được phân tích như một quá trình phát triển có quy luật.\cite{tapchitriethoc} Phép biện chứng cổ đại vì thế dừng lại ở sự khẳng định tính động, mà chưa đạt tới việc giải thích cơ chế của cái động ấy.
-
-Chính ở đây bộc lộ mâu thuẫn nội tại của nó: một mặt, tư duy đã vượt khỏi cái nhìn tĩnh tại; mặt khác, nó thiếu công cụ khoa học và khái niệm để hệ thống hóa trực giác đó thành một lý luận về phát triển. So với phép biện chứng duy vật khoa học của Mác và Engels được xây dựng trên nền tảng khoa học hiện đại và phân tích mâu thuẫn như động lực nội tại của sự vận động phép biện chứng cổ đại vừa là tiền đề, vừa là cái cần được vượt bỏ. Nó mở ra chân trời của tư duy động, nhưng chưa thể tự mình hoàn tất tiến trình ấy.
-
-Do đó, đánh giá tính biện chứng tự phát của CNDV cổ đại phải mang tính hai mặt: đó là hình thức ban sơ của tư duy biện chứng, đồng thời cũng là giới hạn lịch sử của nó. Chính sự ``ngây thơ'' mà Engels nói tới không phải sự thiếu sót đơn thuần, mà là dấu ấn của một giai đoạn khi lý tính mới bắt đầu ý thức về vận động phổ quát của tồn tại.
-
-\subsection{Dự báo thiên tài và khung lý thuyết tiền khoa học}
-
-\begin{itemize}
-
-\item \textbf{Thuyết nguyên tử (Hy Lạp)}:
-
-Học thuyết nguyên tử của Leucippus và Democritus không chỉ là một giả thuyết về cấu tạo vật chất, mà là một bước nhảy khái niệm táo bạo: lần đầu tiên, tính đa dạng của thế giới được giải thích bằng sự tổ hợp và vận động của những đơn vị vật chất tối giản, tồn tại khách quan và không phụ thuộc vào cảm giác.\cite{runes} Ở đây, tư duy đã vượt khỏi trực quan cảm tính để khẳng định một cấu trúc vi mô không thể thấy bằng mắt thường.
-
-Giá trị của thuyết nguyên tử không nằm ở mức độ chính xác thực nghiệm (điều mà thời đại ấy chưa thể có), mà ở hình thức lý luận của nó: nó thay thế cách giải thích phẩm tính bằng cách giải thích cấu trúc. Sự khác biệt giữa các sự vật không còn do ``bản tính'' huyền bí, mà do sự khác biệt về hình dạng, vị trí và trật tự của các nguyên tử. Đây là một nguyên tắc phương pháp luận có tính cách mạng: tìm cái chung tối giản để giải thích cái đa dạng phức tạp.
-
-Tuy nhiên, chính ở đây cũng bộc lộ giới hạn lịch sử của nó: nguyên tử được hình dung như những thực thể bất biến, rắn chắc và không có cấu trúc nội tại. Tư duy đã tiến đến khái niệm về tính gián đoạn của vật chất, nhưng chưa thể nắm bắt được tính động và cấu trúc nội tại phức tạp của bản thân ``nguyên tử''. Vì thế, học thuyết này vừa là dự báo thiên tài về hướng phát triển của vật lý và hóa học hiện đại, vừa là hình thức chất phác của một lý thuyết chưa có cơ sở thực nghiệm và toán học tương ứng.
-
-\item \textbf{Hệ thống âm dương--ngũ hành (Trung Quốc)}:
-
-Nếu thuyết nguyên tử tìm cách giải thích thế giới bằng các đơn vị cấu thành tối giản, thì hệ thống âm dương--ngũ hành lại tiếp cận thực tại từ phương diện quan hệ và quá trình. Ở đây, trọng tâm không phải là ``cái gì cấu thành?'', mà là ``các yếu tố tương tác và chuyển hóa ra sao?''. Âm và dương không phải vật thể cụ thể, mà là những nguyên lý biểu thị tính hai mặt và tính chuyển hóa của mọi tồn tại; ngũ hành không phải năm ``chất'' theo nghĩa vật lý, mà là mô hình về các quan hệ tương sinh--tương khắc.
-
-Giá trị của hệ thống này nằm ở chỗ nó cung cấp một khung lý thuyết về tính quy luật của sự vận động mà không quy chiếu vào thần linh. Sự biến đổi của tự nhiên và con người được hiểu như quá trình điều hòa và mất cân bằng giữa các yếu tố nội tại. Chính vì thế, nó có khả năng gắn kết chặt chẽ với thực hành, đặc biệt trong y học cổ truyền, nông nghiệp và tổ chức đời sống xã hội.\cite{onhaiminh}
-
-Tuy nhiên, giới hạn của hệ thống âm dương--ngũ hành cũng bắt nguồn từ chính tính tổng quát biểu tượng của nó. Các phạm trù được sử dụng có sức bao quát rộng, nhưng thiếu khả năng phân tích định lượng và kiểm chứng thực nghiệm độc lập. Chúng tạo nên một sơ đồ giải thích linh hoạt, song khó tách bạch giữa mô tả biểu tượng và cấu trúc vật lý cụ thể. Vì thế, đây là một khung lý thuyết tiền khoa học: giàu tính hệ thống và trực giác biện chứng, nhưng chưa đạt tới hình thức khoa học chuyên biệt.
-
-\end{itemize}
-
-Nhìn tổng thể, cả thuyết nguyên tử Hy Lạp và hệ thống âm dương--ngũ hành Trung Quốc đều cho thấy một đặc điểm chung của chủ nghĩa duy vật cổ đại: khả năng đi trước thực nghiệm bằng trực giác lý luận. Chúng không phải khoa học theo nghĩa hiện đại, nhưng là những ``hình thái phôi thai'' của tư duy khoa học nơi lý tính đã dám giả định một trật tự khách quan và tìm cách mô hình hóa nó. Chính ở điểm này, ta thấy rõ tính hai mặt của chúng: vừa là dự báo thiên tài, vừa là giới hạn tất yếu của một thời đại khi khoa học thực nghiệm và phương pháp toán học chưa phát triển đầy đủ.
-
-\subsection{Kết nối với khoa học và thực tiễn hiện đại}
-
-Việc liên hệ giữa tư duy duy vật cổ đại và khoa học hiện đại cần được thực hiện một cách thận trọng về phương pháp luận. Mục tiêu không phải là chứng minh người xưa ``đã biết trước'' khoa học ngày nay, mà là chỉ ra những điểm tương đồng về cấu trúc tư duy và làm rõ bước nhảy lịch sử đã diễn ra trong quá trình phát triển tri thức.
-
-\textbf{Nguyên tử cổ đại và vật lý hạt hiện đại}:
-
-Thuyết nguyên tử của Democritus là một giả thuyết triết học được xây dựng bằng suy luận hợp lý, không dựa trên thí nghiệm hay đo đạc định lượng. Nguyên tử được hình dung như đơn vị bất biến, không thể chia nhỏ, khác nhau về hình dạng và vị trí. Đó là một mô hình giải thích cấu trúc thực tại ở cấp độ vi mô, nhưng hoàn toàn nằm trong phạm vi tư biện.
-
-Trái lại, sự hình thành mô hình nguyên tử hiện đại từ thí nghiệm tán xạ của Rutherford, mô hình lượng tử của Bohr, cho tới cơ học lượng tử thế kỉ XX, là kết quả của một phương pháp luận thực nghiệm nghiêm ngặt: giả thuyết được kiểm chứng bằng thí nghiệm, kết quả được lặp lại và hiệu chỉnh bằng toán học. Chính phương pháp thực nghiệm có hệ thống đã biến ``nguyên tử'' từ một ý niệm triết học thành một khái niệm khoa học có nội dung xác định và có khả năng dự đoán.
-
-Do đó, điểm khác biệt về chất giữa hai bên không nằm ở việc ``có hay không có nguyên tử'', mà ở phương thức tiếp cận. Nguyên tử luận cổ đại thể hiện trực giác cấu trúc sâu sắc, nhưng thiếu công cụ thực nghiệm và toán học để chuyển trực giác ấy thành khoa học. Sự đối chiếu này làm nổi bật đồng thời giá trị dự báo và giới hạn lịch sử của CNDV cổ đại.
-
-\textbf{Khí, âm dương và y học Đông phương hiện đại}:
-
-Khác với trường hợp nguyên tử luận, hệ thống khí, âm dương và ngũ hành không bị ``thay thế'' hoàn toàn bởi một mô hình vật lý mới, mà tiếp tục tồn tại như một khung thực hành trong y học Đông phương. Trong chẩn đoán và điều trị, nguyên tắc cân bằng âm--dương và điều hòa khí huyết vẫn đóng vai trò trung tâm.
-
-Điều này không đồng nghĩa với việc hệ thống ấy đạt tới tiêu chuẩn khoa học thực nghiệm hiện đại, nhưng cho thấy sức sống thực tiễn của tư duy chỉnh thể. Trong khi mô hình cơ học phương Tây tập trung vào phân tích bộ phận và cơ chế vi mô, tư duy âm dương--ngũ hành nhấn mạnh quan hệ tổng thể, sự cân bằng động và tương tác đa chiều. Chính yếu tố chỉnh thể này đang được quan tâm trở lại trong các nghiên cứu liên ngành về sinh thái, y học tích hợp và khoa học hệ thống.
-
-\textbf{Liên hệ với tranh luận bản thể luận đương đại}:
-
-Trong triết học và khoa học xã hội hiện nay, các xu hướng như ``material turn'' (bước ngoặt vật chất) và ``new materialisms'' (chủ nghĩa duy vật mới) đặt lại vấn đề về vai trò của vật chất, cơ thể và môi trường, phản ứng lại các khuynh hướng duy tâm hoặc thuần ngôn ngữ luận trước đó. Ở đây, vấn đề ``vật chất là nền tảng của thực tại'' không chỉ là một đề tài lịch sử, mà tiếp tục là điểm trung tâm của tranh luận bản thể và phương pháp.
-
-Việc nghiên cứu CNDV cổ đại trong bối cảnh này cho thấy tính đa dạng của các con đường phát triển: một con đường dẫn tới khoa học cơ học và vật lý hạt, một con đường duy trì tư duy chỉnh thể và thực hành cân bằng. Sự khác biệt ấy không phải là quan hệ thay thế hoàn toàn, mà là biểu hiện của những khả thể khác nhau trong lịch sử phát triển của tư duy về vật chất.
-
-Liên hệ hiện đại, vì vậy, không nhằm đồng nhất hóa cổ đại với hiện đại, mà nhằm làm rõ tiến trình chuyển hóa phương pháp luận: từ trực giác lý luận đến thực nghiệm có hệ thống, từ khung biểu tượng đến mô hình định lượng, và từ tiền khoa học đến khoa học chuyên ngành.
-
-\subsection{Giá trị nhân văn và chính trị}
-
-Một trong những ý nghĩa sâu xa nhất của chủ nghĩa duy vật cổ đại không nằm ở cấu trúc bản thể luận của nó, mà ở hệ quả nhân học và chính trị mà cấu trúc ấy kéo theo. Khi thế giới được giải thích bằng quy luật tự nhiên thay vì ý chí thần linh, con người đồng thời được giải phóng khỏi những nỗi sợ hãi siêu hình vốn chi phối đời sống tinh thần và trật tự xã hội.
-
-\begin{itemize}
-
-\item \textbf{Epicurus (và Lucretius)}:
-
-Epicurus sử dụng chủ nghĩa duy vật như một liệu pháp tinh thần.\cite{runes} Nếu linh hồn chỉ là sự tổ hợp tinh vi của các nguyên tử, thì cái chết không phải sự trừng phạt siêu nhiên, mà chỉ là sự tan rã tự nhiên của cấu trúc ấy. Không có ``hậu phán xét'', không có đau khổ đời sau; thần linh, nếu tồn tại, cũng không can thiệp vào trật tự thế giới. Bằng cách đó, triết học duy vật trở thành nền tảng để đạt tới \emph{ataraxia} sự bình thản nội tâm.
-
-Giá trị nhân văn ở đây mang tính cách mạng: giải phóng con người khỏi nỗi sợ hãi cái chết và thần linh đồng nghĩa với việc giải phóng họ khỏi cơ chế kiểm soát dựa trên mê tín. Tư duy duy vật không chỉ tái cấu trúc nhận thức về tự nhiên, mà còn tái cấu trúc đời sống đạo đức: thay vì sống trong lo âu về những quyền lực siêu việt, con người có thể xây dựng hạnh phúc trên cơ sở hiểu biết quy luật tự nhiên và nhu cầu thực của mình. Ở đây, bản thể luận dẫn trực tiếp đến một hình thái tự do nội tâm.
-
-\item \textbf{Tuân Tử (Trung Quốc)}:
-
-Nếu Epicurus nhấn mạnh giải phóng khỏi sợ hãi siêu hình ở bình diện cá nhân, thì Tuân Tử triển khai một hệ quả chính trị--xã hội của thế giới quan duy vật.\cite{onhaiminh} Quan niệm ``thiên hành hữu thường'' khẳng định rằng tự nhiên vận hành theo quy luật cố định, không đổi thay theo ý chí thần linh hay lời cầu khẩn của con người. Chính vì thế, trật tự xã hội không thể dựa vào thiên mệnh huyền bí, mà phải được kiến lập bằng giáo dục, lễ nhạc và pháp độ.
-
-Tư tưởng ``chế thiên nhiên nhi dụng chi'' thể hiện một bước tiến quan trọng: con người không chỉ thụ động thích ứng với tự nhiên, mà có thể nhận thức và sử dụng quy luật của nó. Ở đây, thế giới quan duy vật trở thành nền tảng cho quan niệm về trách nhiệm chính trị: xã hội không được cứu rỗi bởi thần linh, mà được tổ chức bởi con người thông qua thể chế và giáo hóa.
-
-Giá trị chính trị--nhân văn vì thế nằm ở chỗ: chủ nghĩa duy vật cổ đại góp phần hình thành hình ảnh con người như một chủ thể có năng lực nhận thức và hành động. Thế giới không phải định mệnh siêu nhiên, mà là một trật tự có thể hiểu và cải biến. Sự giải phóng khỏi mê tín ở bình diện vũ trụ luận đồng thời mở ra khả thể tự chủ ở bình diện xã hội.
-
-\end{itemize}
-
-Nhìn chung, trong cả hai truyền thống, chủ nghĩa duy vật không chỉ là học thuyết về cấu trúc của vật chất, mà là một bước chuyển trong ý thức về phẩm giá và năng lực của con người: từ thân phận lệ thuộc vào thần linh sang vị thế chủ thể của nhận thức và tổ chức đời sống.
-
-\subsection{Giá trị lịch sử tư tưởng}
-
-Trong tiến trình lịch sử triết học, chủ nghĩa duy vật cổ đại giữ vị trí như một khâu trung gian tất yếu giữa tư duy huyền thoại và khoa học hiện đại. Nó là hình thức đầu tiên trong đó thế giới được tư duy như một chỉnh thể vật chất có quy luật nội tại, và vì thế là tiền đề để các hệ thống triết học và khoa học sau này tiếp tục phát triển.
-
-Ở phương Tây, thuyết nguyên tử và tư tưởng duy vật Hy Lạp được truyền bá qua La Mã và hồi sinh mạnh mẽ vào thời Phục hưng, góp phần nuôi dưỡng tinh thần khoa học cận đại.\cite{runes} Chúng đặt nền tảng cho chủ nghĩa duy vật cơ học và cho sự hình thành khoa học tự nhiên hiện đại. Dù bị phê phán và vượt bỏ nhiều lần, các trực giác cơ bản về tính vật chất và tính quy luật của thế giới vẫn được bảo tồn trong các hệ thống lý luận sau này.
-
-Ở Trung Quốc, các phạm trù như âm dương, ngũ hành, khí luận cùng tư tưởng của Tuân Tử và các nhà duy vật sau đó đã thấm sâu vào Nho học, y học cổ truyền và tư duy chính trị truyền thống.\cite{onhaiminh} Chúng hình thành một dòng chảy duy vật đặc thù, không đồng nhất với mô hình Hy Lạp nhưng cùng chia sẻ niềm tin vào tính quy luật của tự nhiên.
-
-Giá trị lịch sử của chủ nghĩa duy vật cổ đại vì thế không chỉ nằm ở ảnh hưởng trực tiếp, mà ở việc nó xác lập một khả thể tư duy: khả thể hiểu thế giới như một thực tại vật chất có thể nhận thức. Từ khả thể ấy, nhiều lộ trình tư duy đã hình thành, có lộ trình dẫn tới khoa học thực nghiệm, có lộ trình dẫn tới những hệ thống siêu hình mới. Nhưng tất cả đều mang dấu ấn của khoảnh khắc đầu tiên khi nhân loại dám tư duy tự nhiên như một trật tự tự thân.
-
-%==============================================================================
-\section{Hạn chế của chủ nghĩa duy vật cổ đại}
-%==============================================================================
-
-Bên cạnh những giá trị lịch sử và tư tưởng, chủ nghĩa duy vật cổ đại mang trong mình những giới hạn cấu trúc. Câu hỏi không phải là vì sao nó ``sai'', mà là vì sao nó không thể tự phát triển thành duy vật khoa học hiện đại. Nói cách khác: đâu là những giới hạn nội tại khiến nó dừng lại ở trình độ tiền khoa học?
-
-Có thể phân tích theo ba chiều cấu trúc cơ bản.
-
-Thứ nhất, \textbf{thiếu phương pháp thực nghiệm có hệ thống}. Triết học cổ đại chủ yếu dựa vào quan sát trực quan và suy luận lý tính, chưa có đo đạc định lượng chính xác, chưa có thí nghiệm lặp lại để kiểm chứng giả thuyết, và chưa có thiết chế khoa học chuyên biệt. Vì vậy, các kết luận dù sắc sảo đến đâu vẫn mang tính phỏng đoán hợp lý, không thể chuyển hóa thành hệ thống lý thuyết kiểm chứng được.
-
-Thứ hai, \textbf{thiếu mức độ trừu tượng khái niệm cao}. Vật chất thường bị đồng nhất với một hoặc một số dạng cụ thể, chưa được khái quát thành phạm trù chỉ toàn bộ thực tại khách quan. Điều này giới hạn khả năng mở rộng và điều chỉnh lý thuyết trước những phát hiện mới.
-
-Thứ ba, \textbf{triết học và tự nhiên học chưa phân hóa thành các lĩnh vực độc lập}. Triết học vừa đảm nhiệm vai trò bản thể luận, vừa trực tiếp giải thích hiện tượng tự nhiên. Sự chưa chuyên môn hóa ấy làm cho tư duy không có công cụ phương pháp riêng biệt để vượt khỏi trực giác và suy luận thuần túy.
-
-Ba hạn chế này không phải là thiếu sót cá nhân, mà phản ánh trình độ lịch sử của lực lượng sản xuất, của kỹ thuật và của cấu trúc tri thức đương thời. Chúng chính là điều kiện quy định khả thể của tư duy duy vật cổ đại.
-
-\subsection{Vật chất chưa được hiểu như một phạm trù triết học trừu tượng}
-
-Hạn chế sâu sắc nhất của chủ nghĩa duy vật cổ đại nằm ở trình độ trừu tượng hóa khái niệm ``vật chất''.
-
-Trong điều kiện chưa có toán học giải tích, chưa có vật lý thực nghiệm định lượng, việc đồng nhất vật chất với một yếu tố cảm tính hoặc với một mô hình hình học là điều tất yếu về mặt lịch sử. Thales đồng nhất vật chất với nước; Anaximenes với không khí; Democritus với nguyên tử có hình dạng xác định; trong truyền thống Trung Quốc, ngũ hành gắn với các yếu tố cụ thể như kim, mộc, thủy, hỏa, thổ.
-
-Ngay cả khi Democritus đã tiến thêm một bước bằng cách nói tới những thực thể không thể trực quan, ông vẫn mô tả chúng bằng hình dạng và kích thước tức vẫn trong phạm vi hình học hóa thực tại. ``Nguyên tử'' khi ấy chưa phải là một phạm trù trừu tượng, mà là một thực thể giả định có đặc tính cụ thể.
-
-Điểm mấu chốt là: các nhà duy vật cổ đại chưa tách biệt rõ giữa \textbf{vật chất như phạm trù triết học} và \textbf{các dạng tồn tại cụ thể của vật chất}. Họ nói về ``cái nền tảng'' của thế giới, nhưng nền tảng ấy luôn được đồng nhất với một hình thức xác định. Do đó, khi dạng cụ thể bị bác bỏ, toàn bộ lý thuyết dễ bị lung lay.
-
-Bước nhảy quyết định chỉ diễn ra khi ``vật chất'' được hiểu như một phạm trù triết học thuần túy, không đồng nhất với bất kỳ hình thái cụ thể nào, mà chỉ toàn bộ thực tại khách quan tồn tại độc lập với ý thức. Ở đây, sự trừu tượng hóa đạt tới mức cho phép khái niệm vật chất không phụ thuộc vào một mô hình vật lý nhất định. Chính sự tách rời ấy đã biến duy vật tự phát thành duy vật có cơ sở lý luận chặt chẽ hơn. (Định nghĩa của Lenin trong \emph{Chủ nghĩa duy vật và chủ nghĩa kinh nghiệm phê phán} về vật chất như phạm trù triết học là một biểu đạt kinh điển của bước nhảy ấy; xem thêm Mục 6 Sự kế thừa và phát triển.)
-
-Nhìn từ lịch sử tư duy, giới hạn của chủ nghĩa duy vật cổ đại không phải ở việc nó ``chưa đúng'', mà ở chỗ nó chưa đạt tới mức độ trừu tượng cần thiết để tự bảo vệ trước những biến đổi của tri thức khoa học. Điều này cho thấy sự phát triển của duy vật không phải là sự phủ định hoàn toàn quá khứ, mà là quá trình nâng cao mức độ khái quát hóa khái niệm.
-
-\subsection{Thiếu phương pháp thực nghiệm có hệ thống}
-
-Giới hạn của chủ nghĩa duy vật cổ đại không chỉ nằm ở việc thiếu thí nghiệm cụ thể, mà ở chỗ \textbf{phương pháp luận chưa được ý thức như tiêu chuẩn khách quan của chân lý}. Nói cách khác, vấn đề không đơn thuần là ``chưa có thí nghiệm'', mà là chưa hình thành cơ chế phân biệt rạch ròi giữa giả thuyết, suy luận và bằng chứng kiểm chứng được.
-
-Trong điều kiện đó, triết học tất yếu dao động giữa lý tính và trực giác. Suy luận logic có thể rất chặt chẽ, nhưng không có thiết chế thực nghiệm để xác nhận hoặc bác bỏ giả thuyết. Thuyết nguyên tử của Democritus là một mô hình lý tính nhất quán, song hoàn toàn không có khả năng kiểm chứng thực nghiệm. ``Nguyên tử'' khi ấy chỉ tồn tại như một tất yếu logic, chứ không như một đối tượng đo lường.
-
-Ở phương Đông, hệ thống âm dương--ngũ hành được sử dụng trong y học và nông học như một sơ đồ quy luật, nhưng khi thiếu tiêu chuẩn thực nghiệm độc lập, nó có thể chuyển hóa thành bói toán hoặc huyền đoán. Chính sự thiếu vắng phương pháp kiểm chứng khách quan khiến ranh giới giữa tri thức và suy đoán không được xác lập dứt khoát.
-
-Điều này giải thích vì sao bước ngoặt của khoa học hiện đại chỉ thực sự diễn ra khi phương pháp thực nghiệm được thiết lập như một chuẩn mực. Khi giả thuyết phải chịu sự thử thách của đo đạc định lượng, thí nghiệm lặp lại và công khai phản biện, tri thức mới tách khỏi tư biện thuần túy. Chỉ trong điều kiện ấy, ``nguyên tử'' mới từ một ý niệm triết học trở thành một khái niệm khoa học có nội dung xác định. (Liên hệ với khoa học hiện đại như đã nêu ở mục 3.5: sự khác biệt \emph{về chất} giữa phỏng đoán triết học và lý thuyết kiểm chứng bằng thực nghiệm làm nổi bật giá trị dự báo và giới hạn lịch sử của CNDV cổ đại.)
-
-Do đó, giới hạn của CNDV cổ đại không nằm ở thiếu trí tuệ hay thiếu trực giác sâu sắc, mà ở chỗ chưa đạt tới bước tự ý thức về phương pháp. Triết học duy vật cổ đại vì thế vừa là tiền đề của khoa học, vừa mang dấu ấn của thời đại chưa có khoa học thực nghiệm.
-
-\subsection{Hạn chế lịch sử: điều kiện kinh tế--xã hội}
-
-Những giới hạn phương pháp và khái niệm nói trên không thể được giải thích thuần túy ở bình diện tư tưởng. Chúng gắn liền với điều kiện kinh tế--xã hội cụ thể trong đó chủ nghĩa duy vật cổ đại ra đời.
-
-Ở Hy Lạp cổ đại, xã hội chiếm hữu nô lệ và sản xuất thủ công tạo ra một tầng lớp công dân có thời gian suy tư triết học, nhưng đồng thời hạn chế khả năng phát triển kỹ thuật đo lường và thực nghiệm. Tri thức phần lớn mang tính chiêm nghiệm và suy luận, không gắn với một hệ thống nghiên cứu kỹ thuật quy mô lớn. Công cụ vật chất của sản xuất chưa đòi hỏi hoặc chưa cho phép việc xây dựng các lý thuyết định lượng phức tạp.
-
-Ở Trung Quốc cổ đại, dù có những thành tựu kỹ thuật đáng kể, khoa học vẫn gắn chặt với nhu cầu quản trị và nông nghiệp. Triết học phục vụ ổn định xã hội và đạo đức, hơn là phát triển một khoa học tự nhiên độc lập. Kết cấu nhà nước trung ương tập quyền và mô hình giáo dục kinh điển không tạo ra một thiết chế nghiên cứu tự do theo nghĩa hiện đại.
-
-Cốt lõi của vấn đề nằm ở trình độ lực lượng sản xuất. Khi sản xuất còn thủ công, khi công cụ đo lường còn thô sơ, thì khả năng xây dựng khoa học thực nghiệm có hệ thống bị giới hạn khách quan. Triết học vì thế không thể vượt khỏi chân trời trực quan và suy luận.
-
-Đặt chủ nghĩa duy vật cổ đại trong bối cảnh ấy giúp tránh hai thái cực: hoặc thần thánh hóa nó như khoa học hoàn chỉnh, hoặc phủ nhận nó như tư biện sai lầm. Những hạn chế của nó là giới hạn lịch sử của toàn bộ nền văn minh đương thời. Chính sự phát triển của sản xuất, của kỹ thuật và của thiết chế khoa học về sau mới tạo điều kiện cho bước chuyển từ duy vật tự phát sang duy vật khoa học.
-
-Như vậy, việc CNDV cổ đại không thể ``vượt qua chính mình'' không phải là thất bại nội tại, mà là biểu hiện của một giai đoạn lịch sử trong tiến trình dài của tư duy nhân loại.
-
-\subsection{Tính chất cơ học và siêu hình: hạn chế về quan niệm vận động}
-
-Một trong những giới hạn lý luận sâu sắc của chủ nghĩa duy vật cổ đại nằm ở quan niệm về vận động. Dù đã khẳng định vận động là thuộc tính của thực tại, các nhà duy vật cổ đại chưa giải thích được \textbf{nguồn gốc nội tại của vận động}.
-
-Trong nguyên tử luận của Democritus, vận động được hiểu chủ yếu như sự thay đổi vị trí trong không gian. Các nguyên tử vận động, va chạm và kết hợp, nhưng bản thân chúng không chứa đựng mâu thuẫn nội tại. Chúng là những đơn vị rời rạc, có hình dạng và kích thước cố định. Sự biến đổi của thế giới vì thế được giải thích như sự lắp ghép cơ học giữa các phần tử bất biến.
-
-Cách hiểu này mang tính cơ học ở chỗ vận động chỉ là dịch chuyển, không phải là sự phát triển nội tại. Nó đồng thời mang tính siêu hình theo nghĩa phương pháp luận: sự vật được xem xét như những thực thể cô lập, với thuộc tính cố định, và biến đổi chỉ là kết quả của tác động bên ngoài. Quan niệm ấy vượt xa thần thoại, nhưng chưa đạt tới trình độ biện chứng, trong đó vận động được hiểu là quá trình tự phủ định và chuyển hóa nội tại.
-
-Vấn đề trở nên rõ hơn khi xét quan hệ giữa tất yếu và ngẫu nhiên. Democritus nhấn mạnh tính tất yếu cơ học: mọi sự kiện đều do chuỗi va chạm tất yếu của nguyên tử. Hệ quả là một hình thức định mệnh luận. Epicurus, để bảo vệ tự do ý chí, đã đưa vào khái niệm ``lệch hướng'' (clinamen) của nguyên tử, một sự chệch nhỏ không do nguyên nhân xác định. Tuy nhiên, sự lệch hướng ấy không được giải thích bằng cơ chế nội tại, mà được đặt như một giả định nhằm cứu vãn tự do. Điều này cho thấy khủng hoảng lý luận: khi vận động chỉ được hiểu cơ học, tự do chỉ có thể được bổ sung bằng một yếu tố ngẫu nhiên thuần túy.
-
-Ở đây bộc lộ một giới hạn căn bản: chủ nghĩa duy vật cổ đại chưa xây dựng được một lý luận về sự thống nhất giữa tất yếu và ngẫu nhiên. Ngẫu nhiên hoặc bị loại bỏ (như ở Democritus), hoặc được thêm vào một cách ngoại tại (như ở Epicurus). Chưa có quan niệm rằng ngẫu nhiên là hình thức biểu hiện của tất yếu trong những điều kiện cụ thể, và rằng sự phát triển là kết quả của mâu thuẫn nội tại.
-
-Việc Epicurus quy tự do ý chí về một biến cố vật lý vi mô cũng cho thấy sự chưa phân biệt giữa các cấp độ quy luật: quy luật cơ học của hạt vật chất và quy luật sinh học--xã hội của hành vi con người. Ý chí vì thế bị giản lược thành một hiện tượng cơ học, thay vì được hiểu như sản phẩm của cấu trúc xã hội--lịch sử.
-
-Ở Trung Quốc cổ đại, mô hình tương sinh--tương khắc đã tiến gần hơn tới tư duy quan hệ và chuyển hóa, nhưng vẫn dừng lại ở sơ đồ biểu tượng. Sự vận động được mô tả bằng các chu trình cố định, thiếu phân tích cơ chế cụ thể và điều kiện lịch sử. Do đó, dù tránh được định mệnh luận cơ học thuần túy, tư duy ấy vẫn chưa đạt tới lý luận về mâu thuẫn nội tại và phát triển như một quá trình lịch sử cụ thể.
-
-Như vậy, tính cơ học và siêu hình của CNDV cổ đại không phủ nhận giá trị lịch sử của nó, nhưng chỉ ra giới hạn phương pháp luận: vận động được nhận thức như chuyển động, chứ chưa như phát triển; tất yếu và ngẫu nhiên chưa được thống nhất biện chứng; và các cấp độ quy luật chưa được phân biệt rạch ròi. Chính những giới hạn ấy đòi hỏi một bước phát triển tiếp theo của tư duy duy vật, trong đó vận động được hiểu như sự tự phát triển thông qua mâu thuẫn nội tại của sự vật.
-
-\subsection{Chưa tách biệt vật chất và ý thức; hạn chế trong lĩnh vực xã hội}
-
-Một giới hạn quan trọng của chủ nghĩa duy vật cổ đại nằm ở cách xử lý mối quan hệ giữa vật chất và ý thức. Trong nỗ lực chống lại quan niệm linh hồn bất tử tách rời thể xác, các nhà duy vật cổ đại thường ``duy vật hóa'' hiện tượng tinh thần bằng cách quy nó trực tiếp về cấu trúc vật chất.
-
-Ở Democritus và Epicurus, linh hồn được xem là tập hợp những nguyên tử tinh tế, có hình dạng đặc biệt và vận động nhanh. Cảm giác và tư duy được giải thích như kết quả của sự tác động cơ học giữa các dòng nguyên tử. Bước tiến ở đây là phủ nhận tính siêu nhiên của linh hồn; ý thức không còn là thực thể thần linh, mà gắn với tổ chức vật chất của cơ thể.
-
-Tuy nhiên, cách giải thích này mang tính máy móc: ý thức bị đồng nhất với một quá trình vật lý đơn thuần. Chưa có sự phân tích về tính phản ánh, tính năng động sáng tạo và đặc biệt là tính xã hội--lịch sử của ý thức. Con người được xem như một tổ hợp vật lý phức tạp, nhưng chưa được hiểu như một chủ thể hoạt động thực tiễn trong mạng lưới quan hệ xã hội. Việc Epicurus quy tự do ý chí về ``sự lệch hướng'' vi mô của nguyên tử càng cho thấy sự chưa phân biệt giữa các cấp độ quy luật: ý chí xã hội--lịch sử bị giản lược thành một biến cố cơ học.
-
-Giới hạn này không phải là sự thiếu nhất quán, mà là hệ quả tất yếu của trình độ lý luận đương thời. Khi chưa có khái niệm về thực tiễn xã hội như nền tảng của ý thức, ý thức chỉ có thể được hiểu như một hiện tượng tự nhiên thuần túy.
-
-Hạn chế càng bộc lộ rõ khi chuyển sang lĩnh vực xã hội và lịch sử. Trong khi ở tự nhiên, các nhà duy vật tìm nguyên nhân vật chất và quy luật khách quan, thì trong giải thích lịch sử, họ chưa xây dựng được một lý luận duy vật tương ứng. Lịch sử thường được quy về vai trò của các cá nhân xuất chúng, hoặc về những nguyên tắc đạo đức và ý chí chính trị, chứ chưa được phân tích như một quá trình có quy luật khách quan gắn với điều kiện kinh tế--xã hội.
-
-Ở Trung Quốc, những tư tưởng như ``dân vi quý'' thể hiện tinh thần nhân văn và ý thức về vai trò nhân dân, nhưng vẫn chủ yếu mang tính chuẩn tắc đạo đức--chính trị, chưa phải là một lý luận khoa học về động lực lịch sử. Triết học chưa tách khỏi tự nhiên học và chính trị học, nên không có công cụ phương pháp riêng để xây dựng một học thuyết duy vật về xã hội.
-
-Do đó, có thể nói: chủ nghĩa duy vật cổ đại đạt tới mức duy vật tự nhiên, nhưng chưa đạt tới duy vật xã hội. Ý thức được giải thích như hiện tượng vật lý, lịch sử được nhìn như chuỗi sự kiện chính trị, chứ chưa được hiểu như quá trình phát triển có quy luật của những quan hệ vật chất giữa con người với nhau.
-
-Những hạn chế ấy không nên bị hiểu như thiếu sót cá nhân, mà như giới hạn cấu trúc của một giai đoạn ý thức. CNDV cổ đại là điểm khởi đầu của tư duy duy vật; chính vì là khởi đầu, nó mang tính chất trực quan, giản lược và tiền hệ thống. Sự phát triển tiếp theo của triết học duy vật không phủ nhận nó, mà kế thừa và vượt qua những giới hạn ấy bằng cách mở rộng khái niệm vật chất, xây dựng lý luận về thực tiễn xã hội, và phân tích ý thức như một hình thức phản ánh mang tính lịch sử.
-
-%==============================================================================
-\section{Sự kế thừa và phát triển trong triết học hiện đại}
-%==============================================================================
-
-Việc chỉ ra các hạn chế nội tại của chủ nghĩa duy vật cổ đại tất yếu dẫn tới câu hỏi: những giới hạn ấy đã được vượt qua như thế nào trong lịch sử tư tưởng? Sự xuất hiện của chủ nghĩa duy vật biện chứng không phải là sự phủ định đơn giản quá khứ, mà là một quá trình kế thừa--cải biến--nâng cao. Chính trong sự vận động ấy, duy vật từ hình thái trực quan tự phát chuyển hóa thành một thế giới quan khoa học có ý thức phương pháp luận.
-
-\subsection{Sự kế thừa của chủ nghĩa duy vật biện chứng: định nghĩa phạm trù vật chất}
-
-Bước nhảy quyết định diễn ra ở trình độ khái niệm. Nếu trong thời cổ đại, ``vật chất'' luôn được đồng nhất với một hình thái cụ thể của tồn tại (nước, lửa, nguyên tử hình học, ngũ hành), thì trong chủ nghĩa duy vật biện chứng, vật chất được xác lập như một \textbf{phạm trù triết học thuần túy}.
-
-Ở đây, sự trừu tượng hóa đạt tới mức không phụ thuộc vào bất kỳ mô hình vật lý nhất định nào. V.I. Lenin trong \emph{Chủ nghĩa duy vật và chủ nghĩa kinh nghiệm phê phán} đã định nghĩa vật chất như ``phạm trù triết học dùng để chỉ thực tại khách quan được đem lại cho con người trong cảm giác, được cảm giác chép lại, chụp lại, phản ánh, và tồn tại không lệ thuộc vào cảm giác''. Điểm mấu chốt của định nghĩa này không nằm ở nội dung cảm tính, mà ở sự tách biệt giữa phạm trù và hình thái cụ thể.
-
-Nhờ vậy, khi khoa học tự nhiên phát hiện những cấu trúc mới (trường điện từ, hạt cơ bản, năng lượng, cấu trúc lượng tử), khái niệm vật chất không bị khủng hoảng. Nó không còn gắn với một thực thể cụ thể, mà chỉ toàn bộ thực tại khách quan. Đây chính là bước vượt qua giới hạn của duy vật cổ đại: từ duy vật chất phác sang duy vật có ý thức phương pháp luận.
-
-\subsection{Kế thừa và phát triển vấn đề tất yếu--ngẫu nhiên}
-
-Sự kế thừa không chỉ diễn ra ở cấp độ định nghĩa, mà còn ở việc phát triển những mầm mống tư tưởng đã xuất hiện trong cổ đại.
-
-Trong luận án tiến sĩ \emph{Sự khác biệt giữa triết học tự nhiên của Democritus và Epicurus}, Marx đã đánh giá cao thuyết ``clinamen'' của Epicurus.\cite{marx-epicurus} Theo Marx, sự lệch hướng của nguyên tử không chỉ là chi tiết vật lý, mà là biểu tượng cho tính tự khẳng định của tồn tại, cho khả năng phá vỡ tính tất yếu cơ học thuần túy. Ở đây, Epicurus đã trực giác nhận ra rằng nếu thế giới hoàn toàn tất yếu theo nghĩa cơ học, thì tự do và tính cá biệt không thể tồn tại.
-
-Tuy nhiên, Epicurus chỉ có thể bổ sung ngẫu nhiên như một yếu tố ngoại lệ chưa được giải thích. Ngẫu nhiên xuất hiện như một ``điểm gãy'' trong chuỗi nhân quả, chứ chưa như một phạm trù biện chứng.
-
-Chủ nghĩa duy vật biện chứng phát triển vấn đề này lên tầm lý luận hệ thống. Tất yếu và ngẫu nhiên không còn đối lập tuyệt đối, mà thống nhất trong quá trình vận động của sự vật. Ngẫu nhiên được hiểu là hình thức biểu hiện của tất yếu trong những điều kiện cụ thể; tất yếu chỉ bộc lộ thông qua vô số khả thể ngẫu nhiên. Nhờ vậy, tự do không cần được ``cứu vãn'' bằng một ngoại lệ cơ học, mà được hiểu như nhận thức và thực hiện quy luật khách quan trong những điều kiện lịch sử xác định.
-
-Ở đây có thể thấy rõ tính kế thừa biện chứng: từ định mệnh luận cơ học của Democritus, qua sự điều chỉnh trực giác của Epicurus, đến sự khái quát hóa phạm trù tất yếu--ngẫu nhiên trong phép biện chứng duy vật. Những gì còn mơ hồ trong cổ đại được chuyển hóa thành lý luận có cấu trúc khái niệm rõ ràng.
-
-Như vậy, sự phát triển của duy vật hiện đại không phải là sự đoạn tuyệt với cổ đại, mà là sự nâng cao mức độ tự ý thức của chính tinh thần duy vật. Những hạt nhân hợp lý của thời cổ đại được giữ lại, nhưng được đặt trong một hệ thống phương pháp luận hoàn chỉnh hơn, gắn với khoa học thực nghiệm và lý luận xã hội.
-
-\subsection{Khái niệm ``vật chất'' qua các thời kỳ: từ cổ đại đến Lenin}
-
-Phân tích lịch sử khái niệm ``vật chất'' không chỉ là việc liệt kê các định nghĩa, mà là truy tìm logic vận động nội tại của một phạm trù triết học. Qua mỗi thời kỳ, khái niệm này được mở rộng, trừu tượng hóa và giải phóng dần khỏi những hình thái cảm tính trực tiếp. Chính trong tiến trình ấy có thể thấy bước nhảy về chất mà định nghĩa của Lenin thực hiện.
-
-\textbf{Thời cổ đại}: Vật chất được đồng nhất với những yếu tố cụ thể hoặc cấu trúc hình học của tồn tại. Ở trường phái Milete, nó là nước, không khí, lửa; ở Anaximander, là \emph{apeiron} bước chuyển quan trọng từ yếu tố cảm tính sang nguyên lý trừu tượng hơn; ở Democritus, là nguyên tử có hình dạng và kích thước xác định; ở Trung Quốc, là khí, âm dương, ngũ hành. Điểm chung là vật chất chưa được xác lập như phạm trù độc lập, mà gắn chặt với một dạng cụ thể của thế giới tự nhiên. Tư duy còn mang tính trực quan, hoặc hình học hóa thực tại. Dù đã đạt tới trực giác sâu sắc về tính khách quan của thế giới, khái niệm vẫn chưa thoát khỏi sự ràng buộc của hình thái vật lý nhất định.
-
-\textbf{Thời cận đại (thế kỉ XVII--XVIII)}: Sự phát triển của cơ học và toán học đưa khái niệm vật chất vào khuôn khổ đo lường chính xác. Trong chủ nghĩa duy vật cơ học, vật chất đồng nhất với quảng tính (extension), khối lượng, chuyển động theo định luật cơ học. Thế giới được hình dung như một cỗ máy khổng lồ vận hành theo quan hệ nhân quả tuyến tính. So với cổ đại, đây là bước tiến lớn về phương pháp và tính khoa học. Tuy nhiên, vật chất vẫn bị đồng nhất với ``chất thể cơ học'', và vận động được hiểu chủ yếu như sự thay đổi vị trí trong không gian. Cách nhìn này mang tính siêu hình: xem sự vật cô lập, tĩnh tại về bản chất, vận động chỉ do tác động bên ngoài.
-
-Khủng hoảng xuất hiện khi vật lý học cuối thế kỉ XIX--XX phát hiện điện tử, trường điện từ, năng lượng và hiện tượng phóng xạ. Những thực thể mới không còn phù hợp với hình ảnh ``chất rắn có khối lượng''. Một số nhà tư tưởng vội vàng tuyên bố ``vật chất tiêu tan'', thực chất là do họ đồng nhất vật chất với mô hình cơ học cũ. Cuộc khủng hoảng này cho thấy khái niệm vật chất vẫn chưa được nâng lên thành phạm trù triết học độc lập với mô hình khoa học cụ thể.
-
-\textbf{Marx và Engels}: Trong phép biện chứng duy vật, vật chất không chỉ là chất thể, mà là toàn bộ thực tại khách quan trong sự vận động và phát triển. Vận động được hiểu như thuộc tính tự thân của vật chất; mâu thuẫn nội tại là nguồn gốc của biến đổi; lịch sử tự nhiên và lịch sử xã hội đều là những hình thức vận động khác nhau của vật chất. Ở đây đã xuất hiện bước chuyển quan trọng: vật chất không còn bị giản lược thành cơ học, mà được nhìn trong tính lịch sử và tính hệ thống. Tuy nhiên, Marx và Engels chưa đưa ra một định nghĩa triết học khái quát về phạm trù vật chất; nhiệm vụ ấy được hoàn tất trong bối cảnh lý luận mới.
-
-\textbf{Lenin}: Trong tác phẩm \emph{Chủ nghĩa duy vật và chủ nghĩa kinh nghiệm phê phán}, Lenin xác định: vật chất là phạm trù triết học dùng để chỉ thực tại khách quan được đem lại cho con người trong cảm giác, được cảm giác phản ánh, và tồn tại không lệ thuộc vào cảm giác. Ý nghĩa quyết định của định nghĩa này nằm ở chỗ nó tách phạm trù vật chất khỏi mọi hình thái cụ thể của vật lý học.
-
-Từ đây, bất kỳ phát hiện mới nào của khoa học, dù là hạt cơ bản, trường lượng tử hay năng lượng, chỉ làm phong phú thêm nhận thức về các dạng tồn tại của vật chất, chứ không làm ``vật chất biến mất''. Khái niệm vật chất được giải phóng khỏi mọi đồng nhất thực nghiệm, trở thành nguyên lý phương pháp luận ổn định của thế giới quan khoa học.
-
-Nhìn toàn bộ tiến trình, có thể thấy sự vận động từ: đồng nhất cảm tính (cổ đại), đồng nhất cơ học (cận đại), đến phạm trù triết học trừu tượng (Lenin). Đó là quá trình trừu tượng hóa ngày càng sâu sắc, phản ánh sự trưởng thành của tư duy duy vật. Định nghĩa của Lenin không phủ định các giai đoạn trước, mà tổng kết và vượt qua chúng, đánh dấu bước nhảy từ duy vật tự phát và duy vật cơ học sang duy vật khoa học với ý thức phương pháp luận rõ ràng.
-
-\subsection{Phân biệt ba hình thái biện chứng: tự phát, duy tâm (Hegel) và duy vật (Marx)}
-
-Để xác định đúng vị trí của chủ nghĩa duy vật cổ đại và của phép biện chứng Mác--Lênin trong lịch sử tư tưởng, cần phân biệt ba hình thái biện chứng không chỉ theo tên gọi, mà theo ba tiêu chí cơ bản: (1) cơ sở bản thể luận, (2) cách giải thích nguồn gốc vận động, (3) mức độ ý thức phương pháp luận.
-
-\textbf{Biện chứng tự phát (cổ đại)}
-
-Trong triết học Hy Lạp cổ đại (Heraclitus, các nhà tự nhiên học Ionia) và trong tư duy âm--dương, ngũ hành ở Trung Quốc, đã xuất hiện một cách nhìn thế giới như chỉnh thể vận động. Mọi sự vật đều biến đổi, mọi hiện tượng đều liên hệ với nhau. Engels gọi đó là ``biện chứng tự phát'' ngây thơ nhưng đúng đắn về thực chất.\cite{engels}
-
-Tuy nhiên, tính ``tự phát'' ở đây có nghĩa là: biện chứng tồn tại như trực giác triết học, chứ chưa thành phương pháp có ý thức. Sự vận động được quan sát, nhưng nguồn gốc nội tại của vận động (chẳng hạn như mâu thuẫn bên trong sự vật) chưa được phân tích một cách khái niệm. Thế giới được nhìn trong dòng chảy, nhưng chưa có cấu trúc lý luận chặt chẽ để giải thích vì sao và theo quy luật nào nó vận động.
-
-\textbf{Biện chứng duy tâm (Hegel)}
-
-Ở Hegel, phép biện chứng đạt tới trình độ hệ thống cao. Lần đầu tiên trong lịch sử, các quy luật như mâu thuẫn, chuyển hóa lượng--chất, phủ định của phủ định được trình bày thành một chỉnh thể logic. Sự vận động không còn là quan sát trực giác, mà được triển khai như tất yếu nội tại của khái niệm.
-
-Tuy nhiên, cơ sở bản thể luận của Hegel là duy tâm. Vận động của thế giới được quy về sự tự vận động của Ý niệm tuyệt đối; lịch sử hiện thực chỉ là quá trình tự triển khai của tinh thần. Như vậy, biện chứng đã đạt đến hình thức hệ thống và sâu sắc, nhưng nền tảng của nó là tinh thần chứ không phải vật chất. Nói cách khác, Hegel đã khám phá cấu trúc vận động của hiện thực, nhưng giải thích nó từ phía ý niệm.
-
-\textbf{Biện chứng duy vật (Marx và Engels)}
-
-Marx và Engels tiếp thu ``hạt nhân hợp lý'' của Hegel, tức là tư tưởng về vận động do mâu thuẫn nội tại, nhưng thay đổi cơ sở bản thể luận. Nếu ở Hegel, tinh thần là nền tảng của tồn tại, thì ở Marx, vật chất và thực tiễn xã hội là nền tảng của mọi quá trình lịch sử.
-
-Sự đảo ngược này không phải là phủ định toàn bộ, mà là phủ định biện chứng: giữ lại cấu trúc phương pháp, nhưng đặt nó trên cơ sở hiện thực khách quan. Vận động và phát triển không còn là quá trình tự ý thức của tinh thần, mà là thuộc tính của thế giới vật chất và của các quan hệ xã hội cụ thể. Mâu thuẫn không phải là xung đột giữa các khái niệm, mà là xung đột hiện thực giữa các lực lượng và quan hệ vật chất.
-
-So với biện chứng tự phát, biện chứng duy vật có ý thức phương pháp luận rõ ràng và phân tích được nguồn gốc nội tại của vận động. So với biện chứng duy tâm, nó giữ lại cấu trúc hệ thống nhưng thay đổi nền tảng bản thể luận.
-
-Nhìn tổng quát, có thể khái quát ba hình thái như sau:
-
-\begin{itemize}
-    \item \emph{Biện chứng tự phát}: trực giác về vận động và liên hệ, chưa có hệ thống khái niệm và chưa phân tích nguồn gốc nội tại.
-    \item \emph{Biện chứng duy tâm}: hệ thống hóa cao, phát hiện quy luật vận động, nhưng đặt cơ sở ở tinh thần.
-    \item \emph{Biện chứng duy vật}: kế thừa cấu trúc biện chứng, đặt trên nền tảng vật chất và thực tiễn, giải thích vận động bằng mâu thuẫn nội tại của hiện thực.
-\end{itemize}
-
-Ba hình thái này không tách rời nhau như những đoạn tuyệt tuyệt đối, mà tạo thành một tiến trình phát triển. Từ trực giác tự phát, qua hệ thống duy tâm, đến sự thống nhất giữa hệ thống và nền tảng vật chất, phép biện chứng đạt tới hình thái khoa học.
-
-\subsection{Ý nghĩa đối với việc xây dựng thế giới quan khoa học ngày nay}
-
-Việc nghiên cứu chủ nghĩa duy vật cổ đại không chỉ nhằm tái hiện một giai đoạn lịch sử tư tưởng, mà còn có ý nghĩa phương pháp luận trực tiếp đối với việc xây dựng thế giới quan khoa học hiện nay. Thế giới quan khoa học không đơn thuần là tập hợp tri thức, mà là một hệ thống quan điểm về bản chất của thực tại, về phương thức nhận thức, và về nguyên tắc hành động.
-
-Trước hết, tinh thần duy vật khẳng định tính khách quan của thế giới và tính tự thân vận động của nó. Điều này đặt nền tảng cho thái độ nhận thức dựa trên lý tính và thực nghiệm, chống lại mọi hình thức giải thích siêu nhiên, thần quyền hay mê tín. Trong bối cảnh hiện nay, khi khoa học mở rộng sang các lĩnh vực phức tạp như vũ trụ học, sinh học phân tử, trí tuệ nhân tạo, nguyên tắc thừa nhận tính khách quan của thực tại vẫn là tiền đề không thể thay thế của nghiên cứu khoa học.
-
-Thứ hai, giá trị của biện chứng tự phát nhắc nhở rằng thế giới phải được nhìn trong tính liên hệ và vận động. Một thế giới quan khoa học không thể dựa trên tư duy siêu hình, cô lập và tĩnh tại. Nhận thức các hệ thống phức tạp từ hệ sinh thái, xã hội, đến kinh tế toàn cầu đòi hỏi cách nhìn động, đa chiều và hệ thống. Ở đây, tinh thần biện chứng giúp tránh cả giản lược cơ học lẫn cực đoan nhị nguyên.
-
-Thứ ba, định nghĩa phạm trù vật chất theo nghĩa triết học giữ vai trò như một nguyên lý phương pháp luận ổn định. Khoa học hiện đại liên tục phát hiện những hình thức tồn tại mới: trường, năng lượng, hạt cơ bản, cấu trúc lượng tử, các hệ phi tuyến và tự tổ chức. Nếu đồng nhất vật chất với một mô hình vật lý cụ thể, thế giới quan sẽ dễ rơi vào khủng hoảng mỗi khi mô hình thay đổi. Việc hiểu vật chất như thực tại khách quan nói chung giúp thế giới quan khoa học có tính mở, có khả năng thích ứng với sự phát triển của tri thức.
-
-Thứ tư, sự kết hợp giữa duy vật và biện chứng cho phép xây dựng một lập trường cân bằng: không rơi vào duy tâm (đặt ý thức làm nền tảng của tồn tại), nhưng cũng không rơi vào siêu hình máy móc (giản lược mọi quá trình thành quan hệ cơ học tuyến tính). Trong lĩnh vực xã hội, điều này đặc biệt quan trọng, vì nó đòi hỏi phân tích các quan hệ vật chất và điều kiện lịch sử cụ thể, thay vì giải thích bằng ý chí chủ quan hay định mệnh trừu tượng.
-
-Như vậy, chủ nghĩa duy vật cổ đại và sự phát triển của nó trong triết học hiện đại không chỉ là một chương trong lịch sử tư tưởng, mà là mắt xích trong quá trình hình thành một thế giới quan khoa học có ý thức phương pháp luận. Từ trực giác về tính khách quan của tự nhiên, qua sự hệ thống hóa của phép biện chứng, đến sự xác lập phạm trù vật chất ở trình độ trừu tượng cao, tư duy duy vật đã trưởng thành cùng với chính khoa học. Chính trong sự kế thừa và vượt qua ấy, thế giới quan khoa học ngày nay tìm thấy nền tảng triết học của mình.
-
-%==============================================================================
-\section{Kết luận}
-%==============================================================================
-
-Chủ nghĩa duy vật cổ đại không phải là một hệ thống hoàn chỉnh theo tiêu chuẩn triết học hiện đại. Nó thiếu phương pháp thực nghiệm phát triển, thiếu cấu trúc khái niệm chặt chẽ, và chưa đạt tới trình độ tự ý thức phương pháp luận. Tuy nhiên, giá trị lịch sử của nó không nằm ở mức độ hoàn thiện, mà ở bước chuyển cấu trúc mà nó thực hiện trong lịch sử tư duy.
-
-Lần đầu tiên, thế giới được tư duy như một thực tại tự thân, không cần đến sự bảo chứng của thần linh. Dù dưới hình thức nguyên tử và chân không ở Hy Lạp, hay khí, âm--dương, ngũ hành ở Trung Quốc, các nhà tư tưởng cổ đại đều khẳng định tính khách quan và tính tự vận động của tự nhiên. Thế giới không còn là sân khấu của ý chí siêu nhiên, mà là một cấu trúc có quy luật nội tại. Chính tiền đề ấy đã mở ra khả năng nhận thức khoa học.
-
-Ở cấp độ nhận thức luận, tư duy duy vật cổ đại đã đặt nền móng cho quan niệm rằng tri thức phải xuất phát từ thực tại vật chất. Dù còn mang tính trực quan và chưa có phương pháp thực nghiệm hệ thống, nó đã thay thế mặc khải bằng lý giải, thay thế niềm tin thần thoại bằng quan sát và suy luận. Sự chuyển đổi này đánh dấu bước trưởng thành đầu tiên của lý tính trong lịch sử nhân loại.
-
-So sánh hai truyền thống Đông--Tây cho thấy duy vật không phải một mô hình đơn tuyến. Ở Hy Lạp, nó phát triển theo hướng phân tích cấu trúc và hình học hóa thế giới; ở Trung Quốc, theo hướng tổng hợp quan hệ và cân bằng động. Sự khác biệt ấy phản ánh điều kiện lịch sử--văn hóa khác nhau, nhưng đồng thời cũng cho thấy tính phổ quát của nhu cầu giải thích thế giới bằng quy luật tự nhiên. Duy vật, vì thế, không phải sản phẩm riêng của một nền văn minh, mà là biểu hiện của một bước tiến chung của tư duy nhân loại.
-
-Tuy nhiên, những giới hạn của chủ nghĩa duy vật cổ đại cũng mang tính tất yếu: tính trực quan chất phác, sự đồng nhất phạm trù vật chất với hình thái cụ thể, sự thiếu vắng phân tích về mâu thuẫn nội tại và thực tiễn xã hội. Chính những giới hạn ấy đặt ra yêu cầu phát triển tiếp theo, dẫn tới sự hình thành của phép biện chứng duy vật hiện đại. Trong tiến trình ấy, khái niệm vật chất được trừu tượng hóa, biện chứng được hệ thống hóa, và thế giới quan khoa học được xác lập trên nền tảng phương pháp luận rõ ràng.
-
-Nếu nhìn toàn bộ lịch sử triết học như hành trình tự ý thức của nhân loại về tồn tại, thì chủ nghĩa duy vật cổ đại là một trong những khoảnh khắc khai mở quyết định. Nó không phải điểm kết thúc, mà là điểm khởi đầu. Từ bước chuyển ấy, từ thần thoại sang quy luật, từ siêu nhiên sang tự nhiên, từ lệ thuộc sang tự chủ lý tính, mở ra toàn bộ khả năng phát triển của khoa học và triết học sau này.
-
-Vì vậy, nghiên cứu chủ nghĩa duy vật cổ đại không chỉ nhằm hiểu quá khứ, mà còn nhằm nhận thức rõ hơn nền tảng triết học của thế giới quan khoa học hiện đại. Trong tính chưa hoàn chỉnh của nó đã hàm chứa mầm mống của một cách nhìn thế giới mà nhân loại vẫn tiếp tục phát triển cho đến hôm nay.
-
-\subsection{Tóm lược luận điểm, giá trị và hạn chế}
-
-Trên cơ sở các phân tích ở trên, hai truyền thống Đông và Tây đã được đặt song song trong một khung so sánh nhất quán: nội dung bản thể luận, giá trị lịch sử, hạn chế cấu trúc, và sự kế thừa trong triết học hiện đại. Cách tiếp cận này cho phép vượt qua lối trình bày tuyến tính và làm rõ mối quan hệ giữa chủ nghĩa duy vật và sự hình thành khoa học, đồng thời phê phán cả tính tự phát của duy vật cổ đại lẫn tính siêu hình--cơ học của duy vật cận đại.
-
-Từ đó có thể khái quát ba giá trị nổi bật.
-
-Thứ nhất, đây là bước chuyển từ \emph{mythos} sang \emph{logos}: từ giải thích thần thoại sang giải thích bằng quy luật tự nhiên. Bước chuyển này tạo tiền đề cho một thế giới quan tự nhiên và mở đường cho tư duy tiền khoa học.
-
-Thứ hai, chủ nghĩa duy vật cổ đại thiết lập mối quan hệ tương hỗ giữa triết học và khoa học tự nhiên. Việc tìm kiếm nguyên lý vật chất của thế giới kích thích quan sát, phân tích và khái quát, đồng thời khoa học thực nghiệm sau này lại cung cấp cơ sở thực chứng cho thế giới quan duy vật. Mối quan hệ hai chiều này là một trong những động lực quan trọng của sự phát triển tri thức.
-
-Thứ ba, chủ nghĩa duy vật cổ đại mang giá trị nhân văn và chính trị. Từ tinh thần giải phóng con người khỏi nỗi sợ thần linh (Epicurus), đến quan niệm coi tự nhiên vận hành theo quy luật khách quan (Tuân Tử), tư duy duy vật góp phần củng cố ý thức tự chủ của con người trước tự nhiên và xã hội.
-
-Bên cạnh đó, ba hạn chế cơ bản cũng được xác định rõ.
-
-Thứ nhất, vật chất chưa được hiểu như một phạm trù triết học trừu tượng, mà vẫn đồng nhất với những dạng cụ thể của tồn tại.
-
-Thứ hai, quan niệm về vận động còn mang tính trực quan hoặc cơ học, thiếu phương pháp thực nghiệm và hệ thống lý luận phát triển đầy đủ; biện chứng tồn tại như trực giác hơn là phương pháp.
-
-Thứ ba, chưa có sự phân tích đầy đủ về mối quan hệ giữa vật chất và ý thức, và chưa xây dựng được một lý luận duy vật về lịch sử xã hội. Duy vật đạt tới tự nhiên luận, nhưng chưa mở rộng thành duy vật lịch sử.
-
-Những giá trị và hạn chế ấy cho thấy chủ nghĩa duy vật cổ đại vừa là khởi điểm tất yếu, vừa mang trong mình yêu cầu vượt qua chính mình.
-
-\subsection{Sự kế thừa và ý nghĩa nghiên cứu hiện nay}
-
-Chủ nghĩa duy vật Mác--Lênin kế thừa và phát triển những hạt nhân hợp lý của chủ nghĩa duy vật cổ đại. Định nghĩa phạm trù vật chất của Lenin khắc phục sự đồng nhất với dạng cụ thể, nâng vật chất lên thành nguyên lý bản thể luận có tính phương pháp luận ổn định. Phép biện chứng duy vật, trên cơ sở tiếp thu cấu trúc biện chứng của Hegel, giải thích nguồn gốc vận động bằng mâu thuẫn nội tại của sự vật và mở rộng duy vật từ tự nhiên sang lĩnh vực lịch sử--xã hội.
-
-Tuy nhiên, ý nghĩa của việc nghiên cứu chủ nghĩa duy vật cổ đại không chỉ nằm trong phạm vi lịch sử triết học Mác--Lênin. Trong bối cảnh hiện nay, khi triết học và khoa học đối diện với các vấn đề như khủng hoảng sinh thái, hệ thống phức tạp, hay những xu hướng ``material turn'' trong tư tưởng đương đại, việc quay lại phân tích nền tảng duy vật giúp làm rõ cơ sở bản thể luận và phương pháp luận của nhận thức. Tinh thần nhìn thế giới như một chỉnh thể vật chất vận động có thể đối thoại với các lý thuyết hệ thống, các tiếp cận liên ngành, và các trào lưu duy vật mới.
-
-Ở bình diện phương pháp, việc khảo cứu lịch sử khái niệm ``vật chất'' nhắc nhở rằng thế giới quan khoa học không phải là kết quả của một phát minh đơn lẻ, mà là sản phẩm của một tiến trình tích lũy và tự điều chỉnh lâu dài. Hiểu được tính lịch sử của khái niệm giúp tránh cả thái độ giáo điều lẫn sự hoài nghi cực đoan đối với nền tảng duy vật.
-
-Do đó, chủ nghĩa duy vật cổ đại không chỉ là một học thuyết về tự nhiên, mà là một cuộc cách mạng tinh thần sơ khai: tách tư duy khỏi thần thoại, đặt nền móng cho ý thức về tính khách quan của thế giới, và mở đường cho toàn bộ truyền thống khoa học và triết học duy vật về sau. Chính trong tính khởi nguyên ấy, nó tiếp tục có ý nghĩa đối với việc xây dựng một thế giới quan khoa học có ý thức phương pháp luận trong hiện tại.
+Nhìn chung, chủ nghĩa duy vật cổ đại không chỉ có ý nghĩa trong việc phản ánh những nỗ lực nhận thức ban đầu của con người về thế giới, mà còn đóng vai trò quan trọng trong việc đặt nền móng cho sự phát triển của tư duy khoa học và triết học sau này. Việc nghiên cứu và đánh giá các quan niệm duy vật cổ đại vì vậy không chỉ giúp hiểu rõ hơn lịch sử phát triển của triết học, mà còn góp phần làm sáng tỏ những bước tiến trong quá trình hình thành thế giới quan khoa học của nhân loại.
 
 \newpage
+\nocite{*}
 \printbibliography[title={Tài liệu tham khảo}]
 
 \end{document}
